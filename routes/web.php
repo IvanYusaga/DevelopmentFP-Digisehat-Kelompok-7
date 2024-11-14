@@ -43,14 +43,14 @@ Route::get('/user/userManagement', function () {
 });
 
 // Testing Fomulir Obat
-Route::get('/formulirObat', [ObatController::class, 'index'])->name('obat.form');
-Route::post('/postObat', [ObatController::class, 'postObat'])->name('obat.post');
+Route::get('/user/formulirObat', [ObatController::class, 'index'])->name('obat.form');
+Route::post('/user/postObat', [ObatController::class, 'postObat'])->name('obat.post');
 
-Route::get('/informasiObat', [ObatController::class, 'informasiObat'])->name('informasiObat');
-Route::delete('/destroyObat/{id}', [ObatController::class, 'destroy'])->name('obat.destroy');
+Route::get('/user/informasiObat', [ObatController::class, 'informasiObat'])->name('informasiObat');
+Route::delete('/user/destroyObat/{id}', [ObatController::class, 'destroy'])->name('obat.destroy');
 
-Route::get('/editObat/{id}', [ObatController::class, 'editObat'])->name('obat.edit');
-Route::post('/updateObat/{id}', [ObatController::class, 'updateObat'])->name('obat.update');
+Route::get('/user/editObat/{id}', [ObatController::class, 'editObat'])->name('obat.edit');
+Route::post('/user/updateObat/{id}', [ObatController::class, 'updateObat'])->name('obat.update');
 
 
 //Atur Jadwal User
