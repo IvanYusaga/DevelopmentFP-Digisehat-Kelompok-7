@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\RouteRegistrar;
+use App\Http\Controllers\ObatController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,27 +37,31 @@ Route::get('/user/userProfile', function () {
     return view('user.userProfile');
 });
 
-    //Manajemen Obat User
+//Manajemen Obat User
 Route::get('/user/userManagement', function () {
     return view('user.userManagement');
 });
 
-    Route::get('/user/formulirObat', function () {
-        return view('user.manajemenObat.formulirObat');
-    });
+// Route::get('/user/formulirObat', function () {
+//     return view('user.manajemenObat.formulirObat');
+// });
 
-    Route::get('/user/informasiObat', function () {
-        return view('user.manajemenObat.informasiObat');
-    });
+// Testing Fomulir Obat
+Route::get('/formulirObat', [ObatController::class, 'index'])->name('obat.form');
+Route::post('/postObat', [ObatController::class, 'postObat'])->name('obat.post');
 
-    //Atur Jadwal User
+Route::get('/user/informasiObat', function () {
+    return view('user.manajemenObat.informasiObat');
+})->name('informasiObat');
+
+//Atur Jadwal User
 Route::get('/user/userJadwal', function () {
     return view('user.userJadwal');
 });
 
-    Route::get('/user/formulirJadwal', function () {
-        return view('user.aturJadwal.formulirJadwal');
-    });
+Route::get('/user/formulirJadwal', function () {
+    return view('user.aturJadwal.formulirJadwal');
+});
 
 Route::get('/user/userRiwayat', function () {
     return view('user.userRiwayat');
@@ -68,4 +74,3 @@ Route::get('/user/userLogbook', function () {
 Route::get('/user/userBMI', function () {
     return view('user.userBMI');
 });
-
