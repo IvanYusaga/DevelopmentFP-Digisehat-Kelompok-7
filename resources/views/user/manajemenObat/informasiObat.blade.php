@@ -14,6 +14,12 @@
 
 @section('content')
 
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+
         <div class="card">
         <div class="card-body">
 
@@ -21,7 +27,7 @@
             <thead>
                 <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name Obat</th>
+                <th scope="col">Nama Obat</th>
                 <th scope="col">Tanggal</th>
                 <th scope="col">Cara <br> Penggunaan Obat</th>
                 <th scope="col">Deskripsi</th>
@@ -29,81 +35,28 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($obats as $index => $obat)
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Paracetamol</td>
-                    <td>2024-11-13</td>
-                    <td>2 kali sehari</td>
-                    <td>Pereda nyeri dan demam</td>
+                    <th scope="row">{{ $index + 1 }}</th>
+                    <td>{{ $obat->nama_obat }}</td>
+                    <td>{{ $obat->date }}</td>
+                    <td>{{ $obat->penggunaan_obat }}</td>
+                    <td>{{ $obat->deskripsi }}</td>
                     <td>
-                        <a href="edit" class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('obat.edit', $obat->id) }}" class="btn btn-sm btn-outline-primary">
                             <i class="bi bi-pencil"></i> Edit
                         </a>
-                        <button class="btn btn-sm btn-outline-danger">
-                            <i class="bi bi-trash"></i> Hapus
-                        </button>
+                        <form action="{{ route('obat.destroy', $obat->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus obat ini?')">
+                                <i class="bi bi-trash"></i> Hapus
+                            </button>
+                        </form>
+
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Ibuprofen</td>
-                    <td>2024-11-10</td>
-                    <td>3 kali sehari setelah makan</td>
-                    <td>Anti-inflamasi dan pereda nyeri</td>
-                    <td>
-                        <a href="edit" class="btn btn-sm btn-outline-primary">
-                            <i class="bi bi-pencil"></i> Edit
-                        </a>
-                        <button class="btn btn-sm btn-outline-danger">
-                            <i class="bi bi-trash"></i> Hapus
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Amoxicillin</td>
-                    <td>2024-10-25</td>
-                    <td>2 kali sehari</td>
-                    <td>Antibiotik untuk infeksi bakteri</td>
-                    <td>
-                        <a href="edit" class="btn btn-sm btn-outline-primary">
-                            <i class="bi bi-pencil"></i> Edit
-                        </a>
-                        <button class="btn btn-sm btn-outline-danger">
-                            <i class="bi bi-trash"></i> Hapus
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Loratadine</td>
-                    <td>2024-09-18</td>
-                    <td>1 kali sehari</td>
-                    <td>Antihistamin untuk alergi</td>
-                    <td>
-                        <a href="edit" class="btn btn-sm btn-outline-primary">
-                            <i class="bi bi-pencil"></i> Edit
-                        </a>
-                        <button class="btn btn-sm btn-outline-danger">
-                            <i class="bi bi-trash"></i> Hapus
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>Metformin</td>
-                    <td>2024-08-20</td>
-                    <td>2 kali sehari dengan makan</td>
-                    <td>Obat diabetes tipe 2</td>
-                    <td>
-                        <a href="edit" class="btn btn-sm btn-outline-primary">
-                            <i class="bi bi-pencil"></i> Edit
-                        </a>
-                        <button class="btn btn-sm btn-outline-danger">
-                            <i class="bi bi-trash"></i> Hapus
-                        </button>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
             </table>
 
@@ -111,4 +64,3 @@
     </div>
 </main>
 @endsection
-
