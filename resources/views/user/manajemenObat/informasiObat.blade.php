@@ -6,7 +6,7 @@
     <main id="main" class="main">
     <div class="pagetitle d-flex justify-content-between align-items-center">
         <h1>Berikut Informasi Obat Kamu</h1>
-        <a href="formulirObat">
+        <a href="{{ route('obat.form') }}">
             <button type="button" class="btn btn-info rounded-pill text-white">Tambah</button>
         </a>
     </div>

@@ -13,7 +13,7 @@
       <div class="card-body">
         <h5 class="card-title text-center">Formulir Manajemen Obat</h5>
 
-        <form action="{{ route('obat.post') }}" method="POST" class="g-3">
+        <form action="{{ route('obat.post') }}" method="POST" class="row g-3">
           @csrf
           <div class="col-12">
             <label for="inputNanme4" class="form-label text-primary">Nama Obat</label>
@@ -27,7 +27,7 @@
           </div>
           <div class="col-12">
             <label for="inputPenggunaanObat" class="form-label text-primary">Cara Penggunaan Obat</label>
-            <input type="text" class="form-control" id="penggunaan_obat" name="pengunaan_obat" placeholder="">
+            <input type="text" class="form-control" id="penggunaan_obat" name="penggunaan_obat" placeholder="">
           </div>
           <div class="col-12">
             <label for="inputDeskripsi" class="form-label text-primary">Deskripsi</label>
