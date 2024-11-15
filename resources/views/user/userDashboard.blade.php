@@ -3,6 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('breadcrumbs')
+{{-- @dd(auth()->check()) --}}
     <main id="main" class="main">
 
     <div class="pagetitle">
