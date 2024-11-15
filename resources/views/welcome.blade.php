@@ -42,7 +42,7 @@
                 <h1 class="fw-bold mb-3">Selamat datang di <span class="text-primary">Medipulse!</span></h1>
                 <p class="lead mb-3">Solusi kesehatan digital yang memastikan Anda tidak melewatkan satu dosis pun. Medipulse membantu mengelola jadwal konsumsi obat dengan mudah dan teratur, dari pengingat harian hingga catatan kesehatan Anda. Nikmati kemudahan mendapatkan notifikasi tepat waktu yang dapat disesuaikan sesuai kebutuhan.</p>
                 <p class="fst-italic text-primary mb-4">Bantu jaga kesehatan Anda, kapan saja, di mana saja, dengan cara yang aman dan praktis!</p>
-                <a href="{{ route('login') }}" class="btn btn-primary btn-lg">Masuk</a>
+                <a href="{{ route('login.view') }}" class="btn btn-primary btn-lg">Masuk</a>
             </div>
         </div>
     </div>
