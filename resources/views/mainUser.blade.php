@@ -152,13 +152,21 @@
     </ul>
 
     <ul class="sidebar-nav" id="sidebar-nav">
+      <form action="{{ route('logout') }}" method="POST"> 
+      @csrf
+      @method('POST')
+      <button type="submit" class="btn btn-outline-danger btn-sm">
+        Log Out
+      </button>
+    </form>
 
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link collapsed" href="index.html">
             <i class="bi bi-box-arrow-right"></i>
             <span>Log Out</span>
           </a>
-        </li><!-- End Dashboard Nav -->
+        </li><!-- End Dashboard Nav --> --}}
+    </ul>
 
 
   </aside><!-- End Sidebar-->
