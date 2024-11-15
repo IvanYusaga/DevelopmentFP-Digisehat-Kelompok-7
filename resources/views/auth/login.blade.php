@@ -105,7 +105,7 @@
           </div>
 
             <!-- Login Form -->
-            <form action="{{ route('login.aksi') }}" method="POST" class="user row g-3 needs-validation" novalidate>
+            <form action="{{ route('login.post') }}" method="POST" class="user row g-3 needs-validation" novalidate>
                 @csrf
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -149,7 +149,7 @@
 
                 <!-- Register Link -->
                 <div class="col-12">
-                    <p class="small mb-0">Belum punya akun? <a class="small" href="{{ route('register') }}">&nbsp;Daftar di sini</a></p>
+                    <p class="small mb-0">Belum punya akun? <a class="small" href="{{ route('register.view') }}">&nbsp;Daftar di sini</a></p>
                 </div>
             </form>
           </div>
