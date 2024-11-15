@@ -1,21 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\RouteRegistrar;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\AuthController;
+use App\Http\Middleware\UserLogin;
 
 //Halaman login dan register
-Route::controller(AuthController::class)->group(function () {
-    Route::get('register', 'register')->name('register');
-    Route::post('register', 'registerSimpan')->name('register.simpan');
+Route::get('/register', [AuthController::class, 'registerView'])->name('register.view');
+Route::post('/registerPost', [AuthController::class, 'registerPost'])->name('register.post');
 
-    Route::get('login', 'login')->name('login');
-    Route::post('login', 'loginAksi')->name('login.aksi');
+Route::get('/login', [AuthController::class, 'loginView'])->name('login.view');
+Route::post('/loginPost', [AuthController::class, 'loginPost'])->name('login.post');
 
-    Route::get('logout', 'logout')->middleware('auth')->name('logout');
-});
-
+// Halaman Awal
 Route::get('/', function () {
     return view('welcome');
 });
@@ -42,47 +39,51 @@ Route::get('/admin/profile', function () {
 
 
 //Buat User
-Route::get('/user/userDashboard', function () {
-    return view('user.userDashboard');
-})->name('userDashboard');
+Route::middleware(UserLogin::class)->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/user/userProfile', function () {
-    return view('user.userProfile');
-});
+    Route::get('/user/userDashboard', function () {
+        return view('user.userDashboard');
+    })->name('userDashboard');
 
-//Manajemen Obat User
-Route::get('/user/userManagement', function () {
-    return view('user.userManagement');
-});
+    Route::get('/user/userProfile', function () {
+        return view('user.userProfile');
+    });
 
-// Testing Fomulir Obat
-Route::get('/user/formulirObat', [ObatController::class, 'index'])->name('obat.form');
-Route::post('/user/postObat', [ObatController::class, 'postObat'])->name('obat.post');
+    //Manajemen Obat User
+    Route::get('/user/userManagement', function () {
+        return view('user.userManagement');
+    });
 
-Route::get('/user/informasiObat', [ObatController::class, 'informasiObat'])->name('informasiObat');
-Route::delete('/user/destroyObat/{id}', [ObatController::class, 'destroy'])->name('obat.destroy');
+    // Testing Fomulir Obat
+    Route::get('/user/formulirObat', [ObatController::class, 'index'])->name('obat.form');
+    Route::post('/user/postObat', [ObatController::class, 'postObat'])->name('obat.post');
 
-Route::get('/user/editObat/{id}', [ObatController::class, 'editObat'])->name('obat.edit');
-Route::post('/user/updateObat/{id}', [ObatController::class, 'updateObat'])->name('obat.update');
+    Route::get('/user/informasiObat', [ObatController::class, 'informasiObat'])->name('informasiObat');
+    Route::delete('/user/destroyObat/{id}', [ObatController::class, 'destroy'])->name('obat.destroy');
+
+    Route::get('/user/editObat/{id}', [ObatController::class, 'editObat'])->name('obat.edit');
+    Route::post('/user/updateObat/{id}', [ObatController::class, 'updateObat'])->name('obat.update');
 
 
-//Atur Jadwal User
-Route::get('/user/userJadwal', function () {
-    return view('user.userJadwal');
-});
+    //Atur Jadwal User
+    Route::get('/user/userJadwal', function () {
+        return view('user.userJadwal');
+    });
 
-Route::get('/user/formulirJadwal', function () {
-    return view('user.aturJadwal.formulirJadwal');
-});
+    Route::get('/user/formulirJadwal', function () {
+        return view('user.aturJadwal.formulirJadwal');
+    });
 
-Route::get('/user/userRiwayat', function () {
-    return view('user.userRiwayat');
-});
+    Route::get('/user/userRiwayat', function () {
+        return view('user.userRiwayat');
+    });
 
-Route::get('/user/userLogbook', function () {
-    return view('user.userLogbook');
-});
+    Route::get('/user/userLogbook', function () {
+        return view('user.userLogbook');
+    });
 
-Route::get('/user/userBMI', function () {
-    return view('user.userBMI');
+    Route::get('/user/userBMI', function () {
+        return view('user.userBMI');
+    });
 });
