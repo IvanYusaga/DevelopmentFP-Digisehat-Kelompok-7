@@ -96,6 +96,11 @@
 
         <!-- Card for Login -->
         <div class="card mb-3">
+          @if(session('success'))
+              <div class="alert alert-success">
+                {{ session('success') }}
+              </div>
+          @endif
           <div class="card-body">
 
             <!-- Card Title and Description -->
@@ -119,11 +124,11 @@
 
                 <!-- Username Input -->
                 <div class="col-12">
-                    <label for="yourUsername" class="form-label">Nama Pengguna</label>
+                    <label for="yourUsername" class="form-label">Username</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
                         <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Masukkan nama pengguna Anda.</div>
+                        <div class="invalid-feedback">Masukkan username Anda.</div>
                     </div>
                 </div>
 
