@@ -7,7 +7,7 @@
     <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Halo,Manusia Pentung</h1>
+        <h1>Halo, {{ auth()->user()->nama_pengguna }}</h1>
         <h1>Selamat Datang di MediPulse</h1><br>
             <p>Yuk Lengkapi Profilemu! <a href="userProfile"><strong>Klik Disini</strong></a></p>
         <br>
