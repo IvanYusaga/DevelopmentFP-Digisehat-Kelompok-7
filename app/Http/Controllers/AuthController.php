@@ -6,72 +6,75 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-	public function register()
+	// Menampilkan Tampilan View
+	public function registerView()
 	{
+		if (Auth::check()) {
+			return back();
+		}
 		return view('auth/register');
 	}
 
-	public function registerSimpan(Request $request)
+	// Create Akun User
+	public function registerPost(Request $request)
 	{
-		Validator::make($request->all(), [
-			'nama' => 'required',
+		$request->validate([
+			'nama_pengguna' => 'required|string|max:255',
 			'email' => 'required|email',
-			'password' => 'required|confirmed'
-		])->validate();
-
-		User::create([
-			'nama' => $request->nama,
-			'email' => $request->email,
-			'password' => Hash::make($request->password),
-			'level' => 'USER'
+			'username' => 'required|string|max:8',
+			'password' => 'required|string',
 		]);
 
-		return redirect()->route('login');
+		User::create([
+			'nama_pengguna' => $request->nama_pengguna,
+			'email' => $request->email,
+			'username' => $request->username,
+			'password' => Hash::make($request->password),
+		]);
+
+		return redirect()->route('login.view')->with('success', 'Anda berhasil membuat akun');
 	}
 
-	public function login()
+	// Menampilkan Tampilan Login
+	public function loginView()
 	{
+		if (Auth::check()) {
+			return back();
+		}
 		return view('auth/login');
 	}
 
-	public function loginAksi(Request $request)
-{
-    // Validasi input email dan password
-    Validator::make($request->all(), [
-        'email' => 'required|email',
-        'password' => 'required'
-    ])->validate();
+	// Login User
+	public function loginPost(Request $request)
+	{
+		$credentials = $request->validate([
+			'username' => ['required'],
+			'password' => ['required'],
+		]);
 
-    // Cek kredensial pengguna
-    if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
-        // Jika gagal, kembalikan dengan pesan error spesifik
-        return back()->withErrors([
-            'login_error' => 'Email dan Password Yang Anda Masukkan Itu SALAH!'
-        ])->withInput(); // Mengembalikan input ke halaman sebelumnya
-    }
+		if (Auth::attempt($credentials)) {
+			$request->session()->regenerate();
 
-    // Regenerasi session untuk keamanan
-    $request->session()->regenerate();
-	if (Auth::user()->level === 'admin') {
-        // Jika level admin, redirect ke halaman dashboard admin
-        return redirect()->route('adminDashboard');  // Pastikan route ini ada
-    } else {
-        // Jika level user, redirect ke halaman dashboard user
-        return redirect()->route('userDashboard');  // Pastikan route ini ada
-    }
-}
+			return redirect()->intended(route('userDashboard'));
+		}
 
+		return back()->withErrors([
+			'username' => 'The provided credentials do not match our records.',
+		])->onlyInput('username');
+	}
+
+	// Logout
 	public function logout(Request $request)
 	{
-		Auth::guard('web')->logout();
+		Auth::logout();
 
 		$request->session()->invalidate();
 
-		return redirect('/');
+		$request->session()->regenerateToken();
+
+		return redirect()->route('login.view');
 	}
 }
