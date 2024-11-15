@@ -55,30 +55,30 @@
             </div>
 
             <!-- Formulir untuk Membuat Akun -->
-            <form action="{{ route('register.simpan') }}" method="POST" class="user needs-validation" novalidate>
+            <form action="{{ route('register.post') }}" method="POST" class="user needs-validation" novalidate>
               @csrf
 
               <!-- Input Nama -->
               <div class="form-group mb-3">
-                <label for="yourName" class="form-label">Nama Anda</label>
-                <input type="text" name="name" class="form-control" id="yourName" required>
-                <div class="invalid-feedback">Harap masukkan nama Anda!</div>
+                <label for="yourName" class="form-label">Masukka Nama Pengguna</label>
+                <input type="text" name="nama_pengguna" class="form-control" id="yourName" required>
+                <div class="invalid-feedback">Harap masukkan nama pengguna Anda!</div>
               </div>
 
               <!-- Input Email -->
               <div class="form-group mb-3">
-                <label for="yourEmail" class="form-label">Email Anda</label>
+                <label for="yourEmail" class="form-label">Masukkan Email Anda</label>
                 <input type="email" name="email" class="form-control" id="yourEmail" required>
                 <div class="invalid-feedback">Harap masukkan alamat email yang valid!</div>
               </div>
 
               <!-- Input Username -->
               <div class="form-group mb-3">
-                <label for="yourUsername" class="form-label">Nama Pengguna</label>
+                <label for="yourUsername" class="form-label">Masukkan Username</label>
                 <div class="input-group">
                   <span class="input-group-text" id="inputGroupPrepend">@</span>
                   <input type="text" name="username" class="form-control" id="yourUsername" required>
-                  <div class="invalid-feedback">Harap pilih nama pengguna.</div>
+                  <div class="invalid-feedback">Harap masukkan Username Anda.</div>
                 </div>
               </div>
 
@@ -89,7 +89,7 @@
                 <div class="invalid-feedback">Harap masukkan kata sandi Anda!</div>
               </div>
 
-              <!-- Konfirmasi Password -->
+              {{-- <!-- Konfirmasi Password -->
               <div class="form-group mb-3">
                 <label for="yourPasswordConfirmation" class="form-label">Konfirmasi Kata Sandi</label>
                 <input type="password" name="password_confirmation" class="form-control" id="yourPasswordConfirmation" required>
@@ -101,7 +101,7 @@
                 <input class="form-check-input" type="checkbox" name="terms" id="acceptTerms" required>
                 <label class="form-check-label" for="acceptTerms">Saya setuju dan menerima <a href="#">syarat dan ketentuan</a></label>
                 <div class="invalid-feedback">Anda harus setuju sebelum mengirimkan.</div>
-              </div>
+              </div> --}}
 
               <!-- Tombol Kirim -->
               <div class="col-12 mb-3">
@@ -110,7 +110,7 @@
 
               <!-- Link Login -->
               <div class="col-12 text-center">
-                <p class="small mb-0 text-muted">Sudah punya akun? <a href="{{ route('login') }}" class="text-primary">Masuk di sini</a></p>
+                <p class="small mb-0 text-muted">Sudah punya akun? <a href="{{ route('login.view') }}" class="text-primary">Masuk di sini</a></p>
               </div>
             </form>
 
