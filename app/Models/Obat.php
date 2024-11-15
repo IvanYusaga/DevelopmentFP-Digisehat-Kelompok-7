@@ -16,7 +16,8 @@ class Obat extends Model
     protected $fillable = [
         'id_user',
         'nama_obat',
-        'cara_penggunaan',
+        'date',
+        'penggunaan_obat',
         'deskripsi',
     ];
 

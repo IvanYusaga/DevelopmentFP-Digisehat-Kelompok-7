@@ -13,7 +13,7 @@
             <h5 class="card-title text-center">Edit Informasi Obat</h5>
 
             <!-- Form untuk Edit Data Obat -->
-            <form action="{{ route('obat.update', $obat->id) }}" method="POST" class="row g-3">
+            <form action="{{ route('obat.update', $obat->id_obat) }}" method="POST" class="row g-3">
                 @csrf
                 @method('POST')
                 <div class="col-12">

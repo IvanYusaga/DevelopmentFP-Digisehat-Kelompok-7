@@ -43,10 +43,10 @@
                     <td>{{ $obat->penggunaan_obat }}</td>
                     <td>{{ $obat->deskripsi }}</td>
                     <td>
-                        <a href="{{ route('obat.edit', $obat->id) }}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('obat.edit', $obat->id_obat) }}" class="btn btn-sm btn-outline-primary">
                             <i class="bi bi-pencil"></i> Edit
                         </a>
-                        <form action="{{ route('obat.destroy', $obat->id) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('obat.destroy', $obat->id_obat) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus obat ini?')">

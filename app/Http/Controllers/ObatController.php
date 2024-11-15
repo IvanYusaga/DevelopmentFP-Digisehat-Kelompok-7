@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Obat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ObatController extends Controller
 {
@@ -24,6 +25,7 @@ class ObatController extends Controller
         ]);
 
         Obat::create([
+            'id_user' => auth::id(),
             'nama_obat' => $request->nama_obat,
             'date' => $request->date,
             'penggunaan_obat' => $request->penggunaan_obat,
@@ -36,21 +38,21 @@ class ObatController extends Controller
     // Menampilkan Data Obat
     public function informasiObat()
     {
-        $obats = Obat::all();
+        $obats = Obat::where('id_user', auth::id())->get();
 
         return view('user.manajemenObat.informasiObat', compact('obats'));
     }
 
     // Menampilkan Edit Obat
-    public function editObat($id)
+    public function editObat($id_obat)
     {
-        $obat = Obat::findOrFail($id);
+        $obat = Obat::findOrFail($id_obat);
 
         return view('user.manajemenObat.editObat', compact('obat'));
     }
 
     // Update Data Obat
-    public function updateObat(Request $request, $id)
+    public function updateObat(Request $request, $id_obat)
     {
         // Validasi data
         $request->validate([
@@ -60,7 +62,7 @@ class ObatController extends Controller
             'deskripsi' => 'required|string',
         ]);
 
-        $obat = Obat::findOrFail($id);
+        $obat = Obat::findOrFail($id_obat);
         $obat->update([
             'nama_obat' => $request->nama_obat,
             'date' => $request->date,

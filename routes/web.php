@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ObatController;
-use App\Http\Controllers\AuthController;
 use App\Http\Middleware\UserLogin;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ObatController;
 
 //Halaman login dan register
 Route::get('/register', [AuthController::class, 'registerView'])->name('register.view');
@@ -14,6 +15,9 @@ Route::post('/loginPost', [AuthController::class, 'loginPost'])->name('login.pos
 
 // Halaman Awal
 Route::get('/', function () {
+    if (Auth::check()) {
+        return back();
+    }
     return view('welcome');
 });
 
@@ -60,10 +64,10 @@ Route::middleware(UserLogin::class)->group(function () {
     Route::post('/user/postObat', [ObatController::class, 'postObat'])->name('obat.post');
 
     Route::get('/user/informasiObat', [ObatController::class, 'informasiObat'])->name('informasiObat');
-    Route::delete('/user/destroyObat/{id}', [ObatController::class, 'destroy'])->name('obat.destroy');
+    Route::delete('/user/destroyObat/{id_obat}', [ObatController::class, 'destroy'])->name('obat.destroy');
 
-    Route::get('/user/editObat/{id}', [ObatController::class, 'editObat'])->name('obat.edit');
-    Route::post('/user/updateObat/{id}', [ObatController::class, 'updateObat'])->name('obat.update');
+    Route::get('/user/editObat/{id_obat}', [ObatController::class, 'editObat'])->name('obat.edit');
+    Route::post('/user/updateObat/{id_obat}', [ObatController::class, 'updateObat'])->name('obat.update');
 
 
     //Atur Jadwal User

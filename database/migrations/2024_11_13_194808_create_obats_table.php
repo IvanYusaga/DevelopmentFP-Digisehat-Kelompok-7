@@ -5,18 +5,21 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    public function up(): void {
-        Schema::create('obat', function (Blueprint $table) {
+    public function up(): void
+    {
+        Schema::create('obats', function (Blueprint $table) {
             $table->id('id_obat');
-            $table->foreignId('id_user');
+            $table->foreignId('id_user')->constrained('users', 'id_user')->onDelete('cascade');
             $table->string('nama_obat');
-            $table->text('cara_penggunaan');
+            $table->date('date');
+            $table->text('penggunaan_obat');
             $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
     }
 
-    public function down(): void {
+    public function down(): void
+    {
         Schema::dropIfExists('obat');
     }
 };
