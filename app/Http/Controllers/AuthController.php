@@ -6,75 +6,85 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\QueryException;
 
 class AuthController extends Controller
 {
-	// Menampilkan Tampilan View
-	public function registerView()
-	{
-		if (Auth::check()) {
-			return back();
-		}
-		return view('auth/register');
-	}
+    // Menampilkan Tampilan View
+    public function registerView()
+    {
+        if (Auth::check()) {
+            return back();
+        }
+        return view('auth/register');
+    }
 
-	// Create Akun User
-	public function registerPost(Request $request)
-	{
-		$request->validate([
-			'nama_pengguna' => 'required|string|max:255',
-			'email' => 'required|email',
-			'username' => 'required|string|max:8',
-			'password' => 'required|string',
-		]);
+    // Create Akun User
+    public function registerPost(Request $request)
+    {
+        $request->validate([
+            'nama_pengguna' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'username' => 'required|string|max:8|unique:users,username',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
 
-		User::create([
-			'nama_pengguna' => $request->nama_pengguna,
-			'email' => $request->email,
-			'username' => $request->username,
-			'password' => Hash::make($request->password),
-		]);
+        try {
+            User::create([
+                'nama_pengguna' => $request->nama_pengguna,
+                'email' => $request->email,
+                'username' => $request->username,
+                'password' => Hash::make($request->password),
+            ]);
 
-		return redirect()->route('login.view')->with('success', 'Anda berhasil membuat akun');
-	}
+            return redirect()->route('login.view')->with('success', 'Anda berhasil membuat akun');
+        } catch (QueryException $e) {
+            if ($e->errorInfo[1] == 1062) { // Error kode 1062 adalah Duplicate Entry
+                return back()->with('error', 'Username atau Email sudah digunakan.')->withInput();
+            }
 
-	// Menampilkan Tampilan Login
-	public function loginView()
-	{
-		if (Auth::check()) {
-			return back();
-		}
-		return view('auth/login');
-	}
+            // Lempar error lain yang tidak terduga
+            throw $e;
+        }
+    }
 
-	// Login User
-	public function loginPost(Request $request)
-	{
-		$credentials = $request->validate([
-			'username' => ['required'],
-			'password' => ['required'],
-		]);
+    // Menampilkan Tampilan Login
+    public function loginView()
+    {
+        if (Auth::check()) {
+            return back();
+        }
+        return view('auth/login');
+    }
 
-		if (Auth::attempt($credentials)) {
-			$request->session()->regenerate();
+    // Login User
+    public function loginPost(Request $request)
+    {
+        $credentials = $request->validate([
+            'username' => ['required'],
+            'password' => ['required'],
+        ]);
 
-			return redirect()->intended(route('userDashboard'));
-		}
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-		return back()->withErrors([
-			'username' => 'The provided credentials do not match our records.',
-		])->onlyInput('username');
-	}
+            return redirect()->intended(route('userDashboard'));
+        }
 
-	// Logout
-	public function logout(Request $request)
-	{
-		Auth::logout();
+        return back()->withErrors([
+            'username' => 'The provided credentials do not match our records.',
+        ])->onlyInput('username');
+    }
 
-		$request->session()->invalidate();
+    // Logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
 
-		$request->session()->regenerateToken();
+        $request->session()->invalidate();
 
-		return redirect()->route('login.view');
-	}
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login.view');
+    }
 }
