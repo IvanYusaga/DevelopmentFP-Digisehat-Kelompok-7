@@ -14,6 +14,18 @@ class ObatController extends Controller
         return view('user.manajemenObat.formulirObat');
     }
 
+    public function checkStatusObat()
+    {
+        $user = auth::id();
+        $hasObat = Obat::where('id_user', $user)->exists();
+
+        if ($hasObat) {
+            return redirect()->route('informasiObat');
+        } else {
+            return redirect()->route('userManagement');
+        }
+    }
+
     // Menambahkan Data Obat
     public function postObat(Request $request)
     {
@@ -73,13 +85,19 @@ class ObatController extends Controller
         return redirect()->route('informasiObat')->with('success', 'Data obat berhasil diperbarui');
     }
 
-
     // Delete Data Obat
     public function destroy($id)
     {
         $obat = Obat::findOrFail($id);
+        $userId = $obat->id_user;
         $obat->delete();
 
-        return redirect()->route('informasiObat')->with('success', 'Data obat berhasil dihapus');
+        $hasObat = Obat::where('id_user', $userId)->exists();
+
+        if ($hasObat) {
+            return redirect()->route('informasiObat')->with('success', 'Data obat berhasil dihapus');
+        } else {
+            return redirect()->route('userManagement');
+        }
     }
 }

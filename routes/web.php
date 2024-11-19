@@ -57,9 +57,11 @@ Route::middleware(UserLogin::class)->group(function () {
     //Manajemen Obat User
     Route::get('/user/userManagement', function () {
         return view('user.userManagement');
-    });
+    })->name('userManagement');
 
     // Testing Fomulir Obat
+    Route::get('/user/checkStatusObat', [ObatController::class, 'checkStatusObat'])->name('checkStatusObat');
+
     Route::get('/user/formulirObat', [ObatController::class, 'index'])->name('obat.form');
     Route::post('/user/postObat', [ObatController::class, 'postObat'])->name('obat.post');
 

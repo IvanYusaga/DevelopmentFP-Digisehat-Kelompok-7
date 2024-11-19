@@ -107,7 +107,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="userManagement">
+          <a class="nav-link collapsed" href="{{ route('checkStatusObat') }}">
             <i class="bi bi-people"></i>
             <span>Manajemen Obat</span>
           </a>
