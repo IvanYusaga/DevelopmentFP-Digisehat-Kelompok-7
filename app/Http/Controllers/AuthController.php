@@ -20,23 +20,24 @@ class AuthController extends Controller
 
 	// Create Akun User
 	public function registerPost(Request $request)
-	{
-		$request->validate([
-			'nama_pengguna' => 'required|string|max:255',
-			'email' => 'required|email',
-			'username' => 'required|string|max:8',
-			'password' => 'required|string',
-		]);
+{
+    $request->validate([
+        'nama_pengguna' => 'required|string|max:255',
+        'email' => 'required|email',
+        'username' => 'required|string|max:8',
+        'password' => 'required|string',
+    ]);
 
-		User::create([
-			'nama_pengguna' => $request->nama_pengguna,
-			'email' => $request->email,
-			'username' => $request->username,
-			'password' => Hash::make($request->password),
-		]);
+    User::create([
+        'nama_pengguna' => $request->nama_pengguna,
+        'email' => $request->email,
+        'username' => $request->username,
+        'password' => Hash::make($request->password),
+        'role' => 'user', 
+    ]);
 
-		return redirect()->route('login.view')->with('success', 'Anda berhasil membuat akun');
-	}
+    return redirect()->route('login.view')->with('success', 'Akun berhasil dibuat');
+}
 
 	// Menampilkan Tampilan Login
 	public function loginView()
@@ -49,32 +50,42 @@ class AuthController extends Controller
 
 	// Login User
 	public function loginPost(Request $request)
-	{
-		$credentials = $request->validate([
-			'username' => ['required'],
-			'password' => ['required'],
-		]);
+{
+    $credentials = $request->validate([
+        'username' => 'required',
+        'password' => 'required',
+    ]);
 
-		if (Auth::attempt($credentials)) {
-			$request->session()->regenerate();
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
 
-			return redirect()->intended(route('userDashboard'));
-		}
+        // Arahkan berdasarkan peran user
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('adminDashboard');
+        } elseif (Auth::user()->role === 'user') {
+            return redirect()->route('userDashboard');
+        }
+    }
 
-		return back()->withErrors([
-			'username' => 'The provided credentials do not match our records.',
-		])->onlyInput('username');
-	}
+    return back()->withErrors([
+        'username' => 'The provided credentials do not match our records.',
+    ])->onlyInput('username');
+}
 
 	// Logout
 	public function logout(Request $request)
 	{
-		Auth::logout();
-
-		$request->session()->invalidate();
-
-		$request->session()->regenerateToken();
-
-		return redirect()->route('login.view');
+		  // Periksa apakah pengguna sudah login
+          if (!Auth::check()) {
+            return redirect()->route('login.view'); // Jika tidak login, arahkan ke halaman login
+        }
+    
+        // Logout pengguna
+        Auth::logout();
+        $request->session()->invalidate(); // Hapus semua data sesi
+        $request->session()->regenerateToken(); // Regenerasi token CSRF
+    
+        // Arahkan ke halaman login yang sama untuk semua pengguna
+        return redirect()->route('login.view')->with('success', 'You have been logged out successfully.');
 	}
 }
