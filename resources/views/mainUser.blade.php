@@ -51,7 +51,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="{{asset('style/assets/img/profile-img.jpg')}}" alt="Profile" class="rounded-circle">
+            <img src="{{ auth()->user()->profil && auth()->user()->profil->profile_image ? auth()->user()->profil->profile_image : asset('style/assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->nama_pengguna }}</span>
           </a><!-- End Profile Image Icon -->
 
@@ -65,7 +65,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="userProfile">
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.form') }}">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -98,7 +98,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="userDashboard">
+        <a class="nav-link collapsed" href="{{ route('userDashboard') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -117,7 +117,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="userJadwal">
+          <a class="nav-link collapsed" href="{{ route('userJadwal') }}">
             <i class="bi bi-people"></i>
             <span>Atur Jadwal</span>
           </a>
@@ -127,7 +127,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="userRiwayat">
+          <a class="nav-link collapsed" href="{{ route('userRiwayat') }}">
             <i class="bi bi-people"></i>
             <span>Riwayat Obat</span>
           </a>
@@ -137,7 +137,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="userLogbook">
+          <a class="nav-link collapsed" href="{{ route('userLogbook') }}">
             <i class="bi bi-people"></i>
             <span>Riwayat Logbook</span>
           </a>
@@ -147,7 +147,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="userBMI">
+          <a class="nav-link collapsed" href="{{ route('userBMI') }}">
             <i class="bi bi-people"></i>
             <span>Tes BMI</span>
           </a>

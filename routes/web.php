@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\ProfileController;
 
 //Halaman login dan register
 Route::get('/register', [AuthController::class, 'registerView'])->name('register.view');
@@ -50,16 +51,22 @@ Route::middleware(UserLogin::class)->group(function () {
         return view('user.userDashboard');
     })->name('userDashboard');
 
-    Route::get('/user/userProfile', function () {
-        return view('user.userProfile');
-    });
+
+    // Profile User
+    Route::get('/user/userProfile', [ProfileController::class, 'profile'])->name('user.profile');
+
+    Route::get('/user/userAddProfile', [ProfileController::class, 'index'])->name('profile.form');
+    Route::post('/user/postProfile', [ProfileController::class, 'post'])->name('profile.post');
+
+    Route::get('/user/editProfile/{id_profil}', [ProfileController::class, 'editProfile'])->name('profile.edit');
+    Route::post('/user/updateProfile/{id_profil}', [ProfileController::class, 'update'])->name('profile.update');
+
 
     //Manajemen Obat User
     Route::get('/user/userManagement', function () {
         return view('user.userManagement');
     })->name('userManagement');
 
-    // Testing Fomulir Obat
     Route::get('/user/checkStatusObat', [ObatController::class, 'checkStatusObat'])->name('checkStatusObat');
 
     Route::get('/user/formulirObat', [ObatController::class, 'index'])->name('obat.form');
@@ -75,7 +82,7 @@ Route::middleware(UserLogin::class)->group(function () {
     //Atur Jadwal User
     Route::get('/user/userJadwal', function () {
         return view('user.userJadwal');
-    });
+    })->name('userJadwal');
 
     Route::get('/user/formulirJadwal', function () {
         return view('user.aturJadwal.formulirJadwal');
@@ -83,13 +90,13 @@ Route::middleware(UserLogin::class)->group(function () {
 
     Route::get('/user/userRiwayat', function () {
         return view('user.userRiwayat');
-    });
+    })->name('userRiwayat');
 
     Route::get('/user/userLogbook', function () {
         return view('user.userLogbook');
-    });
+    })->name('userLogbook');
 
     Route::get('/user/userBMI', function () {
         return view('user.userBMI');
-    });
+    })->name('userBMI');
 });

@@ -6,12 +6,16 @@
 {{-- @dd(auth()->check()) --}}
     <main id="main" class="main">
 
-    <div class="pagetitle">
+      <div class="pagetitle">
         <h1>Halo, {{ auth()->user()->nama_pengguna }}</h1>
         <h1>Selamat Datang di MediPulse</h1><br>
-            <p>Yuk Lengkapi Profilemu! <a href="userProfile"><strong>Klik Disini</strong></a></p>
+    
+        @if (!auth()->user()->profil)
+            <p>Yuk Lengkapi Profilemu! <a href="{{ route('profile.form') }}"><strong>Klik Disini</strong></a></p>
+        @endif
         <br>
     </div>
+    
 @endsection
 
 @section('content')
