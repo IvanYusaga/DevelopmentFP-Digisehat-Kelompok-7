@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\BMIController;
 
 //Halaman login dan register
 Route::get('/register', [AuthController::class, 'registerView'])->name('register.view');
@@ -54,6 +55,10 @@ Route::middleware(UserLogin::class)->group(function () {
         return view('user.userProfile');
     });
 
+    Route::get('/user/editProfile', function () {
+        return view('user.editProfile');
+    });
+
     //Manajemen Obat User
     Route::get('/user/userManagement', function () {
         return view('user.userManagement');
@@ -89,7 +94,7 @@ Route::middleware(UserLogin::class)->group(function () {
         return view('user.userLogbook');
     });
 
-    Route::get('/user/userBMI', function () {
-        return view('user.userBMI');
-    });
+    //Buat BMI
+    Route::get('/user/userBMI', [BMIController::class, 'index'])->name('user.tesBMI'); // Untuk menampilkan form
+    Route::post('/user/hasilBMI', [BMIController::class, 'cekBMI'])->name('user.hasilBMI'); // Untuk memproses form
 });
