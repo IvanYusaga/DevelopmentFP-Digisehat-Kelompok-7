@@ -8,7 +8,7 @@
   <title>Medipulse - Register</title>
 
   <!-- Favicons -->
-  <link href="{{asset('style/assets/img/favicon.png') }}" rel="icon">
+  <link rel="icon" href="{{ asset('/style/assets/img/logo.jpg') }}" type="image/png">
   <link href="{{asset('style/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -28,23 +28,22 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primary" style="background: linear-gradient(to right, #cfdde6, #fff, #cfdde6);">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-8 d-flex flex-column align-items-center justify-content-center">
 
-        <!-- Logo -->
-        <div class="d-flex justify-content-center py-4">
-          <a href="index.html" class="logo d-flex align-items-center w-auto">
-            <img src="{{ asset('style/assets/img/logo.jpg') }}" alt="Logo" class="img-fluid">
-            <span class="d-none d-lg-block fs-4 fw-bold ms-2">Medipulse</span>
-          </a>
-        </div>
-         <!-- Akhir Logo -->
+        <!-- Logo Section -->
+      <div class="d-flex justify-content-center py-3">
+        <a href="index.html" class="d-flex align-items-center text-decoration-none">
+          <img src="{{ asset('style/assets/img/logo.jpg') }}" alt="Logo" class="img-fluid me-2" style="height: 50px;">
+          <h2 class="fw-bold text-primary mb-0">Medipulse</h2>
+        </a>
+      </div>
 
            <!-- Kartu untuk Membuat Akun -->
         <div class="col-12 card shadow-lg mb-5 rounded-4 border-0">
-          <div class="card-body p-4">
+          <div class="card-body">
 
             <!-- Pesan Error atau Sukses -->
             @if (session('error'))
@@ -119,7 +118,7 @@
 
               <!-- Link Login -->
               <div class="col-12 text-center">
-                <p class="small mb-0">Sudah punya akun? <a href="{{ route('login.view') }}" class="text-primary">Masuk di sini</a></p>
+                <p class="small mb-0">Sudah punya akun? <a href="{{ route('login.view') }}" class="text-decoration-none fw-bold text-primary">Masuk di sini</a></p>
               </div>
             </form>
 
@@ -128,13 +127,18 @@
         <!-- Akhir Kartu -->
 
          <!-- Footer -->
-        <div class="credits text-center py-3">
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+         
         </div>
-
       </div>
     </div>
-  </div>
+    <footer id="footer" class="footer mt-auto ms-0">
+      <div class="copyright">
+        &copy; Copyright <strong><span>DigiSehat</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">Kelompok VII</a>
+      </div>
+    </footer><!-- End Footer -->
 
 <!-- Vendor JS Files -->
 <script src="{{asset('style/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>

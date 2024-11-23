@@ -509,7 +509,17 @@ class ComposerStaticInita586b84655a3c5e8cc04c306909d7f5a
     );
 
     public static $classMap = array (
+        'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\JadwalPengingatController' => __DIR__ . '/../..' . '/app/Http/Controllers/JadwalPengingatController.php',
+        'App\\Http\\Controllers\\ObatController' => __DIR__ . '/../..' . '/app/Http/Controllers/ObatController.php',
+        'App\\Http\\Middleware\\UserLogin' => __DIR__ . '/../..' . '/app/Http/Middleware/UserLogin.php',
+        'App\\Models\\JadwalPengingat' => __DIR__ . '/../..' . '/app/Models/JadwalPengingat.php',
+        'App\\Models\\Logbook' => __DIR__ . '/../..' . '/app/Models/Logbook.php',
+        'App\\Models\\Obat' => __DIR__ . '/../..' . '/app/Models/Obat.php',
+        'App\\Models\\Penyakit' => __DIR__ . '/../..' . '/app/Models/Penyakit.php',
+        'App\\Models\\Profil' => __DIR__ . '/../..' . '/app/Models/Profil.php',
+        'App\\Models\\RiwayatPenyakit' => __DIR__ . '/../..' . '/app/Models/RiwayatPenyakit.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
@@ -631,6 +641,8 @@ class ComposerStaticInita586b84655a3c5e8cc04c306909d7f5a
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\ObatSeeder' => __DIR__ . '/../..' . '/database/seeders/ObatSeeder.php',
+        'Database\\Seeders\\UserSeeder' => __DIR__ . '/../..' . '/database/seeders/UserSeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
         'DateInvalidOperationException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',

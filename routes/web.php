@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\JadwalPengingatController;
 
-//Halaman login dan register
+// Halaman login dan register
 Route::get('/register', [AuthController::class, 'registerView'])->name('register.view');
 Route::post('/registerPost', [AuthController::class, 'registerPost'])->name('register.post');
 
@@ -21,9 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-//Buat Admin
-
+// Admin Routes
 Route::get('/admin/wireframe', function () {
     return view('admin.wireframe');
 });
@@ -40,9 +39,7 @@ Route::get('/admin/profile', function () {
     return view('admin.profile');
 });
 
-
-
-//Buat User
+// User Routes
 Route::middleware(UserLogin::class)->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -54,12 +51,12 @@ Route::middleware(UserLogin::class)->group(function () {
         return view('user.userProfile');
     });
 
-    //Manajemen Obat User
+    // Manajemen Obat User
     Route::get('/user/userManagement', function () {
         return view('user.userManagement');
     })->name('userManagement');
 
-    // Testing Fomulir Obat
+    // Testing Formulir Obat
     Route::get('/user/checkStatusObat', [ObatController::class, 'checkStatusObat'])->name('checkStatusObat');
 
     Route::get('/user/formulirObat', [ObatController::class, 'index'])->name('obat.form');
@@ -71,15 +68,13 @@ Route::middleware(UserLogin::class)->group(function () {
     Route::get('/user/editObat/{id_obat}', [ObatController::class, 'editObat'])->name('obat.edit');
     Route::post('/user/updateObat/{id_obat}', [ObatController::class, 'updateObat'])->name('obat.update');
 
-
-    //Atur Jadwal User
+    // Atur Jadwal User
     Route::get('/user/userJadwal', function () {
         return view('user.userJadwal');
     });
 
-    Route::get('/user/formulirJadwal', function () {
-        return view('user.aturJadwal.formulirJadwal');
-    });
+    Route::get('/user/formulirJadwal', [JadwalPengingatController::class, 'create'])->name('jadwalPengingat.form');
+    Route::post('/user/storeJadwal', [JadwalPengingatController::class, 'store'])->name('jadwalPengingat.store');
 
     Route::get('/user/userRiwayat', function () {
         return view('user.userRiwayat');

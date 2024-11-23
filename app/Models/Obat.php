@@ -26,7 +26,7 @@ class Obat extends Model
         return $this->belongsTo(User::class, 'id_user');
     }
 
-    public function jadwalPengingats(): HasMany
+    public function jadwalPengingat(): HasMany
     {
         return $this->hasMany(JadwalPengingat::class, 'id_obat');
     }
