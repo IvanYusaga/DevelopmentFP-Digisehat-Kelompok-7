@@ -17,15 +17,24 @@ class UserSeeder extends Seeder
             "username" => "ivan20",
             "email" => "ivan@gmail.com",
             "password" => bcrypt('12345'),
-            "role" => "admin", // Tambahkan role
+            "role" => "admin", 
         ]);
 
+       
         User::create([
             "nama_pengguna" => "Alya Wahyuning",
             "username" => "alya93",
             "email" => "alya@gmail.com",
             "password" => bcrypt('12345'),
-            "role" => "user", // Tambahkan role
+            "role" => "user", 
+        ]);
+
+        User::create([
+            "nama_pengguna" => "Hendrika Restu Prayoga",
+            "username" => "hen12",
+            "email" => "hendrikarestu@gmail.com",
+            "password" => bcrypt('12345'),
+            "role" => "user", 
         ]);
     }
 }

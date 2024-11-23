@@ -13,7 +13,7 @@ class ObatSeeder extends Seeder
     public function run(): void
     {
         Obat::create([
-            "id_user" => "1",
+            "id_user" => "2",
             "nama_obat" => "paracetamol",
             "date" => "2024-11-15",
             "penggunaan_obat" => "diminum setelah makan",
@@ -21,7 +21,7 @@ class ObatSeeder extends Seeder
         ]);
 
         Obat::create([
-            "id_user" => "1",
+            "id_user" => "2",
             "nama_obat" => "ibuprofen",
             "date" => "2024-11-16",
             "penggunaan_obat" => "diminum setiap 6 jam",
@@ -29,7 +29,7 @@ class ObatSeeder extends Seeder
         ]);
 
         Obat::create([
-            "id_user" => "2",
+            "id_user" => "3",
             "nama_obat" => "amoxicillin",
             "date" => "2024-11-17",
             "penggunaan_obat" => "diminum setiap 8 jam",
@@ -37,7 +37,7 @@ class ObatSeeder extends Seeder
         ]);
 
         Obat::create([
-            "id_user" => "2",
+            "id_user" => "3",
             "nama_obat" => "cetirizine",
             "date" => "2024-11-18",
             "penggunaan_obat" => "diminum sebelum tidur",

@@ -75,10 +75,13 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
+              <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
+                @csrf
+                <button type="submit" class="dropdown-item d-flex align-items-center">
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Log Out</span>
+                </button>
+              </form>
             </li>
 
           </ul><!-- End Profile Dropdown Items -->
@@ -104,7 +107,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="userManagement">
+          <a class="nav-link collapsed" href="{{ route('checkStatusObat') }}">
             <i class="bi bi-people"></i>
             <span>Manajemen Obat</span>
           </a>
@@ -149,23 +152,6 @@
             <span>Tes BMI</span>
           </a>
         </li><!-- End Dashboard Nav -->
-    </ul>
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-      <form action="{{ route('logout') }}" method="POST"> 
-      @csrf
-      @method('POST')
-      <button type="submit" class="btn btn-outline-danger btn-sm">
-        Log Out
-      </button>
-    </form>
-
-        {{-- <li class="nav-item">
-          <a class="nav-link collapsed" href="index.html">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Log Out</span>
-          </a>
-        </li><!-- End Dashboard Nav --> --}}
     </ul>
 
 

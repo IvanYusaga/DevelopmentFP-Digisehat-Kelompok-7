@@ -13,7 +13,7 @@
         <br>
         <p>Saat ini kamu belum punya informasi obat kamu.<br>
             Yuk di isi informasi obat kamu!</p>
-            <a href="formulirObat">
+            <a href="{{ route('obat.form') }}">
                 <button type="button" class="btn btn-info rounded-pill text-white">Atur Sekarang</button>
             </a>
         </div>
