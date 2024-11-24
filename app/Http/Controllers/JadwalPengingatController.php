@@ -12,9 +12,8 @@ class JadwalPengingatController extends Controller
     // Menampilkan Formulir Jadwal Pengingat
     public function create()
     {
-        // Mendapatkan daftar obat yang dimiliki oleh user yang login
         $obats = Obat::where('id_user', Auth::id())->get();
-        
+
         return view('user.aturJadwal.formulirJadwal', compact('obats'));
     }
 
@@ -31,7 +30,6 @@ class JadwalPengingatController extends Controller
             'status' => 'required|string',
         ]);
 
-        // Menyimpan jadwal pengingat
         JadwalPengingat::create([
             'id_obat' => $request->id_obat,
             'durasi_pengingat' => $request->durasi_pengingat,
