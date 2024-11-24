@@ -66,7 +66,6 @@ class ObatController extends Controller
     // Update Data Obat
     public function updateObat(Request $request, $id_obat)
     {
-        // Validasi data
         $request->validate([
             'nama_obat' => 'required|string|max:255',
             'date' => 'required|date',

@@ -10,7 +10,7 @@
 
   <title>Medipulse - Login</title>
   <!-- Favicons -->
-  <link href="{{asset('style/assets/img/favicon.png') }}" rel="icon">
+  <link rel="icon" href="{{ asset('/style/assets/img/logo.jpg') }}" type="image/png">
   <link href="{{asset('style/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -27,147 +27,99 @@
 
   <!-- Template Main CSS File -->
   <link href="{{asset('style/assets/css/style.css') }}" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f7f9fc;
-      padding-top: 50px;
-    }
-
-    .card {
-      border: none;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .card-body {
-      padding: 30px;
-    }
-
-    .form-label {
-      font-weight: 600;
-    }
-
-    .btn-primary {
-      background-color: #0069d9;
-      border-color: #0069d9;
-    }
-
-    .btn-primary:hover {
-      background-color: #0056b3;
-      border-color: #004085;
-    }
-
-    .credits {
-      text-align: center;
-      font-size: 0.875rem;
-      margin-top: 20px;
-    }
-
-    .credits a {
-      color: #0069d9;
-    }
-
-    .alert-danger {
-      border-radius: 10px;
-    }
-
-    @media (max-width: 576px) {
-      .container {
-        padding: 10px;
-      }
-    }
-  </style>
-
 </head>
 
-<body>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+<body style="background: linear-gradient(to right, #cfdde6, #fff, #cfdde6);">
+  <div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7 d-flex flex-column align-items-center justify-content-center">
 
-        <!-- Logo Section -->
-        <div class="d-flex justify-content-center py-4">
-          <a href="index.html" class="logo d-flex align-items-center w-auto">
-            <img src="{{asset('style/assets/img/logo.jpg')}}" alt="Logo" class="img-fluid">
-            <span class="d-none d-lg-block">Medipulse</span>
-          </a>
-        </div>
+      <!-- Logo Section -->
+      <div class="d-flex justify-content-center py-3">
+        <a href="index.html" class="d-flex align-items-center text-decoration-none">
+          <img src="{{ asset('style/assets/img/logo.jpg') }}" alt="Logo" class="img-fluid me-2" style="height: 50px;">
+          <h2 class="fw-bold text-primary mb-0">Medipulse</h2>
+        </a>
+      </div>
 
-        <!-- Card for Login -->
-        <div class="card mb-3">
+      <!-- Card for Login -->
+      <div class="card shadow-lg border-0 rounded-4 w-100">
+        <div class="card-body px-4 py-3">
+
+          <!-- Card Title -->
+          <div class="text-center mb-4">
+            <h3 class="fw-bold">Selamat Datang!</h3>
+            <p class="text-muted small">Masuk untuk melanjutkan</p>
+          </div>
+
+          <!-- Alert Message -->
           @if(session('success'))
-              <div class="alert alert-success">
-                {{ session('success') }}
-              </div>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
           @endif
-          <div class="card-body">
 
-            <!-- Card Title and Description -->
-            <div class="pt-4 pb-2">
-              <h5 class="card-title text-center pb-0 fs-4">Masuk ke Akun Anda</h5>
-              <p class="text-center small">Masukkan nama pengguna &amp; kata sandi Anda untuk masuk</p>
-          </div>
+          <!-- Login Form -->
+          <form action="{{ route('login.post') }}" method="POST" class="needs-validation" novalidate>
+            @csrf
+            @if ($errors->any())
+            <div class="alert alert-danger">
+              <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+            @endif
 
-            <!-- Login Form -->
-            <form action="{{ route('login.post') }}" method="POST" class="user row g-3 needs-validation" novalidate>
-                @csrf
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+            <!-- Login with Google -->
+            <button class="btn btn-outline-light text-dark border border-primary w-100 btn-lg d-flex align-items-center justify-content-center mb-4" type="button">
+              <i class="bi bi-google me-2 text-danger"></i>Lanjut Menggunakan Google
+            </button>
 
-                <!-- Username Input -->
-                <div class="col-12">
-                    <label for="yourUsername" class="form-label">Username</label>
-                    <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Masukkan username Anda.</div>
-                    </div>
-                </div>
+            <!-- Input Fields -->
+            <div class="form-floating mb-3">
+              <input type="text" name="username" id="username" class="form-control rounded-3" placeholder="Username" required>
+              <label for="username"><i class="bi bi-person-circle"></i> Username</label>
+              <div class="invalid-feedback">Masukkan username Anda.</div>
+            </div>
 
-                <!-- Password Input -->
-                <div class="col-12">
-                    <label for="yourPassword" class="form-label">Kata Sandi</label>
-                    <input type="password" name="password" class="form-control" id="yourPassword" required>
-                    <div class="invalid-feedback">Masukkan kata sandi Anda!</div>
-                </div>
+            <div class="form-floating mb-3">
+              <input type="password" name="password" id="password" class="form-control rounded-3" placeholder="Password" required>
+              <label for="password"><i class="bi bi-lock-fill"></i> Kata Sandi</label>
+              <div class="invalid-feedback">Masukkan kata sandi Anda!</div>
+            </div>
 
-                <!-- Remember Me Checkbox -->
-                <div class="col-12">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Ingat saya</label>
-                    </div>
-                </div>
+            <!-- Remember Me Checkbox -->
+            <div class="form-check mb-3">
+              <input type="checkbox" class="form-check-input" id="rememberMe" name="remember">
+              <label for="rememberMe" class="form-check-label">Ingat Saya</label>
+            </div>
 
-                <!-- Submit Button -->
-                <div class="col-12">
-                    <button class="btn btn-primary w-100" type="submit">Masuk</button>
-                </div>
+            <!-- Submit Button -->
+            <button class="btn btn-primary w-100 btn-lg mb-3" type="submit">Masuk</button>
+          </form>
 
-                <!-- Register Link -->
-                <div class="col-12">
-                    <p class="small mb-0">Belum punya akun? <a class="small" href="{{ route('register.view') }}">&nbsp;Daftar di sini</a></p>
-                </div>
-            </form>
+          <!-- Register Link -->
+          <div class="text-center mt-2">
+            <p class="small mb-0">Belum punya akun? <a href="{{ route('register.view') }}" class="text-decoration-none fw-bold text-primary">Daftar Sekarang</a></p>
           </div>
         </div>
-
-        <!-- Footer -->
-        <div class="credits">
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
-
       </div>
     </div>
   </div>
+</div>
+
+  <!-- Footer -->
+  <footer id="footer" class="footer mt-auto ms-0">
+    <div class="copyright">
+      &copy; Copyright <strong><span>DigiSehat</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://bootstrapmade.com/">Kelompok VII</a>
+    </div>
+  </footer><!-- End Footer -->
 
   <!-- Vendor JS Files -->
   <script src="{{asset('style/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
