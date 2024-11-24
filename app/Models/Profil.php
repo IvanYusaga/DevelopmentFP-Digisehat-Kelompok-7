@@ -14,27 +14,39 @@ class Profil extends Model
 
     protected $fillable = [
         'id_user',
-        'id_penyakit',
-        'id_riwayat_penyakit',
-        'nama_panjang',
-        'umur',
+        'profile_image',
+        'nama_lengkap',
+        'usia',
         'jenis_kelamin',
-        'tinggi_badan',
-        'berat_badan',
+        'riwayat_penyakit',
     ];
 
+    /**
+     * Relationship with User model
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'id_user');
     }
 
-    public function penyakit(): BelongsTo
+    /**
+     * Mutator for storing profile_image
+     */
+    public function setProfileImageAttribute($value)
     {
-        return $this->belongsTo(Penyakit::class, 'id_penyakit');
+        // Pastikan bahwa nilai $value adalah objek file dan valid
+        if ($value && $value instanceof \Illuminate\Http\UploadedFile) {
+            $fileName = time() . '_' . $value->getClientOriginalName();
+            $value->move(public_path('assets'), $fileName);
+            $this->attributes['profile_image'] = 'assets/' . $fileName;
+        }
     }
 
-    public function riwayatPenyakit(): BelongsTo
+    /**
+     * Accessor for profile_image
+     */
+    public function getProfileImageAttribute($value)
     {
-        return $this->belongsTo(RiwayatPenyakit::class, 'id_riwayat_penyakit');
+        return asset($value);
     }
 }
