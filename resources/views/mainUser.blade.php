@@ -38,11 +38,11 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
+        <i class="bi bi-list toggle-sidebar-btn me-3"></i>
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="{{asset('style/assets/img/logo.jpg')}}" alt="">
         <span class="d-none d-lg-block text-primary">MediPulse</span>
       </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
@@ -107,7 +107,7 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link collapsed" href="userDashboard">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
@@ -118,7 +118,7 @@
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="{{ route('checkStatusObat') }}">
-            <i class="bi bi-people"></i>
+            <i class="bi bi-capsule"></i>
             <span>Manajemen Obat</span>
           </a>
         </li><!-- End Dashboard Nav -->
@@ -128,7 +128,7 @@
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="userJadwal">
-            <i class="bi bi-people"></i>
+            <i class="bi bi-calendar-check"></i>
             <span>Atur Jadwal</span>
           </a>
         </li><!-- End Dashboard Nav -->
@@ -138,7 +138,7 @@
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="userRiwayat">
-            <i class="bi bi-people"></i>
+            <i class="bi bi-clock-history"></i>
             <span>Riwayat Obat</span>
           </a>
         </li><!-- End Dashboard Nav -->
@@ -148,7 +148,7 @@
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="userLogbook">
-            <i class="bi bi-people"></i>
+            <i class="bi bi-journal-text"></i>
             <span>Riwayat Logbook</span>
           </a>
         </li><!-- End Dashboard Nav -->
