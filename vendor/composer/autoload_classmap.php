@@ -6,7 +6,17 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\JadwalPengingatController' => $baseDir . '/app/Http/Controllers/JadwalPengingatController.php',
+    'App\\Http\\Controllers\\ObatController' => $baseDir . '/app/Http/Controllers/ObatController.php',
+    'App\\Http\\Middleware\\UserLogin' => $baseDir . '/app/Http/Middleware/UserLogin.php',
+    'App\\Models\\JadwalPengingat' => $baseDir . '/app/Models/JadwalPengingat.php',
+    'App\\Models\\Logbook' => $baseDir . '/app/Models/Logbook.php',
+    'App\\Models\\Obat' => $baseDir . '/app/Models/Obat.php',
+    'App\\Models\\Penyakit' => $baseDir . '/app/Models/Penyakit.php',
+    'App\\Models\\Profil' => $baseDir . '/app/Models/Profil.php',
+    'App\\Models\\RiwayatPenyakit' => $baseDir . '/app/Models/RiwayatPenyakit.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
@@ -128,6 +138,8 @@ return array(
     'Cron\\MonthField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
     'Database\\Factories\\UserFactory' => $baseDir . '/database/factories/UserFactory.php',
     'Database\\Seeders\\DatabaseSeeder' => $baseDir . '/database/seeders/DatabaseSeeder.php',
+    'Database\\Seeders\\ObatSeeder' => $baseDir . '/database/seeders/ObatSeeder.php',
+    'Database\\Seeders\\UserSeeder' => $baseDir . '/database/seeders/UserSeeder.php',
     'DateError' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
     'DateException' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
     'DateInvalidOperationException' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',
