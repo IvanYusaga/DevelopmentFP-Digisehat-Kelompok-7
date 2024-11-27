@@ -7,6 +7,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JadwalPengingatController;
+use App\Http\Controllers\SocialiteController;
+use Laravel\Socialite\Facades\Socialite;
 
 // Halaman login dan register
 Route::get('/register', [AuthController::class, 'registerView'])->name('register.view');
@@ -14,6 +16,9 @@ Route::post('/registerPost', [AuthController::class, 'registerPost'])->name('reg
 
 Route::get('/login', [AuthController::class, 'loginView'])->name('login.view');
 Route::post('/loginPost', [AuthController::class, 'loginPost'])->name('login.post');
+
+Route::get('/redirect', [SocialiteController::class, 'redirect'])->name('redirect');
+Route::get('/callback', [SocialiteController::class, 'callback'])->name('callback');
 
 // Halaman Awal
 Route::get('/', function () {
