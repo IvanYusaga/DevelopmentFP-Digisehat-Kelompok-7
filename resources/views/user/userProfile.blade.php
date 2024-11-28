@@ -17,7 +17,7 @@
     <div class="card">
       <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
           <img src="{{ $profil->profile_image ?? asset('style/assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
-          <h2>{{ auth()->user()->nama_pengguna }}</h2>
+          <h2>{{ auth()->user()->profil->nama_lengkap }}</h2>
           <h3>Pengguna Obat</h3>
       </div>
     </div>

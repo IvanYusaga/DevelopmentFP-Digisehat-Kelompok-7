@@ -24,7 +24,7 @@ class SocialiteController extends Controller
             $userFromDb = new User();
             $userFromDb->email = $userFromGoogle->getEmail();
             $userFromDb->google_id = $userFromGoogle->getId();
-            $userFromDb->name = $userFromGoogle->getName();
+            $userFromDb->nama_pengguna = $userFromGoogle->getName();
 
             $userFromDb->save();
             auth('web')->login($userFromDb);
