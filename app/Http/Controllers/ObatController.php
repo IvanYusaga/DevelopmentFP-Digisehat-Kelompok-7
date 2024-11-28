@@ -58,7 +58,7 @@ class ObatController extends Controller
     // Menampilkan Dashboard
     public function dashboard()
     {
-        $jumlahObat = Obat::where('id_user', auth()->id())->count();
+        $jumlahObat = Obat::where('id_user', auth::id())->count();
 
         return view('user.userDashboard', compact('jumlahObat'));
     }
