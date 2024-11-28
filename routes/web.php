@@ -92,6 +92,6 @@ Route::middleware(UserLogin::class)->group(function () {
     })->name('userLogbook');
 
     //Buat BMI
-    Route::get('/user/userBMI', [BMIController::class, 'index'])->name('user.tesBMI'); // Untuk menampilkan form
+    Route::get('/user/userBMI', [BMIController::class, 'index'])->name('userBMI'); // Untuk menampilkan form
     Route::post('/user/hasilBMI', [BMIController::class, 'cekBMI'])->name('user.hasilBMI'); // Untuk memproses form
 });
