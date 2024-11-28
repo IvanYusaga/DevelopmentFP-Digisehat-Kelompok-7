@@ -42,6 +42,11 @@
                                 <option value="Perempuan">Perempuan</option>
                             </select>
                         </div>
+                        <!-- Input Umur -->
+                        <div class="col-12">
+                            <label for="inputUmur" class="form-label">Umur (tahun)</label>
+                            <input type="text" class="form-control rounded-pill" id="inputUmur" name="umur" placeholder="Masukkan umur">
+                        </div>
                         <!-- Tombol Submit -->
                         <div class="col-12 text-center">
                             <button type="submit" class="btn btn-info rounded-pill text-white">Atur Sekarang</button>
