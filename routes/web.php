@@ -100,3 +100,6 @@ Route::middleware(UserLogin::class)->group(function () {
         return view('user.userBMI');
     })->name('userBMI');
 });
+
+Route::get('/user/userDashboard', [ObatController::class, 'dashboard'])->name('userDashboard');
+
