@@ -39,11 +39,10 @@ class AuthController extends Controller
 
             return redirect()->route('login.view')->with('success', 'Anda berhasil membuat akun');
         } catch (QueryException $e) {
-            if ($e->errorInfo[1] == 1062) { // Error kode 1062 adalah Duplicate Entry
+            if ($e->errorInfo[1] == 1062) {
                 return back()->with('error', 'Username atau Email sudah digunakan.')->withInput();
             }
 
-            // Lempar error lain yang tidak terduga
             throw $e;
         }
     }

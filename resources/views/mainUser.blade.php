@@ -11,7 +11,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{asset('style/assets/img/favicon.png') }}" rel="icon">
+  <link rel="icon" href="{{ asset('/style/assets/img/logo.jpg') }}" type="image/png">
   <link href="{{asset('style/assets/img/apple-touch-icon.pn') }}g" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -39,7 +39,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
         <i class="bi bi-list toggle-sidebar-btn me-3"></i>
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{{ route('userDashboard') }}" class="logo d-flex align-items-center">
         <img src="{{asset('style/assets/img/logo.jpg')}}" alt="">
         <span class="d-none d-lg-block text-primary">MediPulse</span>
       </a>
@@ -51,7 +51,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="{{asset('style/assets/img/profile-img.jpg')}}" alt="Profile" class="rounded-circle">
+            <img src="{{ auth()->user()->profil && auth()->user()->profil->profile_image ? auth()->user()->profil->profile_image : asset('style/assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->nama_pengguna }}</span>
           </a><!-- End Profile Image Icon -->
 
@@ -65,7 +65,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="userProfile">
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.form') }}">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -106,9 +106,8 @@
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
-
       <li class="nav-item active">
-        <a class="nav-link collapsed" href="userDashboard">
+        <a class="nav-link collapsed" href="{{ route('userDashboard') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -127,7 +126,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="userJadwal">
+          <a class="nav-link collapsed" href="{{ route('userJadwal') }}">
             <i class="bi bi-calendar-check"></i>
             <span>Atur Jadwal</span>
           </a>
@@ -137,7 +136,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="userRiwayat">
+          <a class="nav-link collapsed" href="{{ route('userRiwayat') }}">
             <i class="bi bi-clock-history"></i>
             <span>Riwayat Obat</span>
           </a>
@@ -147,7 +146,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="userLogbook">
+          <a class="nav-link collapsed" href="{{ route('userLogbook') }}">
             <i class="bi bi-journal-text"></i>
             <span>Riwayat Logbook</span>
           </a>
@@ -157,7 +156,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="userBMI">
+          <a class="nav-link collapsed" href="{{ route('userBMI') }}">
             <i class="bi bi-people"></i>
             <span>Tes BMI</span>
           </a>
