@@ -74,9 +74,11 @@
             @endif
 
             <!-- Login with Google -->
-            <button class="btn btn-outline-light text-dark border border-primary w-100 btn-lg d-flex align-items-center justify-content-center mb-4" type="button">
-              <i class="bi bi-google me-2 text-danger"></i>Lanjut Menggunakan Google
-            </button>
+            <a href="{{ route('redirect') }}" class="text-decoration-none">
+              <button class="btn btn-outline-light text-dark border border-primary w-100 btn-lg d-flex align-items-center justify-content-center mb-4" type="button">
+                <i class="bi bi-google me-2 text-danger"></i>Lanjut Menggunakan Google
+              </button>
+            </a>   
 
             <!-- Input Fields -->
             <div class="form-floating mb-3">

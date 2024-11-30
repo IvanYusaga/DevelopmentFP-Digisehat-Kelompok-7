@@ -30,6 +30,7 @@
   <!-- Template Main CSS File -->
   <link href="{{asset('style/assets/css/style.css') }}" rel="stylesheet">
 
+
 </head>
 
 <body>
@@ -52,12 +53,12 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="{{ auth()->user()->profil && auth()->user()->profil->profile_image ? auth()->user()->profil->profile_image : asset('style/assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->nama_pengguna }}</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->profil->nama_lengkap ?? auth()->user()->nama_pengguna }}</span>
           </a><!-- End Profile Image Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>{{ auth()->user()->nama_pengguna }}</h6>
+              <h6>{{ auth()->user()->profil->nama_lengkap ?? auth()->user()->nama_pengguna }}</h6>
               <span>Pengguna Obat</span>
             </li>
             <li>
@@ -191,6 +192,8 @@
   <script src="{{asset('style/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
   <script src="{{asset('style/assets/vendor/tinymce/tinymce.min.js') }}"></script>
   <script src="{{asset('style/assets/vendor/php-email-form/validate.js') }}"></script>
+  <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
 
   <script src="{{asset('style/assets/js/main.js') }}"></script>
 

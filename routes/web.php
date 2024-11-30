@@ -8,6 +8,8 @@ use App\Http\Controllers\ObatController;
 use App\Http\Controllers\BMIController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JadwalPengingatController;
+use App\Http\Controllers\SocialiteController;
+use Laravel\Socialite\Facades\Socialite;
 
 // Halaman login dan register
 Route::get('/register', [AuthController::class, 'registerView'])->name('register.view');
@@ -15,6 +17,9 @@ Route::post('/registerPost', [AuthController::class, 'registerPost'])->name('reg
 
 Route::get('/login', [AuthController::class, 'loginView'])->name('login.view');
 Route::post('/loginPost', [AuthController::class, 'loginPost'])->name('login.post');
+
+Route::get('/redirect', [SocialiteController::class, 'redirect'])->name('redirect');
+Route::get('/callback', [SocialiteController::class, 'callback'])->name('callback');
 
 // Halaman Awal
 Route::get('/', function () {
@@ -95,3 +100,6 @@ Route::middleware(UserLogin::class)->group(function () {
     Route::get('/user/userBMI', [BMIController::class, 'index'])->name('userBMI'); // Untuk menampilkan form
     Route::post('/user/hasilBMI', [BMIController::class, 'cekBMI'])->name('user.hasilBMI'); // Untuk memproses form
 });
+
+Route::get('/user/userDashboard', [ObatController::class, 'dashboard'])->name('userDashboard');
+

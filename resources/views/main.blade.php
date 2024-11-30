@@ -148,6 +148,8 @@
   <script src="{{asset('style/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
   <script src="{{asset('style/assets/vendor/tinymce/tinymce.min.js') }}"></script>
   <script src="{{asset('style/assets/vendor/php-email-form/validate.js') }}"></script>
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
 
   <script src="{{asset('style/assets/js/main.js') }}"></script>
 

@@ -3,11 +3,9 @@
 @section('title', 'Dashboard')
 
 @section('breadcrumbs')
-{{-- @dd(auth()->check()) --}}
-    <main id="main" class="main">
-
-      <div class="pagetitle">
-        <h1>Halo, {{ auth()->user()->nama_pengguna }}</h1>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Halo, {{ auth()->user()->profil->nama_lengkap ?? auth()->user()->nama_pengguna }}</h1>
         <h1>Selamat Datang di MediPulse</h1><br>
 
         @if (!auth()->user()->profil)
@@ -19,6 +17,14 @@
 @endsection
 
 @section('content')
+<div class="loading-page">
+      <div class="img-container">
+        <img src="{{ asset('/style/assets/img/logo-nobg.png') }}" alt="Pengingat Obat" />
+      </div><br>
+      <div class="name-container">
+        <div class="logo-name">Website Pengingat Obat</div>
+      </div>
+    </div>
 <section class="section dashboard">
     <div class="row">
 
@@ -50,16 +56,13 @@
                   <div class="card-body">
                     <h5 class="card-title">Jumlah Jadwal</h5>
 
-                    <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <img src="{{asset('style/assets/img/jumlah_jadwal.png')}}" alt="" style="width: 40px; height: 40px;">
-                      </div>
-                      <div class="ps-3">
-                        <h6>40</h6>
-                        <span class="text-primary fw-bold small pt-2 ps-1">Jadwal Obat</span>
-
-                      </div>
-                    </div>
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-capsule"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>1244</h6>
+                    <span class="text-primary small pt-1 fw-bold">Obat yang telah di input</span>
                   </div>
 
                 </div>
@@ -133,6 +136,6 @@
               </div>
 
     </div>
-  </section>
+</section>
 </main>
 @endsection
