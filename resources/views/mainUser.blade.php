@@ -67,7 +67,7 @@
 
             <li>
               <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.form') }}">
-                <i class="bi bi-person"></i>
+                <i class="bi bi-person-circle"></i>
                 <span>My Profile</span>
               </a>
             </li>
@@ -77,11 +77,22 @@
 
               <li>
                 <a class="dropdown-item d-flex align-items-center" href="editProfile">
-                  <i class="bi bi-person"></i>
+                  <i class="bi bi-pencil"></i>
                   <span>Edit Profile</span>
                 </a>
               </li>
             <li>
+            <li>
+                <hr class="dropdown-divider">
+                </li>
+
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center" href="userPassword">
+                      <i class="bi bi-lock"></i>
+                      <span>Change Password</span>
+                    </a>
+                  </li>
+                <li>
               <hr class="dropdown-divider">
             </li>
 

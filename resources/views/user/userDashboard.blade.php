@@ -50,19 +50,21 @@
               </div>
 
               <div class="col-xxl-4 col-md-6">
-                <div class="card info-card revenue-card">
-
+                <div class="card info-card sales-card">
 
                   <div class="card-body">
-                    <h5 class="card-title">Jumlah Jadwal</h5>
+                    <h5 class="card-title">Jadwal obat</h5>
 
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-capsule"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>1244</h6>
-                    <span class="text-primary small pt-1 fw-bold">Obat yang telah di input</span>
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <img src="{{asset('style/assets/img/jumlah_jadwal.png')}}" alt="" style="width: 40px; height: 40px;">
+                      </div>
+                      <div class="ps-3">
+                        <h6>25</h6>
+                        <span class="text-primary fw-bold small pt-2 ps-1">Jumlah Jadwal</span>
+
+                      </div>
+                    </div>
                   </div>
 
                 </div>

@@ -35,7 +35,7 @@
                     <div class="tab-content pt-2">
                         <div class="tab-pane fade show active profile-edit pt-3" id="profile-edit">
                             <form action="{{ route('profile.update', $profil->id_profil) }}" method="POST" enctype="multipart/form-data">
-                                @csrf                      
+                                @csrf
                                 <div class="row mb-3">
                                     <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                     <div class="col-md-8 col-lg-9">
@@ -45,21 +45,21 @@
                                         </div>
                                     </div>
                                 </div>
-                            
+
                                 <div class="row mb-3">
                                     <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nama Lengkap</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input name="nama_lengkap" type="text" class="form-control" id="fullName" value="{{ old('nama_lengkap', $profil->nama_lengkap) }}">
                                     </div>
                                 </div>
-                            
+
                                 <div class="row mb-3">
                                     <label for="usia" class="col-md-4 col-lg-3 col-form-label">Usia</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input name="usia" type="number" class="form-control" id="usia" value="{{ old('usia', $profil->usia) }}">
                                     </div>
                                 </div>
-                            
+
                                 <div class="row mb-3">
                                     <label for="jenisKelamin" class="col-md-4 col-lg-3 col-form-label">Jenis Kelamin</label>
                                     <div class="col-md-8 col-lg-9">
@@ -69,19 +69,19 @@
                                         </select>
                                     </div>
                                 </div>
-                            
+
                                 <div class="row mb-3">
                                     <label for="riwayatPenyakit" class="col-md-4 col-lg-3 col-form-label">Riwayat Penyakit</label>
                                     <div class="col-md-8 col-lg-9">
                                         <textarea name="riwayat_penyakit" class="form-control" id="riwayatPenyakit">{{ old('riwayat_penyakit', $profil->riwayat_penyakit) }}</textarea>
                                     </div>
                                 </div>
-                            
+
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">Save Changes</button>
                                 </div>
                             </form>
-                            
+
                         </div>
                     </div>
                 </div>
