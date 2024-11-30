@@ -91,16 +91,9 @@
               </div>
 
               <div class="form-group mb-3">
-                <label for="yourUsername" class="form-label">Username</label>
-                <input type="text" name="username" class="form-control" id="yourUsername" value="{{ old('username') }}" required>
-                <div class="invalid-feedback">Harap masukkan Username Anda!</div>
-              </div>
-
-              <div class="form-group mb-3">
                 <label for="yourPassword" class="form-label">Password</label>
                 <div class="input-group">
                   <input type="password" name="password" class="form-control" id="yourPassword" required>
-                  <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()">👁️</button>
                   <div class="invalid-feedback">Harap masukkan kata sandi Anda!</div>
                 </div>
               </div>

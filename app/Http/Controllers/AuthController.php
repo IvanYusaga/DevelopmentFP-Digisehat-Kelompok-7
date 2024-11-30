@@ -25,7 +25,6 @@ class AuthController extends Controller
         $request->validate([
             'nama_pengguna' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'username' => 'required|string|max:8|unique:users,username',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -33,14 +32,13 @@ class AuthController extends Controller
             User::create([
                 'nama_pengguna' => $request->nama_pengguna,
                 'email' => $request->email,
-                'username' => $request->username,
                 'password' => Hash::make($request->password),
             ]);
 
             return redirect()->route('login.view')->with('success', 'Anda berhasil membuat akun');
         } catch (QueryException $e) {
             if ($e->errorInfo[1] == 1062) {
-                return back()->with('error', 'Username atau Email sudah digunakan.')->withInput();
+                return back()->with('error', 'Email sudah digunakan.')->withInput();
             }
 
             throw $e;
@@ -60,7 +58,7 @@ class AuthController extends Controller
     public function loginPost(Request $request)
     {
         $credentials = $request->validate([
-            'username' => ['required'],
+            'email' => ['required'],
             'password' => ['required'],
         ]);
 
@@ -71,8 +69,8 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'username' => 'The provided credentials do not match our records.',
-        ])->onlyInput('username');
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 
     // Logout
