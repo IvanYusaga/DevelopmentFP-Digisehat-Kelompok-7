@@ -53,11 +53,16 @@ class BMIController extends Controller
 
         // Data dari API
         $prediction = $result['prediction'] ?? 'Tidak diketahui';
+        $height = $result['height'] ?? 'BB Tidak diketahui';
+        $weight = $result['weight'] ?? 'TB Tidak diketahui';
+        $idealWeight = $result['range ideal weight'] ?? 'BB Ideal Tidak diketahui';
         $recommendation = $result['recommendation'] ?? 'Tidak ada rekomendasi.';
         $image = $this->getImage($prediction);
 
+        $idealWeightMessage = $this->getIdealWeightMessage($prediction, $idealWeight);
+
         // Kirim data ke view
-        return view('user/hasilBMI', compact('prediction', 'recommendation', 'image'));
+        return view('user/hasilBMI', compact('prediction', 'height', 'weight', 'idealWeight', 'idealWeightMessage', 'recommendation', 'image'));
     }
 
     private function getImage($kategori)
@@ -72,5 +77,19 @@ class BMIController extends Controller
         ];
 
         return $images[$kategori] ?? asset('style/assets/img/default.png');
+    }
+
+    private function getIdealWeightMessage($prediction, $idealWeight)
+    {
+        $messages = [
+            'Underweight' => "Kamu berada di bawah berat badan normal. Berat badan ideal kamu adalah $idealWeight. Ayo tingkatkan asupan kalori dan gizi agar lebih sehat!",
+            'Normal weight' => "Selamat! Kamu memiliki berat badan yang ideal. Berat badan ideal kamu tetap berada di $idealWeight. Jaga pola makan dan gaya hidup sehat!",
+            'Overweight' => "Kamu berada di atas berat badan normal. Berat badan ideal kamu adalah $idealWeight. Pertimbangkan untuk meningkatkan aktivitas fisik dan mengatur pola makan.",
+            'Obesity I' => "Berat badanmu berada di kategori obesitas I. Berat badan ideal kamu adalah $idealWeight. Mulailah rencana untuk mencapai berat badan lebih sehat.",
+            'Obesity II' => "Kamu berada di kategori obesitas II. Berat badan ideal kamu adalah $idealWeight. Diskusikan dengan ahli gizi untuk strategi penurunan berat badan.",
+            'Obesity III' => "Berat badanmu masuk kategori obesitas III. Berat badan ideal kamu adalah $idealWeight. Prioritaskan konsultasi dengan dokter atau ahli gizi.",
+        ];
+
+        return $messages[$prediction] ?? "Berat badan ideal kamu adalah $idealWeight. Tetaplah menjaga kesehatan!";
     }
 }
