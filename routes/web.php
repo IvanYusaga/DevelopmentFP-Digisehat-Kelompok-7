@@ -103,3 +103,8 @@ Route::middleware(UserLogin::class)->group(function () {
 
 Route::get('/user/userDashboard', [ObatController::class, 'dashboard'])->name('userDashboard');
 
+//route jadwal 
+Route::get('/jadwal/create', [JadwalPengingatController::class, 'create'])->name('jadwal.create');
+Route::post('/jadwal/store', [JadwalPengingatController::class, 'store'])->name('jadwal.store');
+
+

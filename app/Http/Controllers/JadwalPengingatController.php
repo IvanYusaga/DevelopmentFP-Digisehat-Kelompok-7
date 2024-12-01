@@ -13,14 +13,13 @@ class JadwalPengingatController extends Controller
     public function create()
     {
         $obats = Obat::where('id_user', Auth::id())->get();
-
         return view('user.aturJadwal.formulirJadwal', compact('obats'));
     }
 
     // Menyimpan Jadwal Pengingat
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'id_obat' => 'required|exists:obats,id_obat',
             'durasi_pengingat' => 'required|integer',
             'dosis' => 'required|string',
@@ -30,15 +29,7 @@ class JadwalPengingatController extends Controller
             'status' => 'required|string',
         ]);
 
-        JadwalPengingat::create([
-            'id_obat' => $request->id_obat,
-            'durasi_pengingat' => $request->durasi_pengingat,
-            'dosis' => $request->dosis,
-            'jumlah_obat' => $request->jumlah_obat,
-            'frekuensi' => $request->frekuensi,
-            'tanggal_konsumsi' => $request->tanggal_konsumsi,
-            'status' => $request->status,
-        ]);
+        JadwalPengingat::create($validatedData);
 
         return redirect()->route('userJadwal')->with('success', 'Jadwal pengingat obat berhasil ditambahkan');
     }
