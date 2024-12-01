@@ -15,16 +15,14 @@ class UserSeeder extends Seeder
     {
         User::create([
             "nama_pengguna" => "Chasetyo Ivan Yusaga",
-            "username" => "ivan20",
             "email" => "ivan@gmail.com",
-            "password" => bcrypt('12345'),
+            "password" => bcrypt('12345678'),
         ]);
 
         User::create([
             "nama_pengguna" => "Alya Wahyuning",
-            "username" => "alya93",
             "email" => "alya@gmail.com",
-            "password" => bcrypt('12345'),
+            "password" => bcrypt('12345678'),
         ]);
     }
 }

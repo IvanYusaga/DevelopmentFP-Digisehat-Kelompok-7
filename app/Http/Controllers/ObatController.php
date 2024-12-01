@@ -55,6 +55,14 @@ class ObatController extends Controller
         return view('user.manajemenObat.informasiObat', compact('obats'));
     }
 
+    // Menampilkan Dashboard
+    public function dashboard()
+    {
+        $jumlahObat = Obat::where('id_user', auth::id())->count();
+
+        return view('user.userDashboard', compact('jumlahObat'));
+    }
+
     // Menampilkan Edit Obat
     public function editObat($id_obat)
     {

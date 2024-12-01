@@ -3,22 +3,27 @@
 @section('title', 'Dashboard')
 
 @section('breadcrumbs')
-{{-- @dd(auth()->check()) --}}
-    <main id="main" class="main">
-
-      <div class="pagetitle">
-        <h1>Halo, {{ auth()->user()->nama_pengguna }}</h1>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Halo, {{ auth()->user()->profil->nama_lengkap ?? auth()->user()->nama_pengguna }}</h1>
         <h1>Selamat Datang di MediPulse</h1><br>
-    
+
         @if (!auth()->user()->profil)
             <p>Yuk Lengkapi Profilemu! <a href="{{ route('profile.form') }}"><strong>Klik Disini</strong></a></p>
         @endif
         <br>
     </div>
-    
 @endsection
 
 @section('content')
+{{-- <div class="loading-page">
+      <div class="img-container">
+        <img src="{{ asset('/style/assets/img/logo-nobg.png') }}" alt="Pengingat Obat" />
+      </div><br>
+      <div class="name-container">
+        <div class="logo-name">Website Pengingat Obat</div>
+      </div>
+    </div> --}}
 <section class="section dashboard">
     <div class="row">
 
@@ -50,8 +55,8 @@
                     <i class="bi bi-capsule"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>1244</h6>
-                    <span class="text-primary small pt-1 fw-bold">Obat yang telah di input</span>
+                    <h6>{{ $jumlahObat }}</h6>
+                    <span class="text-primary small pt-1 fw-bold">Obat yang telah diinput</span>
                   </div>
                 </div>
               </div>
@@ -60,6 +65,6 @@
         </div>
       </div>
     </div>
-  </section>
+</section>
 </main>
 @endsection

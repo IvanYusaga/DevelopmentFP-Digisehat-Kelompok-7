@@ -74,15 +74,17 @@
             @endif
 
             <!-- Login with Google -->
-            <button class="btn btn-outline-light text-dark border border-primary w-100 btn-lg d-flex align-items-center justify-content-center mb-4" type="button">
-              <i class="bi bi-google me-2 text-danger"></i>Lanjut Menggunakan Google
-            </button>
+            <a href="{{ route('redirect') }}" class="text-decoration-none">
+              <button class="btn btn-outline-light text-dark border border-primary w-100 btn-lg d-flex align-items-center justify-content-center mb-4" type="button">
+                <i class="bi bi-google me-2 text-danger"></i>Lanjut Menggunakan Google
+              </button>
+            </a>   
 
             <!-- Input Fields -->
             <div class="form-floating mb-3">
-              <input type="text" name="username" id="username" class="form-control rounded-3" placeholder="Username" required>
-              <label for="username"><i class="bi bi-person-circle"></i> Username</label>
-              <div class="invalid-feedback">Masukkan username Anda.</div>
+              <input type="text" name="email" id="username" class="form-control rounded-3" placeholder="Username" required>
+              <label for="username"><i class="bi bi-person-circle"></i> email</label>
+              <div class="invalid-feedback">Masukkan email Anda.</div>
             </div>
 
             <div class="form-floating mb-3">
