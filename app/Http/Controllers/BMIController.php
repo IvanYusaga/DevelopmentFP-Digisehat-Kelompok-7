@@ -71,9 +71,8 @@ class BMIController extends Controller
             'Underweight' => asset('style/assets/img/kurus.png'),
             'Normal weight' => asset('style/assets/img/normal.png'),
             'Overweight' => asset('style/assets/img/gemuk.png'),
-            'Obesity I' => asset('style/assets/img/obesitas_1.png'),
-            'Obesity II' => asset('style/assets/img/obesitas_2.png'),
-            'Obesity III' => asset('style/assets/img/obesitas_3.png'),
+            'Obesity class I' => asset('style/assets/img/obesitas_1.png'),
+            'Obesity class II' => asset('style/assets/img/obesitas_2.png'),
         ];
 
         return $images[$kategori] ?? asset('style/assets/img/default.png');
@@ -87,7 +86,6 @@ class BMIController extends Controller
             'Overweight' => "Kamu berada di atas berat badan normal. Berat badan ideal kamu adalah $idealWeight. Pertimbangkan untuk meningkatkan aktivitas fisik dan mengatur pola makan.",
             'Obesity I' => "Berat badanmu berada di kategori obesitas I. Berat badan ideal kamu adalah $idealWeight. Mulailah rencana untuk mencapai berat badan lebih sehat.",
             'Obesity II' => "Kamu berada di kategori obesitas II. Berat badan ideal kamu adalah $idealWeight. Diskusikan dengan ahli gizi untuk strategi penurunan berat badan.",
-            'Obesity III' => "Berat badanmu masuk kategori obesitas III. Berat badan ideal kamu adalah $idealWeight. Prioritaskan konsultasi dengan dokter atau ahli gizi.",
         ];
 
         return $messages[$prediction] ?? "Berat badan ideal kamu adalah $idealWeight. Tetaplah menjaga kesehatan!";

@@ -108,3 +108,8 @@ Route::get('/user/userPassword', function () {
     return view('user.userPassword');
 });
 
+//Add Password
+Route::get('/user/userAddPass', function () {
+    return view('user.userAddPass');
+});
+

@@ -78,7 +78,7 @@
               <button class="btn btn-outline-light text-dark border border-primary w-100 btn-lg d-flex align-items-center justify-content-center mb-4" type="button">
                 <i class="bi bi-google me-2 text-danger"></i>Lanjut Menggunakan Google
               </button>
-            </a>   
+            </a>
 
             <!-- Input Fields -->
             <div class="form-floating mb-3">
@@ -134,5 +134,11 @@
   <script src="{{asset('style/assets/vendor/php-email-form/validate.js') }}"></script>
 
   <script src="{{asset('style/assets/js/main.js') }}"></script>
+
+    <script>
+        // Menghapus localStorage 'loadingShown' setiap kali halaman login dibuka
+        localStorage.removeItem('loadingShown');
+    </script>
+
 </body>
 </html>

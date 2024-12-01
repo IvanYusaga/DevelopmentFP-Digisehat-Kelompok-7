@@ -82,17 +82,30 @@
                 </a>
               </li>
             <li>
+
             <li>
                 <hr class="dropdown-divider">
-                </li>
+            </li>
 
-                  <li>
-                    <a class="dropdown-item d-flex align-items-center" href="userPassword">
-                      <i class="bi bi-lock"></i>
-                      <span>Change Password</span>
-                    </a>
-                  </li>
-                <li>
+            <li>
+                <a class="dropdown-item d-flex align-items-center" href="userPassword">
+                  <i class="bi bi-lock"></i>
+                  <span>Change Password</span>
+                </a>
+            </li>
+
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+
+            <li>
+                <a class="dropdown-item d-flex align-items-center" href="userAddPass">
+                  <i class="bi bi-key"></i>
+                  <span>Add Password</span>
+                </a>
+            </li>
+
+            <li>
               <hr class="dropdown-divider">
             </li>
 

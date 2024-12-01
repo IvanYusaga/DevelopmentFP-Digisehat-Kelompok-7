@@ -17,14 +17,42 @@
 @endsection
 
 @section('content')
-<div class="loading-page">
-      <div class="img-container">
-        <img src="{{ asset('/style/assets/img/logo-nobg.png') }}" alt="Pengingat Obat" />
-      </div><br>
-      <div class="name-container">
-        <div class="logo-name">Website Pengingat Obat</div>
-      </div>
+    <div class="loading-page" style="display: none;">
+        <div class="img-container">
+            <img src="{{ asset('/style/assets/img/logo-nobg.png') }}" alt="Pengingat Obat" />
+        </div><br>
+        <div class="name-container">
+            <div class="logo-name">Website Pengingat Obat</div>
+        </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const loadingPage = document.querySelector('.loading-page');
+
+            // Cek apakah "loadingShown" sudah ada di localStorage
+            if (localStorage.getItem('loadingShown')) {
+                // Jika sudah ada, sembunyikan loading screen
+                if (loadingPage) {
+                    loadingPage.style.display = 'none';
+                }
+            } else {
+                // Jika belum ada, tampilkan loading screen
+                if (loadingPage) {
+                    loadingPage.style.display = 'flex';
+
+                    // Sembunyikan loading screen setelah beberapa saat
+                    setTimeout(() => {
+                        loadingPage.style.display = 'none';
+
+                        // Tandai bahwa loading screen sudah pernah ditampilkan
+                        localStorage.setItem('loadingShown', 'true');
+                    }, 3000); // Durasi loading screen dalam milidetik
+                }
+            }
+        });
+    </script>
+
 <section class="section dashboard">
     <div class="row">
 
