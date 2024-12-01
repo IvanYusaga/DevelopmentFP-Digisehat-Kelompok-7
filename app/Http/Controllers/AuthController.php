@@ -84,4 +84,51 @@ class AuthController extends Controller
 
         return redirect()->route('login.view');
     }
+
+    public function addPasswordView()
+    {
+        if (Auth::user()->password !== null) {
+            return redirect()->route('userDashboard');
+        }
+        return view('user/userAddPass');
+    }
+
+    public function postAddPassword(Request $request)
+    {
+        $request->validate([
+            'newpassword' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        $user->password = Hash::make($request->newpassword);
+        $user->save();
+
+        return redirect()->route('userDashboard');
+    }
+
+    public function changePasswordView()
+    {
+        return view('user/userChangePassword');
+    }
+
+    public function postChangePassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|string|min:8|current_password',
+            'newpassword' => 'required|string|min:8|confirmed',
+            'newpassword_confirmation' => 'required|string|min:8',
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->withErrors(['password' => 'Password lama yang Anda masukkan salah.']);
+        }
+
+        $user->password = Hash::make($request->newpassword);
+        $user->save();
+
+        return redirect()->route('userDashboard')->with('success', 'Password berhasil diubah.');
+    }
 }

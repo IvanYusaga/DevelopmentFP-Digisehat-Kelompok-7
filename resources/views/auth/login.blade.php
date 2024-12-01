@@ -83,7 +83,7 @@
             <!-- Input Fields -->
             <div class="form-floating mb-3">
               <input type="text" name="email" id="username" class="form-control rounded-3" placeholder="Username" required>
-              <label for="username"><i class="bi bi-person-circle"></i> email</label>
+              <label for="username"><i class="bi bi-person-circle"></i> Email</label>
               <div class="invalid-feedback">Masukkan email Anda.</div>
             </div>
 

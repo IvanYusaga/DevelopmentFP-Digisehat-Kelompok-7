@@ -71,39 +71,31 @@
                 <span>My Profile</span>
               </a>
             </li>
-            <li>
-                <hr class="dropdown-divider">
-              </li>
 
+            @if (auth()->check() && auth()->user()->password === null)
               <li>
-                <a class="dropdown-item d-flex align-items-center" href="editProfile">
-                  <i class="bi bi-pencil"></i>
-                  <span>Edit Profile</span>
-                </a>
-              </li>
-            <li>
-
-            <li>
                 <hr class="dropdown-divider">
-            </li>
-
+              </li>
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="{{ route('AddPassword.form') }}">
+                  <i class="bi bi-key"></i>
+                  <span>Add Password</span>
+                </a>
+                </li>
+            @endif
+            
+            @if (auth()->check() && auth()->user()->password !== null)
             <li>
-                <a class="dropdown-item d-flex align-items-center" href="userPassword">
+              <hr class="dropdown-divider">
+            </li>
+            
+            <li>
+                <a class="dropdown-item d-flex align-items-center" href="{{ route('changePassword.form') }}">
                   <i class="bi bi-lock"></i>
                   <span>Change Password</span>
                 </a>
             </li>
-
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-
-            <li>
-                <a class="dropdown-item d-flex align-items-center" href="userAddPass">
-                  <i class="bi bi-key"></i>
-                  <span>Add Password</span>
-                </a>
-            </li>
+            @endif
 
             <li>
               <hr class="dropdown-divider">

@@ -99,6 +99,14 @@ Route::middleware(UserLogin::class)->group(function () {
     //Buat BMI
     Route::get('/user/userBMI', [BMIController::class, 'index'])->name('userBMI'); // Untuk menampilkan form
     Route::post('/user/hasilBMI', [BMIController::class, 'cekBMI'])->name('user.hasilBMI'); // Untuk memproses form
+
+    // Add Password
+    Route::get('/user/userAddPass', [AuthController::class, 'addPasswordView'])->name('AddPassword.form');
+    Route::post('/user/postUserAddPass', [AuthController::class, 'postAddPassword'])->name('AddPassword.post');
+
+    // Change Password
+    Route::get('/user/userChangePassword', [AuthController::class, 'changePasswordView'])->name('changePassword.form');
+    Route::post('/user/postUserChangePassword', [AuthController::class, 'postChangePassword'])->name('changePassword.post');
 });
 
 Route::get('/user/userDashboard', [ObatController::class, 'dashboard'])->name('userDashboard');
@@ -111,9 +119,4 @@ Route::post('/jadwal/store', [JadwalPengingatController::class, 'store'])->name(
 //Change Password
 Route::get('/user/userPassword', function () {
     return view('user.userPassword');
-});
-
-//Add Password
-Route::get('/user/userAddPass', function () {
-    return view('user.userAddPass');
 });
