@@ -10,6 +10,7 @@ class JadwalPengingat extends Model
 {
     use HasFactory;
 
+    protected $table = 'jadwal_pengingat'; // Pastikan tabel sesuai
     protected $primaryKey = 'id_jadwal';
 
     protected $fillable = [

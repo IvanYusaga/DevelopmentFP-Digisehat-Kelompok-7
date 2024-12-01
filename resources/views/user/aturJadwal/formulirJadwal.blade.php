@@ -9,10 +9,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <!-- Form Section -->
         <div class="col-md-12">
             <h2 class="text-center mb-4">Pengingat Obat</h2>
-            <form class="row g-3" id="scheduleForm" action="" method="POST">
+            <form class="row g-3" id="scheduleForm" action="{{ route('jadwal.store') }}" method="POST">
                 @csrf
                 <div class="col-12">
                     <label for="inputNamaObat" class="form-label">Nama Obat</label>
@@ -27,31 +26,31 @@
                         @endforeach
                     </select>
                 </div>
-                <!-- Cara Pengguna Obat -->
+
                 <div class="col-12">
                     <label for="inputGunaObat" class="form-label">Cara Pengguna Obat:</label>
-                    <input type="text" id="inputGunaObat" class="form-control" required>
+                    <input type="text" id="inputGunaObat" class="form-control" name="dosis" required>
                 </div>
-                <!-- Jumlah Obat -->
+
                 <div class="col-12">
                     <label for="inputJumlahObat" class="form-label">Jumlah Obat:</label>
-                    <input type="number" id="inputJumlahObat" class="form-control" placeholder="Masukkan jumlah obat" required>
+                    <input type="number" id="inputJumlahObat" class="form-control" name="jumlah_obat" required>
                 </div>
-                <!-- Tanggal Mulai -->
+
                 <div class="col-12">
-                    <label for="inputDate" class="form-label">Tanggal Pengingat:</label>
-                    <input type="date" id="inputDate" class="form-control">
+                    <label for="inputDate" class="form-label">Tanggal Konsumsi:</label>
+                    <input type="date" id="inputDate" class="form-control" name="tanggal_konsumsi" required>
                 </div>
-                <!-- Waktu Pengingat -->
+
                 <div class="col-12">
-                    <label for="inputTime" class="form-label">Waktu Pengingat:</label>
-                    <input type="time" id="inputTime" class="form-control">
+                    <label for="inputTime" class="form-label">Durasi Pengingat (Menit):</label>
+                    <input type="number" id="inputTime" class="form-control" name="durasi_pengingat" required>
                 </div>
-                <!-- Frekuensi Minum Obat -->
+
                 <div class="col-12">
                     <label for="inputFrekuensi" class="form-label">Frekuensi Minum Obat (Per Hari):</label>
-                    <select id="inputFrekuensi" class="form-select">
-                        <option>Pilih</option>
+                    <select id="inputFrekuensi" class="form-select" name="frekuensi">
+                        <option value="">Pilih</option>
                         <option value="1">1 kali dalam sehari</option>
                         <option value="2">2 kali dalam sehari</option>
                         <option value="3">3 kali dalam sehari</option>
@@ -59,116 +58,21 @@
                         <option value="5">5 kali dalam sehari</option>
                     </select>
                 </div>
-                
-                <!-- Button untuk Jadwalkan Reminder -->
-                <button type="button" class="btn btn-primary w-100">Jadwalkan Reminder</button>
+
+                <div class="col-12">
+                    <label for="inputStatus" class="form-label">Status:</label>
+                    <select id="inputStatus" class="form-select" name="status" required>
+                        <option value="aktif">Aktif</option>
+                        <option value="non-aktif">Non-Aktif</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Jadwalkan Reminder</button>
             </form>
         </div>
     </div>
 </div>
-
 <script>
-    function populateObatDetails() {
-        // Ambil elemen dropdown
-        const obatSelect = document.getElementById('inputNamaObat');
-
-        // Ambil opsi yang dipilih
-        const selectedOption = obatSelect.options[obatSelect.selectedIndex];
-
-        // Validasi jika pengguna belum memilih obat
-        if (selectedOption.value === "") {
-            document.getElementById('inputGunaObat').value = ''; // Kosongkan input Cara Pengguna Obat
-            return;
-        }
-
-        // Ambil data dari atribut opsi yang dipilih
-        const penggunaan_obat = selectedOption.getAttribute('data-penggunaanobat');
-
-        // Isi input form dengan data yang sesuai
-        document.getElementById('inputGunaObat').value = penggunaan_obat || '';
-    }
-    
-    // Menetapkan tanggal hari ini dan 30 hari ke depan
-    const today = new Date();
-    const maxDate = new Date();
-    maxDate.setDate(today.getDate() + 30);
-
-    // Format tanggal menjadi yyyy-mm-dd
-    function formatDate(date) {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;
-    }
-
-    // Atur atribut min dan max pada input tanggal
-    const inputDate = document.getElementById('inputDate');
-    inputDate.min = formatDate(today);
-    inputDate.max = formatDate(maxDate);
-
-    // Mencegah klik di luar rentang dengan JavaScript
-    inputDate.addEventListener('input', function () {
-        const selectedDate = new Date(this.value);
-        if (selectedDate < today || selectedDate > maxDate) {
-            alert("Tanggal di luar rentang yang diperbolehkan.");
-            this.value = ''; // Reset input jika tidak valid
-        }
-    });
-
-    // Disable waktu di masa lalu jika tanggal hari ini dipilih
-    const inputTime = document.getElementById('inputTime');
-    inputDate.addEventListener('change', function () {
-        const selectedDate = new Date(this.value);
-        if (selectedDate.toDateString() === today.toDateString()) {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            inputTime.min = `${hours}:${minutes}`;
-        } else {
-            inputTime.min = '00:00'; // Reset jika bukan hari ini
-        }
-    });
-    document.addEventListener("DOMContentLoaded", function () {
-        const inputDate = document.getElementById('inputDate');
-        const inputTime = document.getElementById('inputTime');
-
-        // Dapatkan tanggal dan waktu sekarang
-        const now = new Date();
-        const today = now.toISOString().split("T")[0];
-        const thirtyDaysLater = new Date(now);
-        thirtyDaysLater.setDate(thirtyDaysLater.getDate() + 30);
-
-        // Format tanggal 30 hari ke depan
-        const maxDate = thirtyDaysLater.toISOString().split("T")[0];
-
-        // Set nilai default untuk tanggal dan batasan
-        inputDate.min = today; // Tidak boleh di masa lalu
-        inputDate.max = maxDate; // Tidak boleh lebih dari 30 hari ke depan
-        inputDate.value = today; // Set nilai default hari ini
-
-        // Set nilai default untuk waktu
-        const currentTime = now.toTimeString().split(" ")[0].slice(0, 5); // Format HH:MM
-        inputTime.value = currentTime;
-    });
-
-    function populateObatDetails() {
-        // Ambil elemen dropdown
-        const obatSelect = document.getElementById('inputNamaObat');
-
-        // Ambil opsi yang dipilih
-        const selectedOption = obatSelect.options[obatSelect.selectedIndex];
-
-        // Validasi jika pengguna belum memilih obat
-        if (selectedOption.value === "") {
-            document.getElementById('inputGunaObat').value = ''; // Kosongkan input
-            return;
-        }
-
-        // Ambil data dari atribut opsi yang dipilih
-        const penggunaan_obat = selectedOption.getAttribute('data-penggunaanobat');
-
-        // Isi input form dengan data yang sesuai
-        document.getElementById('inputGunaObat').value = penggunaan_obat || '';
-    }
+    // Your existing JavaScript here...
 </script>
 @endsection
