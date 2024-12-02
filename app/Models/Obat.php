@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Obat extends Model
 {
     use HasFactory;
-
+    protected $table = 'obats';
     protected $primaryKey = 'id_obat';
 
     protected $fillable = [

@@ -27,8 +27,8 @@
             <thead>
                 <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nama Obat</th>
                 <th scope="col">Tanggal</th>
+                <th scope="col">Nama Obat</th>
                 <th scope="col">Cara <br> Penggunaan Obat</th>
                 <th scope="col">Deskripsi</th>
                 <th scope="col">Opsi</th>
@@ -38,8 +38,8 @@
                 @foreach($obats as $index => $obat)
                 <tr>
                     <th scope="row">{{ $index + 1 }}</th>
-                    <td>{{ $obat->nama_obat }}</td>
                     <td>{{ $obat->date }}</td>
+                    <td>{{ $obat->nama_obat }}</td>
                     <td>{{ $obat->penggunaan_obat }}</td>
                     <td>{{ $obat->deskripsi }}</td>
                     <td>
