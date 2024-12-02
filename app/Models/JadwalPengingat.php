@@ -15,10 +15,11 @@ class JadwalPengingat extends Model
 
     protected $fillable = [
         'id_obat',
-        'durasi_pengingat',
-        'dosis',
+        'waktu_pengingat',
+        'caraPenggunaanObat',
         'jumlah_obat',
         'frekuensi',
+        'rentanghari',
         'tanggal_konsumsi',
         'status',
     ];
