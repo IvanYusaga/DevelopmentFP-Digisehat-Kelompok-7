@@ -9,11 +9,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class JadwalPengingat extends Model
 {
     use HasFactory;
-
-    protected $table = 'jadwal_pengingat'; // Pastikan tabel sesuai
     protected $primaryKey = 'id_jadwal';
 
     protected $fillable = [
+        'id_user',
         'id_obat' => 'required|exists:obats,id_obat',
         'caraPenggunaanObat' => 'required|string',
         'jumlah_obat' => 'required|integer|min:1',
@@ -24,7 +23,7 @@ class JadwalPengingat extends Model
         'waktu_pengingat.*' => 'required|date_format:H:i',
         'status',
     ];
-    
+
 
     public function obat(): BelongsTo
     {

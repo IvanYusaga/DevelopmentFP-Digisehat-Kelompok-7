@@ -5,9 +5,11 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    public function up(): void {
-        Schema::create('jadwal_pengingat', function (Blueprint $table) {
+    public function up(): void
+    {
+        Schema::create('jadwal_pengingats', function (Blueprint $table) {
             $table->id('id_jadwal'); // Primary Key
+            $table->foreignId('id_user')->constrained('users', 'id_user')->onDelete('cascade');
             $table->unsignedBigInteger('id_obat'); // Kolom referensi tanpa foreign key
             $table->string('caraPenggunaanObat'); // Dosis obat
             $table->integer('jumlah_obat'); // Jumlah obat
@@ -23,7 +25,8 @@ return new class extends Migration {
         });
     }
 
-    public function down(): void {
-        Schema::dropIfExists('jadwal_pengingat');
+    public function down(): void
+    {
+        Schema::dropIfExists('jadwal_pengingats');
     }
 };

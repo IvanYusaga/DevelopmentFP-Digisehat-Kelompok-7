@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\JadwalPengingat;
@@ -43,6 +44,7 @@ class JadwalPengingatController extends Controller
             while ($currentDate <= $endDate) {
                 $scheduleData[] = [
                     'id_obat' => $request->id_obat,
+                    'id_user' => auth::id(),
                     'caraPenggunaanObat' => $request->caraPenggunaanObat,
                     'jumlah_obat' => $request->jumlah_obat,
                     'frekuensi' => $request->frekuensi,
@@ -95,4 +97,3 @@ class JadwalPengingatController extends Controller
         return redirect()->route('user.jadwal')->with('success', 'Jadwal berhasil dihapus!');
     }
 }
-
