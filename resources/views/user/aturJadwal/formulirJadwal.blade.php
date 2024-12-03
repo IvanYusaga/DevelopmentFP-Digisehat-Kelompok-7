@@ -41,19 +41,12 @@
 
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="inputDate" class="form-label">Tanggal Konsumsi</label>
+                                <label for="inputDate" class="form-label">Tanggal Mulai Konsumsi</label>
                                 <input type="date" id="inputDate" class="form-control" name="tanggal_konsumsi" required>
                             </div>
-                            <div class="col-md-6">
-                                <label for="inputTime" class="form-label">Waktu Pengingat</label>
-                                <input type="time" id="inputTime" class="form-control" name="waktu_pengingat" required>
-                            </div>
-                        </div>
-
-
-                        <div class="mb-3">
+                           <div class="mb-3 col-6">
                             <label for="inputFrekuensi" class="form-label">Frekuensi Minum Obat (Per Hari)</label>
-                            <select id="inputFrekuensi" class="form-select" name="frekuensi">
+                            <select id="inputFrekuensi" class="form-select" name="frekuensi" onchange="generateTimeInputs()">
                                 <option value="">Pilih</option>
                                 <option value="1">1 kali dalam sehari</option>
                                 <option value="2">2 kali dalam sehari</option>
@@ -61,6 +54,8 @@
                                 <option value="4">4 kali dalam sehari</option>
                                 <option value="5">5 kali dalam sehari</option>
                             </select>
+                        </div>
+                        <div id="inputWaktuPengingatContainer" class="row"></div>
                         </div>
 
                         <div class="mb-3">
@@ -237,5 +232,21 @@
             });
         });
     });
+
+    document.getElementById('inputFrekuensi').addEventListener('change', function() {
+        const container = document.getElementById('inputWaktuPengingatContainer');
+        container.innerHTML = ''; // Reset container
+        const jumlah = parseInt(this.value, 10);
+
+        for (let i = 1; i <= jumlah; i++) {
+            container.innerHTML += `
+                <div class="col-4 mx-auto">
+                    <label for="inputWaktuPengingat${i}" class="form-label">Jam Pengingat ${i}</label>
+                    <input type="time" class="form-control" name="waktu_pengingat[]" id="inputWaktuPengingat${i}" required>
+                </div>
+            `;
+        }
+    });
+
 </script>
 @endsection

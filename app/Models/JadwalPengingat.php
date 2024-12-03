@@ -14,15 +14,17 @@ class JadwalPengingat extends Model
     protected $primaryKey = 'id_jadwal';
 
     protected $fillable = [
-        'id_obat',
-        'waktu_pengingat',
-        'caraPenggunaanObat',
-        'jumlah_obat',
-        'frekuensi',
-        'rentanghari',
-        'tanggal_konsumsi',
+        'id_obat' => 'required|exists:obats,id_obat',
+        'caraPenggunaanObat' => 'required|string',
+        'jumlah_obat' => 'required|integer|min:1',
+        'tanggal_konsumsi' => 'required|date',
+        'frekuensi' => 'required|integer|min:1',
+        'rentanghari' => 'required|integer|min:1',
+        'waktu_pengingat' => 'required|array',
+        'waktu_pengingat.*' => 'required|date_format:H:i',
         'status',
     ];
+    
 
     public function obat(): BelongsTo
     {

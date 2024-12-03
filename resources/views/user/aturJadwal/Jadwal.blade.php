@@ -38,20 +38,20 @@
                 </thead>
                 <tbody>
                     @foreach($jadwalPengingat as $index => $jadwal)
-                    <tr>
+                    <!-- Baris utama -->
+                    <tr class="clickable-row" data-bs-toggle="collapse" data-bs-target="#dropdown-{{ $index }}" aria-expanded="false" aria-controls="dropdown-{{ $index }}">
                         <th scope="row">{{ $index + 1 }}</th>
                         <td>{{ $jadwal->obat->nama_obat }}</td>
-                        <td>{{$jadwal->tanggal_konsumsi}}</td>
+                        <td>{{ $jadwal->tanggal_konsumsi }}</td>
                         <td>{{ $jadwal->waktu_pengingat }}</td>
                         <td>{{ $jadwal->caraPenggunaanObat }}</td>
                         <td>{{ $jadwal->frekuensi }} Kali Sehari</td>
-                        <td class="badge text-danger border border-secondary fs-6">
-                            <span class="badge bg-success text-wrap fs-6" data-bs-toggle="tooltip" title="Masih dalam jadwal">
+                        <td>
+                            {{-- <span class="badge bg-success text-wrap fs-6">
                                 <i class="bi bi-check-circle"></i> Aktif
-                            </span>
+                            </span> --}}
                         </td>
                         <td>
-                            <!-- Button Hapus dengan konfirmasi -->
                             <form action="{{ route('jadwal.destroy', $jadwal->id_jadwal) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
@@ -59,6 +59,59 @@
                                     <i class="bi bi-trash"></i> Hapus
                                 </button>
                             </form>
+                        </td>
+                    </tr>
+                    <!-- Baris dropdown -->
+                    <tr class="collapse" id="dropdown-{{ $index }}">
+                        <td colspan="8">
+                            <div class="card card-body shadow-lg border-0 rounded-4" style="background: #f6f9ff;">
+                                <h5 class="text-dark fw-bold mb-3">Jadwalkan Ke Google Calendar Anda</h5>
+                                <p>Tambahkan jadwal konsumsi obat Anda langsung ke Google Calendar untuk memastikan Anda tidak melewatkan pengingat. Dengan fitur ini, Anda dapat mengatur notifikasi otomatis yang membantu menjaga kesehatan Anda tetap teratur dan sesuai jadwal.</p>
+                                <form action="" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <label for="inputNamaObat" class="form-label fw-semibold">Nama Obat</label>
+                                            <input type="text" id="inputNamaObat" class="form-control border-2 border-secondary" value="{{ $jadwal->obat->nama_obat }}" readonly>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="caraPenggunaanObat" class="form-label fw-semibold">Cara Penggunaan Obat</label>
+                                            <input type="text" id="caraPenggunaanObat" class="form-control border-2 border-secondary" name="caraPenggunaanObat" value="{{ $jadwal->caraPenggunaanObat }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="row g-4 mt-3">
+                                        <div class="col-md-6">
+                                            <label for="inputTime" class="form-label fw-semibold">Waktu Pengingat</label>
+                                            <input type="time" id="inputTime" class="form-control border-2 border-secondary" name="waktu_pengingat" value="{{ $jadwal->waktu_pengingat }}" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="inputDate" class="form-label fw-semibold">Tanggal Mulai Konsumsi</label>
+                                            <input type="date" id="inputDate" class="form-control border-2 border-secondary" name="tanggal_konsumsi" value="{{ $jadwal->tanggal_konsumsi }}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row g-4 mt-3">
+                                        <div class="col-md-6">
+                                            <label for="inputFrekuensi" class="form-label fw-semibold">Frekuensi</label>
+                                            <select id="inputFrekuensi" name="frekuensi" class="form-select border-2 border-secondary">
+                                                <option value="1" {{ $jadwal->frekuensi == 1 ? 'selected' : '' }}>1 Kali Sehari</option>
+                                                <option value="2" {{ $jadwal->frekuensi == 2 ? 'selected' : '' }}>2 Kali Sehari</option>
+                                                <option value="3" {{ $jadwal->frekuensi == 3 ? 'selected' : '' }}>3 Kali Sehari</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="inputDateEnd" class="form-label fw-semibold">Tanggal Selesai Konsumsi</label>
+                                            <input type="date" id="inputDateEnd" class="form-control border-2 border-secondary" name="tanggal_selesai" value="{{ $jadwal->tanggal_konsumsi }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-4">
+                                        <button type="submit" class="btn btn-secondary px-4 py-2 rounded-pill bg-info">
+                                            <i class="bi bi-save me-2"></i> Tambahkan Jadwal Ke Google Calender
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
                         </td>
                     </tr>
                     @endforeach
@@ -143,21 +196,31 @@
         });
     });
     document.addEventListener("DOMContentLoaded", function() {
-    const rows = document.querySelectorAll("tbody tr");
-    
-    rows.forEach(row => {
-        const tanggal = row.querySelector("td:nth-child(3)").innerText; // Tanggal Konsumsi
-        const waktu = row.querySelector("td:nth-child(4)").innerText; // Waktu Pengingat
-        const statusCell = row.querySelector("td:nth-child(7)"); // Kolom Status
+        const rows = document.querySelectorAll("tbody tr");
 
-        const waktuPengingat = new Date(`${tanggal}T${waktu}`);
-        const sekarang = new Date();
+        rows.forEach((row, index) => {
+            // Pastikan kita hanya memproses baris yang mengandung data (bukan baris detail dropdown)
+            if (row.classList.contains('clickable-row')) {
+                const tanggal = row.querySelector("td:nth-child(3)").innerText.trim(); // Tanggal Konsumsi
+                const waktu = row.querySelector("td:nth-child(4)").innerText.trim(); // Waktu Pengingat
+                const statusCell = row.querySelector("td:nth-child(7)"); // Kolom Status
 
-        if (waktuPengingat < sekarang) {
-            statusCell.innerText = "Non Aktif"; // Ubah status secara dinamis
-        }
+                // Mengonversi tanggal dan waktu menjadi objek Date
+                const [year, month, day] = tanggal.split('-');
+                const [hours, minutes] = waktu.split(':');
+                const waktuPengingat = new Date(year, month - 1, day, hours, minutes); // Buat objek Date
+
+                const sekarang = new Date(); // Waktu saat ini
+
+                // Cek apakah waktu pengingat sudah lewat
+                if (waktuPengingat < sekarang) {
+                    statusCell.innerHTML = '<span class="badge bg-danger text-wrap fs-6"><i class="bi bi-x-circle"></i>Non Aktif</span>';
+                } else {
+                    statusCell.innerHTML = '<span class="badge bg-success text-wrap fs-6"><i class="bi bi-check-circle"></i> Aktif</span>';
+                }
+            }
+        });
     });
-});
 
 </script>
 </main>
