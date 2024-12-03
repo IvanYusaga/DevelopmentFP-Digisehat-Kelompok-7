@@ -85,6 +85,11 @@ Route::middleware(UserLogin::class)->group(function () {
         return view('user.userJadwal');
     })->name('userJadwal');
 
+    // Menampilkan informasi jadwal pengingat
+    Route::get('user/jadwal', [JadwalPengingatController::class, 'index'])->name('user.jadwal');
+    Route::post('user/jadwal', [JadwalPengingatController::class, 'store'])->name('jadwal.store');
+    Route::delete('user/jadwal/{id}', [JadwalPengingatController::class, 'destroy'])->name('jadwal.destroy');
+    
     Route::get('/user/formulirJadwal', [JadwalPengingatController::class, 'create'])->name('jadwalPengingat.form');
     Route::post('/user/storeJadwal', [JadwalPengingatController::class, 'store'])->name('jadwalPengingat.store');
 

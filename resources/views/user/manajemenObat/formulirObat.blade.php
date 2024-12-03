@@ -20,11 +20,11 @@
             <input type="text" class="form-control" id="nama_obat" name="nama_obat" placeholder="">
           </div>
           <div class="col-8">
-            <label for="inputDate" class="col-sm-2 col-form-label text-primary">Date</label>
-            <div class="col-sm-10">
-              <input type="date" id="date" name="date" class="form-control text-primary">
-            </div>
+              <div class="col-sm-10">
+                  <input type="hidden" id="date" name="date" class="form-control text-primary">
+              </div>
           </div>
+
           <div class="col-12">
             <label for="inputPenggunaanObat" class="form-label text-primary">Cara Penggunaan Obat</label>
             <input type="text" class="form-control" id="penggunaan_obat" name="penggunaan_obat" placeholder="">
@@ -39,6 +39,23 @@
         </form>
       </div>
     </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const dateInput = document.getElementById('date');
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0'); // Bulan dimulai dari 0
+      const dd = String(today.getDate()).padStart(2, '0');
+      
+      // Formatkan tanggal menjadi yyyy-mm-dd
+      const formattedDate = `${yyyy}-${mm}-${dd}`;
+      
+      // Tetapkan nilai default ke input
+      dateInput.value = formattedDate;
+  });
+</script>
+
 </section>
 </main>
 @endsection

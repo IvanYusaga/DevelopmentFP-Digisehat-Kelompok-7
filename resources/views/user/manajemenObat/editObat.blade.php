@@ -21,9 +21,8 @@
                     <input type="text" class="form-control" id="nama_obat" name="nama_obat" value="{{ old('nama_obat', $obat->nama_obat) }}" required>
                 </div>
                 <div class="col-8">
-                    <label for="date" class="col-sm-2 col-form-label text-primary">Tanggal</label>
                     <div class="col-sm-10">
-                    <input type="date" id="date" name="date" class="form-control text-primary" value="{{ old('date', $obat->date) }}" required>
+                    <input type="hidden" id="date" name="date" class="form-control text-primary" value="{{ old('date', $obat->date) }}" required>
                 </div>
                 </div>
                 <div class="col-12">
@@ -40,6 +39,21 @@
             </form>
         </div>
     </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const dateInput = document.getElementById('date');
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0'); // Bulan dimulai dari 0
+      const dd = String(today.getDate()).padStart(2, '0');
+      
+      // Formatkan tanggal menjadi yyyy-mm-dd
+      const formattedDate = `${yyyy}-${mm}-${dd}`;
+      
+      // Tetapkan nilai default ke input
+      dateInput.value = formattedDate;
+  });
+</script>
 </section>
 </main>
 @endsection
