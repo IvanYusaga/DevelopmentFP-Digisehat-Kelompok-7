@@ -39,11 +39,11 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
+        <i class="bi bi-list toggle-sidebar-btn me-3"></i>
       <a href="{{ route('userDashboard') }}" class="logo d-flex align-items-center">
         <img src="{{asset('style/assets/img/logo.jpg')}}" alt="">
         <span class="d-none d-lg-block text-primary">MediPulse</span>
       </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
@@ -67,10 +67,36 @@
 
             <li>
               <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.form') }}">
-                <i class="bi bi-person"></i>
+                <i class="bi bi-person-circle"></i>
                 <span>My Profile</span>
               </a>
             </li>
+
+            @if (auth()->check() && auth()->user()->password === null)
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="{{ route('AddPassword.form') }}">
+                  <i class="bi bi-key"></i>
+                  <span>Add Password</span>
+                </a>
+                </li>
+            @endif
+            
+            @if (auth()->check() && auth()->user()->password !== null)
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            
+            <li>
+                <a class="dropdown-item d-flex align-items-center" href="{{ route('changePassword.form') }}">
+                  <i class="bi bi-lock"></i>
+                  <span>Change Password</span>
+                </a>
+            </li>
+            @endif
+
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -97,8 +123,7 @@
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link collapsed" href="{{ route('userDashboard') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
@@ -109,7 +134,7 @@
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="{{ route('checkStatusObat') }}">
-            <i class="bi bi-people"></i>
+            <i class="bi bi-capsule"></i>
             <span>Manajemen Obat</span>
           </a>
         </li><!-- End Dashboard Nav -->
@@ -119,7 +144,7 @@
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="{{ route('userJadwal') }}">
-            <i class="bi bi-people"></i>
+            <i class="bi bi-calendar-check"></i>
             <span>Atur Jadwal</span>
           </a>
         </li><!-- End Dashboard Nav -->
@@ -129,7 +154,7 @@
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="{{ route('userRiwayat') }}">
-            <i class="bi bi-people"></i>
+            <i class="bi bi-clock-history"></i>
             <span>Riwayat Obat</span>
           </a>
         </li><!-- End Dashboard Nav -->
@@ -139,7 +164,7 @@
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="{{ route('userLogbook') }}">
-            <i class="bi bi-people"></i>
+            <i class="bi bi-journal-text"></i>
             <span>Riwayat Logbook</span>
           </a>
         </li><!-- End Dashboard Nav -->

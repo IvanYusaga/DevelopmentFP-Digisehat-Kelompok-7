@@ -14,6 +14,9 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column; /* Agar elemen-elemen dalam body diatur secara vertikal */
+  min-height: 100vh; /* Membuat halaman minimal setinggi layar */
   font-family: "Open Sans", sans-serif;
   background: #f6f9ff;
   color: #444444;
@@ -155,6 +158,7 @@ h6 {
   margin-top: 60px;
   padding: 20px 30px;
   transition: all 0.3s;
+  flex: 1;
 }
 
 @media (max-width: 1199px) {
@@ -1324,22 +1328,22 @@ h6 {
 # Footer
 --------------------------------------------------------------*/
 .footer {
-  padding: 20px 0;
-  font-size: 14px;
-  transition: all 0.3s;
-  border-top: 1px solid #cddfff;
+    padding: 20px 0;
+    font-size: 14px;
+    transition: all 0.3s;
+    border-top: 1px solid #cddfff;
 }
 
 .footer .copyright {
-  text-align: center;
-  color: #012970;
+    text-align: center;
+    color: #012970;
 }
 
 .footer .credits {
-  padding-top: 5px;
-  text-align: center;
-  font-size: 13px;
-  color: #012970;
+    padding-top: 5px;
+    text-align: center;
+    font-size: 13px;
+    color: #012970;
 }
 
 /* Tampilan responsive */

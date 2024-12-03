@@ -7,8 +7,13 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
+<<<<<<< HEAD
+    'App\\Http\\Controllers\\BMIController' => $baseDir . '/app/Http/Controllers/BMIController.php',
+    'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+=======
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\JadwalPengingatController' => $baseDir . '/app/Http/Controllers/JadwalPengingatController.php',
+>>>>>>> 119c3c69b6e17c740ffdfae78c4c2926316ee9f9
     'App\\Http\\Controllers\\ObatController' => $baseDir . '/app/Http/Controllers/ObatController.php',
     'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
     'App\\Http\\Controllers\\SocialiteController' => $baseDir . '/app/Http/Controllers/SocialiteController.php',

@@ -74,6 +74,13 @@
               <p class="text-center small text-muted">Masukkan data pribadi Anda untuk membuat akun</p>
             </div>
 
+            <!-- Login with Google -->
+            <a href="{{ route('redirect') }}" class="text-decoration-none">
+              <button class="btn btn-outline-light text-dark border border-primary w-100 btn-lg d-flex align-items-center justify-content-center mb-4" type="button">
+                <i class="bi bi-google me-2 text-danger"></i>Lanjut Menggunakan Google
+              </button>
+            </a>
+            
             <!-- Formulir untuk Membuat Akun -->
             <form action="{{ route('register.post') }}" method="POST" class="needs-validation" novalidate>
               @csrf

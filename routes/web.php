@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\BMIController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JadwalPengingatController;
 use App\Http\Controllers\SocialiteController;
@@ -53,7 +54,6 @@ Route::middleware(UserLogin::class)->group(function () {
         return view('user.userDashboard');
     })->name('userDashboard');
 
-
     // Profile User
     Route::get('/user/userProfile', [ProfileController::class, 'profile'])->name('user.profile');
 
@@ -101,9 +101,17 @@ Route::middleware(UserLogin::class)->group(function () {
         return view('user.userLogbook');
     })->name('userLogbook');
 
-    Route::get('/user/userBMI', function () {
-        return view('user.userBMI');
-    })->name('userBMI');
+    //Buat BMI
+    Route::get('/user/userBMI', [BMIController::class, 'index'])->name('userBMI'); // Untuk menampilkan form
+    Route::post('/user/hasilBMI', [BMIController::class, 'cekBMI'])->name('user.hasilBMI'); // Untuk memproses form
+
+    // Add Password
+    Route::get('/user/userAddPass', [AuthController::class, 'addPasswordView'])->name('AddPassword.form');
+    Route::post('/user/postUserAddPass', [AuthController::class, 'postAddPassword'])->name('AddPassword.post');
+
+    // Change Password
+    Route::get('/user/userChangePassword', [AuthController::class, 'changePasswordView'])->name('changePassword.form');
+    Route::post('/user/postUserChangePassword', [AuthController::class, 'postChangePassword'])->name('changePassword.post');
 });
 
 Route::get('/user/userDashboard', [ObatController::class, 'dashboard'])->name('userDashboard');
@@ -113,3 +121,7 @@ Route::get('/jadwal/create', [JadwalPengingatController::class, 'create'])->name
 Route::post('/jadwal/store', [JadwalPengingatController::class, 'store'])->name('jadwal.store');
 
 
+//Change Password
+Route::get('/user/userPassword', function () {
+    return view('user.userPassword');
+});

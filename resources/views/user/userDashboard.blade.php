@@ -13,57 +13,158 @@
         @endif
         <br>
     </div>
+
 @endsection
 
 @section('content')
-{{-- <div class="loading-page">
-      <div class="img-container">
-        <img src="{{ asset('/style/assets/img/logo-nobg.png') }}" alt="Pengingat Obat" />
-      </div><br>
-      <div class="name-container">
-        <div class="logo-name">Website Pengingat Obat</div>
-      </div>
-    </div> --}}
+<div class="loading-page" style="display: none;">
+  <div class="img-container">
+      <img src="{{ asset('/style/assets/img/logo-nobg.png') }}" alt="Pengingat Obat" />
+  </div><br>
+  <div class="name-container">
+      <div class="logo-name">Website Pengingat Obat</div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const loadingPage = document.querySelector('.loading-page');
+
+      // Cek apakah "loadingShown" sudah ada di localStorage
+      if (localStorage.getItem('loadingShown')) {
+          // Jika sudah ada, sembunyikan loading screen
+          if (loadingPage) {
+              loadingPage.style.display = 'none';
+          }
+      } else {
+          // Jika belum ada, tampilkan loading screen
+          if (loadingPage) {
+              loadingPage.style.display = 'flex';
+
+              // Sembunyikan loading screen setelah beberapa saat
+              setTimeout(() => {
+                  loadingPage.style.display = 'none';
+
+                  // Tandai bahwa loading screen sudah pernah ditampilkan
+                  localStorage.setItem('loadingShown', 'true');
+              }, 3000); // Durasi loading screen dalam milidetik
+          }
+      }
+  });
+</script>
+
 <section class="section dashboard">
     <div class="row">
 
-      <div class="col-lg-8">
-        <div class="row">
+            <div class="col-xxl-4 col-md-6">
+                <div class="card info-card sales-card">
 
-          <div class="col-xxl-4 col-xl-12">
+                  <div class="card-body">
+                    <h5 class="card-title">Jumlah obat</h5>
 
-            <div class="card info-card customers-card">
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <img src="{{asset('style/assets/img/obat_dashboard.jpeg')}}" alt="" style="width: 40px; height: 40px;">
+                      </div>
+                      <div class="ps-3">
+                        <h6>25</h6>
+                        <span class="text-primary fw-bold small pt-2 ps-1">Obat yang telah di input</span>
 
-              <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                  <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                  </li>
-
-                  <li><a class="dropdown-item" href="#">Today</a></li>
-                  <li><a class="dropdown-item" href="#">This Month</a></li>
-                  <li><a class="dropdown-item" href="#">This Year</a></li>
-                </ul>
-              </div>
-
-              <div class="card-body">
-                <h5 class="card-title">Jumlah Obat</h5>
-
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-capsule"></i>
+                      </div>
+                    </div>
                   </div>
-                  <div class="ps-3">
-                    <h6>{{ $jumlahObat }}</h6>
-                    <span class="text-primary small pt-1 fw-bold">Obat yang telah diinput</span>
-                  </div>
+
                 </div>
               </div>
+
+              <div class="col-xxl-4 col-md-6">
+                <div class="card info-card sales-card">
+
+                  <div class="card-body">
+                    <h5 class="card-title">Jadwal obat</h5>
+
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <img src="{{asset('style/assets/img/jumlah_jadwal.png')}}" alt="" style="width: 40px; height: 40px;">
+                      </div>
+                      <div class="ps-3">
+                        <h6>25</h6>
+                        <span class="text-primary fw-bold small pt-2 ps-1">Jumlah Jadwal</span>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            <div class="col-12">
+                <h5 class="fw-bold text-primary mt-3">Jadwal Minum Obat</h5> <br>
             </div>
-          </div>
-        </div>
-      </div>
+
+            <div class="col-xxl-4 col-md-6">
+                <div class="card info-card sales-card">
+
+                  <div class="card-body">
+                    <h5 class="card-title"></h5>
+
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <img src="{{asset('style/assets/img/jadwal_minum_obat_dashboard.png')}}" alt="" style="width: 40px; height: 40px;">
+                      </div>
+                      <div class="ps-3">
+                        <h6>Vit A</h6>
+                        <span class="text-dark small pt-2 ps-1">1 Butir</span> <br>
+                        <span class="text-dark small pt-2 ps-1">08.00</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-xxl-4 col-md-6">
+                <div class="card info-card sales-card">
+
+                  <div class="card-body">
+                    <h5 class="card-title"></h5>
+
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <img src="{{asset('style/assets/img/jadwal_minum_obat_dashboard.png')}}" alt="" style="width: 40px; height: 40px;">
+                      </div>
+                      <div class="ps-3">
+                        <h6>Vit B</h6>
+                        <span class="text-dark small pt-2 ps-1">1 Butir</span> <br>
+                        <span class="text-dark small pt-2 ps-1">09.00</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-xxl-4 col-md-6">
+                <div class="card info-card sales-card">
+
+                  <div class="card-body">
+                    <h5 class="card-title"></h5>
+
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <img src="{{asset('style/assets/img/jadwal_minum_obat_dashboard.png')}}" alt="" style="width: 40px; height: 40px;">
+                      </div>
+                      <div class="ps-3">
+                        <h6>Vit B</h6>
+                        <span class="text-dark small pt-2 ps-1">1 Butir</span> <br>
+                        <span class="text-dark small pt-2 ps-1">09.00</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
     </div>
 </section>
 </main>
