@@ -13,13 +13,13 @@ class JadwalPengingat extends Model
 
     protected $fillable = [
         'id_user',
-        'id_obat' => 'required|exists:obats,id_obat',
-        'caraPenggunaanObat' => 'required|string',
-        'jumlah_obat' => 'required|integer|min:1',
-        'tanggal_konsumsi' => 'required|date',
-        'frekuensi' => 'required|integer|min:1',
-        'waktu_pengingat' => 'required|array',
-        'waktu_pengingat.*' => 'required|date_format:H:i',
+        'id_obat',
+        'caraPenggunaanObat',
+        'jumlah_obat',
+        'tanggal_konsumsi',
+        'frekuensi',
+        'waktu_pengingat',
+        'waktu_pengingat.*',
         'status',
     ];
 

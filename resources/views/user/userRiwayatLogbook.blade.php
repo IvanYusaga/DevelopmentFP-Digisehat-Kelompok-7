@@ -33,13 +33,12 @@
     // Data obat dan perhitungan progress
     const medications = [
         {
-            id: 1,
-            name: 'Vitamin A',
+            id: 5,
+            name: 'Vitamin B',
             dosage: '1 Tablet',
-            frequency: 2,
-            duration: 10,
-            takenDoses: 9,
-            schedule: ['08:00', '20:00']
+            frequency: 3,
+            duration: 5,
+            takenDoses: 10,
         },
         {
             id: 2,
@@ -48,7 +47,6 @@
             frequency: 2,
             duration: 10,
             takenDoses: 15,
-            schedule: ['08:00', '20:00']
         },
         {
             id: 3,
@@ -57,7 +55,6 @@
             frequency: 2,
             duration: 10,
             takenDoses: 20,
-            schedule: ['08:00', '20:00']
         },
         {
             id: 4,
@@ -66,7 +63,6 @@
             frequency: 2,
             duration: 10,
             takenDoses: 4,
-            schedule: ['08:00', '20:00']
         }
     ];
 

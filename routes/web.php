@@ -94,12 +94,12 @@ Route::middleware(UserLogin::class)->group(function () {
     Route::get('/user/formulirJadwal', [JadwalPengingatController::class, 'create'])->name('jadwalPengingat.form');
     Route::post('/user/storeJadwal', [JadwalPengingatController::class, 'store'])->name('jadwalPengingat.store');
 
-    Route::get('/user/userRiwayat', function () {
-        return view('user.userRiwayat');
+    Route::get('/user/userRiwayatObat', function () {
+        return view('user.userRiwayatObat');
     })->name('userRiwayat');
 
     Route::get('/user/userLogbook', function () {
-        return view('user.userLogbook');
+        return view('user.userRiwayatLogbook');
     })->name('userLogbook');
 
     //Buat BMI
