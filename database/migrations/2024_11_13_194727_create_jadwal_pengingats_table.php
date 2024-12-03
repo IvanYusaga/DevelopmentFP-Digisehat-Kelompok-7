@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->integer('jumlah_obat'); // Jumlah obat
             $table->integer('frekuensi'); // frekuensi per hari
             $table->time('waktu_pengingat'); // Waktu pengingat
-            $table->integer('rentanghari'); // Rentang hari
             $table->date('tanggal_konsumsi'); // Tanggal konsumsi
             $table->enum('status', ['aktif', 'selesai'])->default('aktif');
             $table->timestamps();

@@ -9,6 +9,7 @@ use App\Http\Controllers\BMIController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JadwalPengingatController;
 use App\Http\Controllers\SocialiteController;
+use App\Models\JadwalPengingat;
 use Laravel\Socialite\Facades\Socialite;
 
 // Halaman login dan register
@@ -89,7 +90,7 @@ Route::middleware(UserLogin::class)->group(function () {
     Route::get('user/jadwal', [JadwalPengingatController::class, 'index'])->name('user.jadwal');
     Route::post('user/jadwal', [JadwalPengingatController::class, 'store'])->name('jadwal.store');
     Route::delete('user/jadwal/{id}', [JadwalPengingatController::class, 'destroy'])->name('jadwal.destroy');
-    
+
     Route::get('/user/formulirJadwal', [JadwalPengingatController::class, 'create'])->name('jadwalPengingat.form');
     Route::post('/user/storeJadwal', [JadwalPengingatController::class, 'store'])->name('jadwalPengingat.store');
 
@@ -112,16 +113,14 @@ Route::middleware(UserLogin::class)->group(function () {
     // Change Password
     Route::get('/user/userChangePassword', [AuthController::class, 'changePasswordView'])->name('changePassword.form');
     Route::post('/user/postUserChangePassword', [AuthController::class, 'postChangePassword'])->name('changePassword.post');
+
+    //route jadwal
+    Route::get('/user/checkStatusJadwal', [JadwalPengingatController::class, 'checkStatusJadwal'])->name('checkStatusJadwal');
+
+    Route::get('/jadwal/create', [JadwalPengingatController::class, 'create'])->name('jadwal.create');
+    Route::post('/jadwal/store', [JadwalPengingatController::class, 'store'])->name('jadwal.store');
+
+    Route::get('/user/jadwalView', [JadwalPengingatController::class, 'index'])->name('jadwal.view');
 });
 
 Route::get('/user/userDashboard', [ObatController::class, 'dashboard'])->name('userDashboard');
-
-//route jadwal 
-Route::get('/jadwal/create', [JadwalPengingatController::class, 'create'])->name('jadwal.create');
-Route::post('/jadwal/store', [JadwalPengingatController::class, 'store'])->name('jadwal.store');
-
-
-//Change Password
-Route::get('/user/userPassword', function () {
-    return view('user.userPassword');
-});

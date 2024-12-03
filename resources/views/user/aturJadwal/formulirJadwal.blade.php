@@ -65,18 +65,6 @@
                             </select>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="rentanghari" class="form-label">Ingin Melakukan Pengingat Berapa Lama?</label>
-                            <select id="rentanghari" class="form-select" name="rentanghari">
-                                <option value="">Pilih</option>
-                                <option value="1">Hari ini saja</option>
-                                <option value="3">3 Hari</option>
-                                <option value="7">1 Minggu</option>
-                                <option value="14">2 Minggu</option>
-                                <option value="30">1 Bulan</option>
-                            </select>
-                        </div>
-
                         <button type="submit" class="btn btn-info text-white w-100">Jadwalkan Reminder</button>
                     </form>
                 </div>

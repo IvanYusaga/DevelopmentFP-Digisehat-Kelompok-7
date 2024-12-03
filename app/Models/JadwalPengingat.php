@@ -18,7 +18,6 @@ class JadwalPengingat extends Model
         'jumlah_obat' => 'required|integer|min:1',
         'tanggal_konsumsi' => 'required|date',
         'frekuensi' => 'required|integer|min:1',
-        'rentanghari' => 'required|integer|min:1',
         'waktu_pengingat' => 'required|array',
         'waktu_pengingat.*' => 'required|date_format:H:i',
         'status',

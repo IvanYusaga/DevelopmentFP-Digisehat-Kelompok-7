@@ -143,7 +143,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="{{ route('userJadwal') }}">
+          <a class="nav-link collapsed" href="{{ route('checkStatusJadwal') }}">
             <i class="bi bi-calendar-check"></i>
             <span>Atur Jadwal</span>
           </a>

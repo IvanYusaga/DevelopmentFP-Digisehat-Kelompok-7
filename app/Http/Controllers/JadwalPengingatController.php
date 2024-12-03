@@ -10,6 +10,19 @@ use Carbon\Carbon;
 
 class JadwalPengingatController extends Controller
 {
+
+    public function checkStatusJadwal()
+    {
+        $user = auth::id();
+        $hasJadwal = JadwalPengingat::where('id_user', $user)->exists();
+
+        if ($hasJadwal) {
+            return redirect()->route('jadwal.view');
+        } else {
+            return redirect()->route('jadwal.create');
+        }
+    }
+
     // Menampilkan Formulir Jadwal Pengingat
     public function create()
     {
@@ -20,7 +33,6 @@ class JadwalPengingatController extends Controller
     // Menyimpan Jadwal Pengingat
     public function store(Request $request)
     {
-        // Validasi input dari user
         $validatedData = $request->validate([
             'id_obat' => 'required|exists:obats,id_obat',
             'caraPenggunaanObat' => 'required|string|max:255',
@@ -28,40 +40,47 @@ class JadwalPengingatController extends Controller
             'frekuensi' => 'required|integer|min:1|max:5',
             'waktu_pengingat' => 'required|array',
             'waktu_pengingat.*' => 'required|date_format:H:i',
-            'rentanghari' => 'required|integer|min:1',
             'tanggal_konsumsi' => 'required|date|after_or_equal:today',
             'status' => 'nullable|in:aktif,selesai',
         ]);
 
         $startDate = Carbon::parse($request->tanggal_konsumsi);
-        $endDate = $startDate->copy()->addDays($request->rentanghari - 1);
+        $jumlahObat = $request->jumlah_obat;
         $validatedData['status'] = $request->status ?? 'aktif';
 
-        // Siapkan array untuk data jadwal pengingat
         $scheduleData = [];
-        foreach ($request->waktu_pengingat as $time) {
-            $currentDate = $startDate->copy();
-            while ($currentDate <= $endDate) {
-                $scheduleData[] = [
-                    'id_obat' => $request->id_obat,
-                    'id_user' => auth::id(),
-                    'caraPenggunaanObat' => $request->caraPenggunaanObat,
-                    'jumlah_obat' => $request->jumlah_obat,
-                    'frekuensi' => $request->frekuensi,
-                    'waktu_pengingat' => $time, // Simpan waktu satu per satu
-                    'rentanghari' => $request->rentanghari,
-                    'tanggal_konsumsi' => $currentDate->toDateString(),
-                    'status' => $request->status ?? 'aktif',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ];
-                $currentDate->addDay(); // Lanjutkan ke hari berikutnya
+        $counterObat = 0;
+
+        for ($day = 0; $day < $jumlahObat; $day++) {
+            $currentDate = $startDate->copy()->addDays($day);
+
+            foreach ($request->waktu_pengingat as $time) {
+                if ($counterObat < $jumlahObat) {
+
+                    $scheduleData[] = [
+                        'id_obat' => $request->id_obat,
+                        'id_user' => Auth::id(),
+                        'caraPenggunaanObat' => $request->caraPenggunaanObat,
+                        'jumlah_obat' => 1,
+                        'frekuensi' => $request->frekuensi,
+                        'waktu_pengingat' => $time,
+                        'tanggal_konsumsi' => $currentDate->toDateString(),
+                        'status' => $request->status ?? 'aktif',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+
+                    $counterObat++;
+
+                    if ($counterObat >= $jumlahObat) {
+                        break 2;
+                    }
+                }
             }
         }
 
-        // Coba simpan data ke database
+        // Simpan data ke database
         try {
-            // Masukkan data ke tabel
             JadwalPengingat::insert($scheduleData);
 
             // Redirect ke halaman jadwal dengan pesan sukses

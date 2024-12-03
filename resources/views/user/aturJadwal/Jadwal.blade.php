@@ -90,7 +90,7 @@
                                             <input type="date" id="inputDate" class="form-control border-2 border-secondary" name="tanggal_konsumsi" value="{{ $jadwal->tanggal_konsumsi }}" readonly>
                                         </div>
                                     </div>
-                                    <div class="row g-4 mt-3">
+                                    {{-- <div class="row g-4 mt-3">
                                         <div class="col-md-6">
                                             <label for="inputFrekuensi" class="form-label fw-semibold">Frekuensi</label>
                                             <select id="inputFrekuensi" name="frekuensi" class="form-select border-2 border-secondary">
@@ -103,7 +103,7 @@
                                             <label for="inputDateEnd" class="form-label fw-semibold">Tanggal Selesai Konsumsi</label>
                                             <input type="date" id="inputDateEnd" class="form-control border-2 border-secondary" name="tanggal_selesai" value="{{ $jadwal->tanggal_konsumsi }}" required>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="d-flex justify-content-center mt-4">
                                         <button type="submit" class="btn btn-secondary px-4 py-2 rounded-pill bg-info">
                                             <i class="bi bi-save me-2"></i> Tambahkan Jadwal Ke Google Calender
