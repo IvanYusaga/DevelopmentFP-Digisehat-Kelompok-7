@@ -124,3 +124,7 @@ Route::middleware(UserLogin::class)->group(function () {
 });
 
 Route::get('/user/userDashboard', [ObatController::class, 'dashboard'])->name('userDashboard');
+
+Route::get('/user/userCekJadwalBtn', function () {
+    return view('user.userCekJadwalBtn');
+});

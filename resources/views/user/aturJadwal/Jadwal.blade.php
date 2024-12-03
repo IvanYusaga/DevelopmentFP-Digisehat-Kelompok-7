@@ -6,6 +6,9 @@
     <main id="main" class="main">
     <div class="pagetitle d-flex justify-content-between align-items-center">
         <h1>Berikut Jadwal Obat Kamu</h1>
+        <a href="{{ route('jadwalPengingat.form') }}">
+            <button type="button" class="btn btn-info rounded-pill text-white">Tambah</button>
+        </a>
     </div>
 @endsection
 
@@ -142,11 +145,11 @@
     </div>
     <h4 class="fw-bold text-primary text-gradient mb-3">Waktunya Minum Obat!</h4>
     <p id="modalMessage" class="text-muted fs-5 text-center">
-        Jangan lupa konsumsi obat Anda tepat waktu untuk mendapatkan manfaat maksimal dan memastikan pemulihan yang lebih cepat. 
+        Jangan lupa konsumsi obat Anda tepat waktu untuk mendapatkan manfaat maksimal dan memastikan pemulihan yang lebih cepat.
         Dengan mematuhi jadwal minum obat yang telah ditentukan, Anda membantu tubuh bekerja lebih efektif dalam melawan penyakit.
     </p>
     <p class="text-muted fs-6 text-center">
-        Jika Anda memiliki pertanyaan terkait cara penggunaan obat atau efek samping yang mungkin timbul, segera hubungi dokter atau apoteker Anda. 
+        Jika Anda memiliki pertanyaan terkait cara penggunaan obat atau efek samping yang mungkin timbul, segera hubungi dokter atau apoteker Anda.
         Menjaga konsistensi dalam pengobatan adalah kunci untuk kesehatan jangka panjang!
     </p>
 </div>
