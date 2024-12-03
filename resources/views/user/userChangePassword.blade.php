@@ -26,7 +26,11 @@
                             <div class="col-md-8 col-lg-9">
                                 <input name="password" type="password" class="form-control form-control-sm" id="currentPassword" required>
                                 @error('password')
-                                  <div class="text-danger">{{ $message }}</div>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <i class="bi bi-exclamation-octagon me-1"></i>
+                                        {{ $message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
                                 @enderror
                             </div>
                         </div>
@@ -36,7 +40,11 @@
                             <div class="col-md-8 col-lg-9">
                                 <input name="newpassword" type="password" class="form-control form-control-sm" id="newPassword" required>
                                 @error('newpassword')
-                                    <div class="text-danger">{{ $message }}</div>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <i class="bi bi-exclamation-octagon me-1"></i>
+                                        {{ $message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
                                 @enderror
                             </div>
                         </div>
@@ -46,7 +54,11 @@
                             <div class="col-md-8 col-lg-9">
                                 <input name="newpassword_confirmation" type="password" class="form-control form-control-sm" id="renewPassword" required>
                                 @error('newpassword_confirmation')
-                                    <div class="text-danger">{{ $message }}</div>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <i class="bi bi-exclamation-octagon me-1"></i>
+                                        {{ $message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
                                 @enderror
                             </div>
                         </div>
