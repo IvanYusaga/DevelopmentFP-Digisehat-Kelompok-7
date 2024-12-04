@@ -15,6 +15,7 @@ class RiwayatObat extends Model
     protected $fillable = [
         'id_user',
         'id_jadwal',
+        'id_obat',
     ];
 
     public function user(): BelongsTo
@@ -25,5 +26,10 @@ class RiwayatObat extends Model
     public function jadwalPengingat(): BelongsTo
     {
         return $this->belongsTo(JadwalPengingat::class, 'id_jadwal');
+    }
+
+    public function obat(): BelongsTo
+    {
+        return $this->belongsTo(Obat::class, 'id_obat');
     }
 }

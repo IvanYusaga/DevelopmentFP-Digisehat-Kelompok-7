@@ -4,62 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\RiwayatObat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\JadwalPengingat;
 
 class RiwayatObatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        // Ambil semua jadwal pengingat dengan data obat untuk user yang sedang login
+        $jadwalPengingat = JadwalPengingat::with('obat') // Ambil relasi obat
+            ->where('id_user', Auth::id()) // Filter berdasarkan user login
+            ->get()
+            ->unique('id_obat'); // Hapus duplikasi berdasarkan id_obat
+
+        return view('user.userRiwayatObat', compact('jadwalPengingat'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function cekJadwal($id_obat)
     {
-        //
-    }
+        // Ambil data jadwal berdasarkan id_obat dan user login
+        $jadwalPengingat = JadwalPengingat::with('obat')
+            ->where('id_obat', $id_obat)
+            ->where('id_user', Auth::id())
+            ->get();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // Ambil nama obat untuk ditampilkan di halaman
+        $namaObat = $jadwalPengingat->first()->obat->nama_obat ?? 'Obat Tidak Ditemukan';
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(RiwayatObat $riwayatObat)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(RiwayatObat $riwayatObat)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, RiwayatObat $riwayatObat)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(RiwayatObat $riwayatObat)
-    {
-        //
+        return view('user.userCekJadwalBtn', compact('jadwalPengingat', 'namaObat'));
     }
 }

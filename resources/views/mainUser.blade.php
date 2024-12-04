@@ -153,7 +153,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="{{ route('userRiwayat') }}">
+          <a class="nav-link collapsed" href="{{ route('userRiwayatObat') }}">
             <i class="bi bi-clock-history"></i>
             <span>Riwayat Obat</span>
           </a>

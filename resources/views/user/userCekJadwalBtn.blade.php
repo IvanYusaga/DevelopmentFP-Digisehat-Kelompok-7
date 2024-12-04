@@ -1,22 +1,18 @@
 @extends('mainUser')
 
-@section('title', 'Dashboard')
+@section('title', 'Cek Jadwal Obat')
 
 @section('breadcrumbs')
 <main id="main" class="main">
-
     <div class="pagetitle">
-        <h1 class="text-center">Cek Jadwal Obat Paracetamol Kamu</h1> <br>
+        <h1 class="text-center">Cek Jadwal Obat {{ $namaObat }} Kamu</h1> <br>
     </div>
-
 @endsection
 
 @section('content')
 <div class="card shadow-sm border-0 rounded-3">
-    <div class="card-header text-dark text-center py-2">
-    </div>
     <div class="card-body p-4">
-        <!-- Table -->
+        <!-- Tabel Desktop -->
         <div class="table-responsive d-none d-md-block">
             <table class="table table-bordered table-striped table-hover text-center align-middle">
                 <thead class="table-secondary">
@@ -32,190 +28,102 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @forelse($jadwalPengingat as $index => $jadwal)
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Paracetamol</td>
-                        <td>20 Kali</td>
-                        <td>14.00</td>
-                        <td>Diminum</td>
-                        <td>2 kali sehari</td>
+                        <th scope="row">{{ $index + 1 }}</th>
+                        <td>{{ $jadwal->obat->nama_obat }}</td>
+                        <td>{{ $jadwal->tanggal_konsumsi }}</td>
+                        <td>{{ $jadwal->waktu_pengingat }}</td>
+                        <td>{{ $jadwal->caraPenggunaanObat }}</td>
+                        <td>{{ $jadwal->frekuensi }}</td>
                         <td>
+                            @if($jadwal->status == 'aktif')
                             <span class="badge bg-success text-wrap fs-6">
                                 <i class="bi bi-check-circle"></i> Aktif
                             </span>
-                        </td>
-                        <td>
-                                <button type="submit" class="btn btn-outline-danger btn-sm">
-                                    <i class="bi bi-trash"></i> Hapus
-                                </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Paracetamol</td>
-                        <td>20 Kali</td>
-                        <td>14.00</td>
-                        <td>Diminum</td>
-                        <td>2 kali sehari</td>
-                        <td>
-                            <span class="badge bg-success text-wrap fs-6">
-                                <i class="bi bi-check-circle"></i> Aktif
+                            @else
+                            <span class="badge bg-secondary text-wrap fs-6">
+                                <i class="bi bi-clock"></i> Nonaktif
                             </span>
+                            @endif
                         </td>
                         <td>
+                            <form action="#" method="POST">
+                                @csrf
+                                @method('DELETE')
                                 <button type="submit" class="btn btn-outline-danger btn-sm">
                                     <i class="bi bi-trash"></i> Hapus
                                 </button>
+                            </form>
                         </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Paracetamol</td>
-                        <td>20 Kali</td>
-                        <td>14.00</td>
-                        <td>Diminum</td>
-                        <td>2 kali sehari</td>
-                        <td>
-                            <span class="badge bg-success text-wrap fs-6">
-                                <i class="bi bi-check-circle"></i> Aktif
-                            </span>
-                        </td>
-                        <td>
-                                <button type="submit" class="btn btn-outline-danger btn-sm">
-                                    <i class="bi bi-trash"></i> Hapus
-                                </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Paracetamol</td>
-                        <td>20 Kali</td>
-                        <td>14.00</td>
-                        <td>Diminum</td>
-                        <td>2 kali sehari</td>
-                        <td>
-                            <span class="badge bg-success text-wrap fs-6">
-                                <i class="bi bi-check-circle"></i> Aktif
-                            </span>
-                        </td>
-                        <td>
-                                <button type="submit" class="btn btn-outline-danger btn-sm">
-                                    <i class="bi bi-trash"></i> Hapus
-                                </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Paracetamol</td>
-                        <td>20 Kali</td>
-                        <td>14.00</td>
-                        <td>Diminum</td>
-                        <td>2 kali sehari</td>
-                        <td>
-                            <span class="badge bg-success text-wrap fs-6">
-                                <i class="bi bi-check-circle"></i> Aktif
-                            </span>
-                        </td>
-                        <td>
-                                <button type="submit" class="btn btn-outline-danger btn-sm">
-                                    <i class="bi bi-trash"></i> Hapus
-                                </button>
-                        </td>
-                      </tr>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="8">Tidak ada jadwal untuk obat ini.</td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
-             <!-- Tabel Vertikal untuk Perangkat Kecil -->
-             <div class="table-responsive d-md-none">
-                <!-- Tabel Pertama -->
-                <div class="mb-3 p-2 border rounded">
-                    <table class="table table-bordered table-striped mb-4"><!-- Tambahkan mb-4 untuk jarak antar tabel -->
-                        <tbody>
-                            <tr>
-                                <th>Nama Obat</th>
-                                <td>Paracetamol</td>
-                            </tr>
-                            <tr>
-                                <th>Tanggal Konsumsi</th>
-                                <td>20 Kali</td>
-                            </tr>
-                            <tr>
-                                <th>Waktu Pengingat</th>
-                                <td>14.00</td>
-                            </tr>
-                            <tr>
-                                <th>Cara Penggunaan Obat</th>
-                                <td>Diminum</td>
-                            </tr>
-                            <tr>
-                                <th>Frekuensi</th>
-                                <td>2 Kali Sehari</td>
-                            </tr>
-                            <tr>
-                                <th>Status</th>
-                                <td>
-                                    <span class="badge bg-success text-wrap fs-6">
-                                        <i class="bi bi-check-circle"></i> Aktif
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Aksi</th>
-                                <td>
-                                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                                        <i class="bi bi-trash"></i> Hapus
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
 
-                <!-- Tabel Kedua -->
-                <div class="mb-3 p-2 border rounded">
-                    <table class="table table-bordered table-striped">
-                        <tbody>
-                            <tr>
-                                <th>Nama Obat</th>
-                                <td>Paracetamol</td>
-                            </tr>
-                            <tr>
-                                <th>Tanggal Konsumsi</th>
-                                <td>20 Kali</td>
-                            </tr>
-                            <tr>
-                                <th>Waktu Pengingat</th>
-                                <td>14.00</td>
-                            </tr>
-                            <tr>
-                                <th>Cara Penggunaan Obat</th>
-                                <td>Diminum</td>
-                            </tr>
-                            <tr>
-                                <th>Frekuensi</th>
-                                <td>2 Kali Sehari</td>
-                            </tr>
-                            <tr>
-                                <th>Status</th>
-                                <td>
-                                    <span class="badge bg-success text-wrap fs-6">
-                                        <i class="bi bi-check-circle"></i> Aktif
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Aksi</th>
-                                <td>
+        <!-- Tabel Mobile -->
+        <div class="table-responsive d-md-none">
+            @forelse($jadwalPengingat as $jadwal)
+            <div class="mb-3 p-2 border rounded">
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                        <tr>
+                            <th>Nama Obat</th>
+                            <td>{{ $jadwal->obat->nama_obat }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tanggal Konsumsi</th>
+                            <td>{{ $jadwal->tanggal_konsumsi }}</td>
+                        </tr>
+                        <tr>
+                            <th>Waktu Pengingat</th>
+                            <td>{{ $jadwal->waktu_pengingat }}</td>
+                        </tr>
+                        <tr>
+                            <th>Cara Penggunaan Obat</th>
+                            <td>{{ $jadwal->caraPenggunaanObat }}</td>
+                        </tr>
+                        <tr>
+                            <th>Frekuensi</th>
+                            <td>{{ $jadwal->frekuensi }}</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>
+                                @if($jadwal->status == 'Aktif')
+                                <span class="badge bg-success text-wrap fs-6">
+                                    <i class="bi bi-check-circle"></i> Aktif
+                                </span>
+                                @else
+                                <span class="badge bg-secondary text-wrap fs-6">
+                                    <i class="bi bi-clock"></i> Nonaktif
+                                </span>
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Aksi</th>
+                            <td>
+                                <form action="#" method="POST">
+                                    @csrf
+                                    @method('DELETE')
                                     <button type="submit" class="btn btn-outline-danger btn-sm">
                                         <i class="bi bi-trash"></i> Hapus
                                     </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
+            @empty
+            <p class="text-center">Tidak ada jadwal untuk obat ini.</p>
+            @endforelse
         </div>
     </div>
 </div>

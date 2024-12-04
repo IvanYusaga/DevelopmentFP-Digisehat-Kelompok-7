@@ -8,6 +8,7 @@ use App\Http\Controllers\ObatController;
 use App\Http\Controllers\BMIController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JadwalPengingatController;
+use App\Http\Controllers\RiwayatObatController;
 use App\Http\Controllers\SocialiteController;
 use App\Models\JadwalPengingat;
 use Laravel\Socialite\Facades\Socialite;
@@ -121,10 +122,14 @@ Route::middleware(UserLogin::class)->group(function () {
     Route::post('/jadwal/store', [JadwalPengingatController::class, 'store'])->name('jadwal.store');
 
     Route::get('/user/jadwalView', [JadwalPengingatController::class, 'index'])->name('jadwal.view');
+
+    // Route Riwayat Obat
+    Route::get('/user/riwayatObat', [RiwayatObatController::class, 'index'])->name('userRiwayatObat');
+    Route::get('/user/cekRiwayatObat/{id_obat}', [RiwayatObatController::class, 'cekJadwal'])->name('riwayatObat.cek');
 });
 
 Route::get('/user/userDashboard', [ObatController::class, 'dashboard'])->name('userDashboard');
 
 Route::get('/user/userCekJadwalBtn', function () {
     return view('user.userCekJadwalBtn');
-});
+})->name('userCekJadwalBtn');
