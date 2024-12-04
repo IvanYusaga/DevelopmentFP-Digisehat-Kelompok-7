@@ -17,7 +17,30 @@ class RiwayatObatController extends Controller
             ->get()
             ->unique('id_obat'); // Hapus duplikasi berdasarkan id_obat
 
-        return view('user.userRiwayatObat', compact('jadwalPengingat'));
+        // Siapkan array untuk menghitung obat selesai per id_obat
+        $statusCount = [];
+
+        // Loop untuk menghitung jumlah selesai dan total per id_obat
+        foreach ($jadwalPengingat as $jadwal) {
+            // Inisialisasi array untuk tiap id_obat jika belum ada
+            if (!isset($statusCount[$jadwal->id_obat])) {
+                $statusCount[$jadwal->id_obat] = [
+                    'completed' => 0, // Jumlah selesai
+                    'total' => 0, // Jumlah total
+                ];
+            }
+
+            // Update jumlah total berdasarkan jumlah_obat
+            $statusCount[$jadwal->id_obat]['total'] += $jadwal->jumlah_obat;
+
+            // Update jumlah selesai jika statusnya 'Nonaktif' (selesai)
+            if ($jadwal->status == 'Nonaktif') {
+                $statusCount[$jadwal->id_obat]['completed'] += $jadwal->jumlah_obat;
+            }
+        }
+
+        // Kirim data ke view
+        return view('user.userRiwayatObat', compact('jadwalPengingat', 'statusCount'));
     }
 
     public function cekJadwal($id_obat)
@@ -32,5 +55,18 @@ class RiwayatObatController extends Controller
         $namaObat = $jadwalPengingat->first()->obat->nama_obat ?? 'Obat Tidak Ditemukan';
 
         return view('user.userCekJadwalBtn', compact('jadwalPengingat', 'namaObat'));
+    }
+
+    public function selesaiJadwal($id)
+    {
+        // Cari jadwal berdasarkan ID
+        $jadwal = JadwalPengingat::findOrFail($id);
+
+        // Ubah status menjadi nonaktif
+        $jadwal->status = 'Selesai';
+        $jadwal->save();
+
+        // Redirect kembali dengan pesan sukses
+        return redirect()->back()->with('success', 'Status jadwal berhasil diubah menjadi nonaktif.');
     }
 }

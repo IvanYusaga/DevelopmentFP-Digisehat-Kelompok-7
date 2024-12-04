@@ -126,10 +126,8 @@ Route::middleware(UserLogin::class)->group(function () {
     // Route Riwayat Obat
     Route::get('/user/riwayatObat', [RiwayatObatController::class, 'index'])->name('userRiwayatObat');
     Route::get('/user/cekRiwayatObat/{id_obat}', [RiwayatObatController::class, 'cekJadwal'])->name('riwayatObat.cek');
+
+    Route::post('/user/riwayatObatSelesai/{id}', [RiwayatObatController::class, 'selesaiJadwal'])->name('riwayatObat.selesai');
 });
 
 Route::get('/user/userDashboard', [ObatController::class, 'dashboard'])->name('userDashboard');
-
-Route::get('/user/userCekJadwalBtn', function () {
-    return view('user.userCekJadwalBtn');
-})->name('userCekJadwalBtn');

@@ -36,7 +36,7 @@
             id: 5,
             name: 'Vitamin B',
             dosage: '1 Tablet',
-            frequency: 3,
+            frequency: 4,
             duration: 5,
             takenDoses: 10,
         },

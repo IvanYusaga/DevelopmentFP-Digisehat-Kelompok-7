@@ -35,7 +35,7 @@
                         <td>{{ $jadwal->tanggal_konsumsi }}</td>
                         <td>{{ $jadwal->waktu_pengingat }}</td>
                         <td>{{ $jadwal->caraPenggunaanObat }}</td>
-                        <td>{{ $jadwal->frekuensi }}</td>
+                        <td>{{ $jadwal->frekuensi }} Obat</td>
                         <td>
                             @if($jadwal->status == 'aktif')
                             <span class="badge bg-success text-wrap fs-6">
@@ -43,18 +43,21 @@
                             </span>
                             @else
                             <span class="badge bg-secondary text-wrap fs-6">
-                                <i class="bi bi-clock"></i> Nonaktif
+                                <i class="bi bi-clock"></i> Non aktif
                             </span>
                             @endif
                         </td>
                         <td>
-                            <form action="#" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-outline-danger btn-sm">
-                                    <i class="bi bi-trash"></i> Hapus
-                                </button>
-                            </form>
+                            @if($jadwal->status == 'aktif')
+                                <form action="{{ route('riwayatObat.selesai', $jadwal->id_jadwal) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-check-circle"></i> Selesai
+                                    </button>
+                                </form>
+                            @else
+                                <span class="text-muted">Sudah Selesai</span>
+                            @endif
                         </td>
                     </tr>
                     @empty
@@ -109,13 +112,16 @@
                         <tr>
                             <th>Aksi</th>
                             <td>
-                                <form action="#" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                                        <i class="bi bi-trash"></i> Hapus
-                                    </button>
-                                </form>
+                                @if($jadwal->status == 'aktif')
+                                    <form action="{{ route('riwayatObat.selesai', $jadwal->id_jadwal) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-outline-primary btn-sm">
+                                            <i class="bi bi-check-circle"></i> Selesai
+                                        </button>
+                                    </form>
+                                @else
+                                    <span class="text-muted">Sudah Selesai</span>
+                                @endif
                             </td>
                         </tr>
                     </tbody>
