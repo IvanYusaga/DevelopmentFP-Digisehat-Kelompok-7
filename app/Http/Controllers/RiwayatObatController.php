@@ -11,37 +11,38 @@ class RiwayatObatController extends Controller
 {
     public function index()
     {
-        // Ambil semua jadwal pengingat dengan data obat untuk user yang sedang login
-        $jadwalPengingat = JadwalPengingat::with('obat') // Ambil relasi obat
-            ->where('id_user', Auth::id()) // Filter berdasarkan user login
+        // Ambil semua jadwal pengingat dengan relasi ke data obat untuk user yang sedang login
+        $jadwalPengingat = JadwalPengingat::with('obat') // Mengambil data dari relasi tabel 'obat'
+            ->where('id_user', Auth::id()) // Filter hanya data milik user yang sedang login
             ->get()
-            ->unique('id_obat'); // Hapus duplikasi berdasarkan id_obat
+            ->unique('id_obat'); // Hapus duplikasi berdasarkan 'id_obat'
 
-        // Siapkan array untuk menghitung obat selesai per id_obat
+        // Siapkan array untuk menyimpan informasi status selesai dan total obat berdasarkan id_obat
         $statusCount = [];
 
-        // Loop untuk menghitung jumlah selesai dan total per id_obat
         foreach ($jadwalPengingat as $jadwal) {
-            // Inisialisasi array untuk tiap id_obat jika belum ada
-            if (!isset($statusCount[$jadwal->id_obat])) {
-                $statusCount[$jadwal->id_obat] = [
-                    'completed' => 0, // Jumlah selesai
-                    'total' => 0, // Jumlah total
-                ];
-            }
+            // Hitung total jumlah_obat dari semua jadwal untuk id_obat tertentu
+            $total = JadwalPengingat::where('id_user', Auth::id())
+                ->where('id_obat', $jadwal->id_obat)
+                ->sum('jumlah_obat'); // Jumlahkan kolom jumlah_obat
 
-            // Update jumlah total berdasarkan jumlah_obat
-            $statusCount[$jadwal->id_obat]['total'] += $jadwal->jumlah_obat;
+            // Hitung jumlah jadwal dengan status "Nonaktif" (obat selesai) untuk id_obat tertentu
+            $completed = JadwalPengingat::where('id_user', Auth::id())
+                ->where('id_obat', $jadwal->id_obat)
+                ->where('status', 'selesai') // Filter hanya yang selesai
+                ->count(); // Hitung jumlah baris
 
-            // Update jumlah selesai jika statusnya 'Nonaktif' (selesai)
-            if ($jadwal->status == 'Nonaktif') {
-                $statusCount[$jadwal->id_obat]['completed'] += $jadwal->jumlah_obat;
-            }
+            // Simpan hasilnya ke array $statusCount
+            $statusCount[$jadwal->id_obat] = [
+                'completed' => $completed, // Jumlah selesai
+                'total' => $total,         // Jumlah total obat
+            ];
         }
 
-        // Kirim data ke view
+        // Kirim data jadwalPengingat dan statusCount ke view
         return view('user.userRiwayatObat', compact('jadwalPengingat', 'statusCount'));
     }
+
 
     public function cekJadwal($id_obat)
     {
