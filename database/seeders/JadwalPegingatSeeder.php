@@ -67,5 +67,31 @@ class JadwalPegingatSeeder extends Seeder
             'created_at' => $now,
             'updated_at' => $now,
         ]);
+
+        JadwalPengingat::create([
+            'id_user' => 1, // Sesuaikan dengan id_user yang tersedia di tabel users
+            'id_obat' => 3, // Sesuaikan dengan id_obat yang tersedia di tabel obats
+            'caraPenggunaanObat' => 'Diminum setelah makan',
+            'jumlah_obat' => 1,
+            'frekuensi' => 1,
+            'waktu_pengingat' => '08:00:00',
+            'tanggal_konsumsi' => '2024-12-04',
+            'status' => 'aktif',
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+
+        JadwalPengingat::create([
+            'id_user' => 1, // Sesuaikan dengan id_user yang tersedia di tabel users
+            'id_obat' => 3, // Sesuaikan dengan id_obat yang tersedia di tabel obats
+            'caraPenggunaanObat' => 'Diminum setelah makan',
+            'jumlah_obat' => 1,
+            'frekuensi' => 1,
+            'waktu_pengingat' => '08:00:00',
+            'tanggal_konsumsi' => '2024-12-05',
+            'status' => 'aktif',
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
     }
 }

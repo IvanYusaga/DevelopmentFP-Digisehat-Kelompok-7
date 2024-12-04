@@ -29,6 +29,14 @@ class ObatSeeder extends Seeder
         ]);
 
         Obat::create([
+            "id_user" => "1",
+            "nama_obat" => "cetirizine",
+            "date" => "2024-11-18",
+            "penggunaan_obat" => "diminum sebelum tidur",
+            "deskripsi" => "obat untuk alergi"
+        ]);
+
+        Obat::create([
             "id_user" => "2",
             "nama_obat" => "amoxicillin",
             "date" => "2024-11-17",
