@@ -68,15 +68,39 @@
                     <tr class="collapse" id="dropdown-{{ $index }}">
                         <td colspan="8">
                             <div class="card card-body shadow-lg border-0 rounded-4" style="background: #f6f9ff;">
-                                <h5 class="text-dark fw-bold mb-3">Jadwalkan Ke Google Calendar Anda</h5>
+                                <?php 
+                                    // Include configuration file 
+                                    include_once 'schedule/dbConfig.php'; 
+                                    
+                                    $postData = ''; 
+                                    if(!empty($_SESSION['postData'])){ 
+                                        $postData = $_SESSION['postData']; 
+                                        unset($_SESSION['postData']); 
+                                    } 
+                                    
+                                    $status = $statusMsg = ''; 
+                                    if(!empty($_SESSION['status_response'])){ 
+                                        $status_response = $_SESSION['status_response']; 
+                                        $status = $status_response['status']; 
+                                        $statusMsg = $status_response['status_msg']; 
+                                    }
+                                    // Query untuk mengambil semua event dari database
+                                    $sql = "SELECT * FROM calendar";
+                                    $result = $db->query($sql);
+                                    ?>
+                                <h5 class="text-dark fw-bold m-3"><i class="bi bi-calendar2-week-fill"></i>&nbsp;Jadwalkan Ke Google Calendar Anda</h5>
                                 <p>Tambahkan jadwal konsumsi obat Anda langsung ke Google Calendar untuk memastikan Anda tidak melewatkan pengingat. Dengan fitur ini, Anda dapat mengatur notifikasi otomatis yang membantu menjaga kesehatan Anda tetap teratur dan sesuai jadwal.</p>
-                                <form action="" method="POST">
+                                <!-- Status message -->
+                                <?php if(!empty($statusMsg)){ ?>
+                                    <div class="alert alert-<?php echo $status; ?>"><?php echo $statusMsg; ?></div>
+                                <?php } ?>
+                                <form action="{{ url('schedule/addEvent.php') }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="row g-4">
                                         <div class="col-md-6">
                                             <label for="inputNamaObat" class="form-label fw-semibold">Nama Obat</label>
-                                            <input type="text" id="inputNamaObat" class="form-control border-2 border-secondary" value="{{ $jadwal->obat->nama_obat }}" readonly>
+                                            <input type="text" id="inputNamaObat" class="form-control border-2 border-secondary" value="{{ $jadwal->obat->nama_obat }}" name="inputNamaObat" readonly>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="caraPenggunaanObat" class="form-label fw-semibold">Cara Penggunaan Obat</label>
@@ -101,20 +125,15 @@
                                                 <option value="2" {{ $jadwal->frekuensi == 2 ? 'selected' : '' }}>2 Kali Sehari</option>
                                                 <option value="3" {{ $jadwal->frekuensi == 3 ? 'selected' : '' }}>3 Kali Sehari</option>
                                             </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="inputDateEnd" class="form-label fw-semibold">Tanggal Selesai Konsumsi</label>
-                                            <input type="date" id="inputDateEnd" class="form-control border-2 border-secondary" name="tanggal_selesai" value="{{ $jadwal->tanggal_konsumsi }}" required>
-                                        </div>
-                                    </div> --}}
+                                        </div> --}}
+                                            <input type="hidden" id="inputDateEnd" class="form-control border-2 border-secondary" name="tanggal_selesai" value="{{ $jadwal->tanggal_konsumsi }}" required>
                                     <div class="d-flex justify-content-center mt-4">
-                                        <button type="submit" class="btn btn-secondary px-4 py-2 rounded-pill bg-info">
+                                        <button type="submit" name="submit" class="btn btn-secondary px-4 py-2 rounded-pill bg-info">
                                             <i class="bi bi-save me-2"></i> Tambahkan Jadwal Ke Google Calender
                                         </button>
                                     </div>
                                 </form>
                             </div>
-
                         </td>
                     </tr>
                     @endforeach

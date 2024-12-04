@@ -7,21 +7,21 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
-<<<<<<< HEAD
     'App\\Http\\Controllers\\BMIController' => $baseDir . '/app/Http/Controllers/BMIController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
-=======
-    'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\JadwalPengingatController' => $baseDir . '/app/Http/Controllers/JadwalPengingatController.php',
->>>>>>> 119c3c69b6e17c740ffdfae78c4c2926316ee9f9
     'App\\Http\\Controllers\\ObatController' => $baseDir . '/app/Http/Controllers/ObatController.php',
     'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
+    'App\\Http\\Controllers\\RiwayatLogbookController' => $baseDir . '/app/Http/Controllers/RiwayatLogbookController.php',
+    'App\\Http\\Controllers\\RiwayatObatController' => $baseDir . '/app/Http/Controllers/RiwayatObatController.php',
     'App\\Http\\Controllers\\SocialiteController' => $baseDir . '/app/Http/Controllers/SocialiteController.php',
     'App\\Http\\Middleware\\UserLogin' => $baseDir . '/app/Http/Middleware/UserLogin.php',
     'App\\Models\\JadwalPengingat' => $baseDir . '/app/Models/JadwalPengingat.php',
     'App\\Models\\Logbook' => $baseDir . '/app/Models/Logbook.php',
     'App\\Models\\Obat' => $baseDir . '/app/Models/Obat.php',
     'App\\Models\\Profil' => $baseDir . '/app/Models/Profil.php',
+    'App\\Models\\RiwayatLogbook' => $baseDir . '/app/Models/RiwayatLogbook.php',
+    'App\\Models\\RiwayatObat' => $baseDir . '/app/Models/RiwayatObat.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
@@ -143,6 +143,7 @@ return array(
     'Cron\\MonthField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
     'Database\\Factories\\UserFactory' => $baseDir . '/database/factories/UserFactory.php',
     'Database\\Seeders\\DatabaseSeeder' => $baseDir . '/database/seeders/DatabaseSeeder.php',
+    'Database\\Seeders\\JadwalPegingatSeeder' => $baseDir . '/database/seeders/JadwalPegingatSeeder.php',
     'Database\\Seeders\\ObatSeeder' => $baseDir . '/database/seeders/ObatSeeder.php',
     'Database\\Seeders\\UserSeeder' => $baseDir . '/database/seeders/UserSeeder.php',
     'DateError' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/DateError.php',

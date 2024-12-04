@@ -7,6 +7,11 @@
 @endsection
 
 @section('content')
+<!-- Ikon lonceng untuk meminta izin notifikasi -->
+<div id="notification-bell" class="position-fixed" style="bottom: 20px; right: 20px; cursor: pointer;">
+    <i class="bi bi-bell-fill text-info "style="font-size:30px; opacity:0.3;" data-bs-toggle="tooltip" data-bs-placement="left" title="Aktifkan notifikasi untuk menerima pengingat obat!"></i>
+</div>
+
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-10 col-md-9 col-sm-12">
@@ -178,20 +183,41 @@
         const currentTime = now.toTimeString().split(" ")[0].slice(0, 5); // Format HH:MM
         inputTime.value = currentTime;
     });
-    function populateObatDetails() {
-        // Ambil elemen dropdown
-        const obatSelect = document.getElementById('inputNamaObat');
-        // Ambil opsi yang dipilih
-        const selectedOption = obatSelect.options[obatSelect.selectedIndex];
-        // Validasi jika pengguna belum memilih obat
-        if (selectedOption.value === "") {
-            document.getElementById('caraPenggunaanObat').value = ''; // Kosongkan input
-            return;
+
+    // Menangani permintaan izin notifikasi
+    document.getElementById('notification-bell').addEventListener('click', function() {
+        if (Notification.permission === 'granted') {
+            alert("Izin notifikasi sudah diberikan!");
+        } else if (Notification.permission !== 'denied') {
+            Notification.requestPermission().then(function(permission) {
+                if (permission === 'granted') {
+                    alert("Izin notifikasi berhasil diberikan!");
+                } else {
+                    alert("Izin notifikasi ditolak.");
+                }
+            });
+        } else {
+            alert("Izin notifikasi sudah ditolak.");
         }
-        // Ambil data dari atribut opsi yang dipilih
-        const penggunaan_obat = selectedOption.getAttribute('data-penggunaanobat');
-        // Isi input form dengan data yang sesuai
-        document.getElementById('caraPenggunaanObat').value = penggunaan_obat || '';
+    });
+
+    // Fungsi untuk menampilkan notifikasi
+    function showNotification(title, message) {
+        if (Notification.permission === 'granted') {
+            new Notification(title, {
+                body: message,
+                icon: '{{ asset('/style/assets/img/logo.jpg') }}' // Ganti dengan path icon yang sesuai
+            });
+        } else if (Notification.permission !== 'denied') {
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    new Notification(title, {
+                        body: message,
+                        icon: '{{ asset('/style/assets/img/logo.jpg') }}'
+                    });
+                }
+            });
+        }
     }
 
     // Ketika form disubmit
@@ -227,13 +253,24 @@
         const jumlah = parseInt(this.value, 10);
 
         for (let i = 1; i <= jumlah; i++) {
+            const now = new Date();
+            const currentTime = now.toTimeString().split(" ")[0].slice(0, 5);
             container.innerHTML += `
                 <div class="col-4 mx-auto">
                     <label for="inputWaktuPengingat${i}" class="form-label">Jam Pengingat ${i}</label>
-                    <input type="time" class="form-control" name="waktu_pengingat[]" id="inputWaktuPengingat${i}" required>
+                    <input type="time" class="form-control" name="waktu_pengingat[]" id="inputWaktuPengingat${i}" value="${currentTime}" required>
                 </div>
             `;
         }
+    });
+
+    document.getElementById('scheduleForm').addEventListener('submit', function (event) {
+        // Cari tombol submit
+        const submitButton = document.getElementById('submitButton');
+        
+        // Disable tombol untuk mencegah klik ganda
+        submitButton.disabled = true;
+        submitButton.innerText = "loading..."; // Opsional, untuk memberi tahu pengguna bahwa form sedang diproses
     });
 
 </script>
