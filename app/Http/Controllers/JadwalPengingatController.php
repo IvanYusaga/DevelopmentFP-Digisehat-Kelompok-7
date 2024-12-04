@@ -94,12 +94,16 @@ class JadwalPengingatController extends Controller
     // Menampilkan Jadwal Pengingat
     public function index()
     {
+        // Muat data jadwal pengingat, hanya untuk user yang login, diurutkan berdasarkan tanggal konsumsi dan waktu pengingat
         $jadwalPengingat = JadwalPengingat::with('obat') // Muat data dari relasi obat
             ->whereHas('obat', function ($query) {
-                $query->where('id_user', Auth::id()); // Filter hanya obat milik user
+                $query->where('id_user', Auth::id()); // Filter hanya obat milik user yang login
             })
+            ->orderBy('tanggal_konsumsi', 'asc') // Urutkan berdasarkan tanggal konsumsi
+            ->orderBy('waktu_pengingat', 'asc') // Urutkan berdasarkan waktu pengingat
             ->get();
 
+        // Tampilkan data ke view
         return view('user.aturJadwal.Jadwal', compact('jadwalPengingat'));
     }
 
