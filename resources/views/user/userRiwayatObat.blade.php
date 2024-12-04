@@ -1,6 +1,6 @@
 @extends('mainUser')
 
-@section('title', 'Dashboard')
+@section('title', 'Riwayat Obat')
 
 @section('breadcrumbs')
 <main id="main" class="main">
@@ -27,8 +27,9 @@
                     <i class="bi bi-info-circle"></i> Cek Jadwal
                 </a>
             </div>
+            <!-- Menampilkan jumlah selesai / total per obat berdasarkan id_obat -->
             <span class="text-primary fw-bold align-self-center">
-                {{ $jadwal->jumlah_obat }} Obat
+                {{ $statusCount[$jadwal->id_obat]['completed'] }}/{{ $statusCount[$jadwal->id_obat]['total'] }} Obat
             </span>
         </div>
     </div>
