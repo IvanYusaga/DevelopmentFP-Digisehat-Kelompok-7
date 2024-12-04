@@ -119,4 +119,23 @@ class JadwalPengingatController extends Controller
         // Redirect kembali ke halaman jadwal dengan pesan sukses
         return redirect()->route('user.jadwal')->with('success', 'Jadwal berhasil dihapus!');
     }
+
+    public function viewJadwal()
+{
+    $jadwalPengingat = JadwalPengingat::with('obat')
+        ->where('id_user', Auth::id())
+        ->orderBy('tanggal_konsumsi')
+        ->get();
+
+    // Update status berdasarkan waktu
+    foreach ($jadwalPengingat as $jadwal) {
+        $currentDateTime = now();
+        $jadwalTime = Carbon::parse("{$jadwal->tanggal_konsumsi} {$jadwal->waktu_pengingat}");
+        $jadwal->status = $jadwalTime->isPast() ? 'nonaktif' : 'aktif';
+        $jadwal->save();
+    }
+
+    return view('user.jadwalPengingat', compact('jadwalPengingat'));
+}
+
 }
