@@ -42,7 +42,7 @@
                 </thead>
                 <tbody>
                     @foreach($jadwalPengingat as $index => $jadwal)
-                    <tr>
+                    <tr class="clickable-row" data-bs-toggle="collapse" data-bs-target="#dropdown-{{ $index }}" aria-expanded="false" aria-controls="dropdown-{{ $index }}">
                         <th scope="row">{{ $index + 1 }}</th>
                         <td>{{ $jadwal->obat->nama_obat }}</td>
                         <td>{{ $jadwal->tanggal_konsumsi }}</td>
@@ -63,6 +63,74 @@
                                     <i class="bi bi-trash"></i> Hapus
                                 </button>
                             </form>
+                        </td>
+                    </tr>
+                    <!-- Baris dropdown -->
+                    <tr class="collapse" id="dropdown-{{ $index }}">
+                        <td colspan="8">
+                            <div class="border-0 rounded-4" style="background: #f6f9ff;">
+                                <?php 
+                                    // Include configuration file 
+                                    include_once 'schedule/dbConfig.php'; 
+                                    
+                                    $postData = ''; 
+                                    if(!empty($_SESSION['postData'])){ 
+                                        $postData = $_SESSION['postData']; 
+                                        unset($_SESSION['postData']); 
+                                    } 
+                                    
+                                    $status = $statusMsg = ''; 
+                                    if(!empty($_SESSION['status_response'])){ 
+                                        $status_response = $_SESSION['status_response']; 
+                                        $status = $status_response['status']; 
+                                        $statusMsg = $status_response['status_msg']; 
+                                    }
+                                    // Query untuk mengambil semua event dari database
+                                    $sql = "SELECT * FROM calendar";
+                                    $result = $db->query($sql);
+                                    ?>
+                                {{-- <h5 class="text-dark fw-bold m-3"><i class="bi bi-calendar2-week-fill"></i>&nbsp;Jadwalkan Ke Google Calendar Anda</h5> --}}
+                                {{-- <p>Tambahkan jadwal konsumsi obat Anda langsung ke Google Calendar untuk memastikan Anda tidak melewatkan pengingat. Dengan fitur ini, Anda dapat mengatur notifikasi otomatis yang membantu menjaga kesehatan Anda tetap teratur dan sesuai jadwal.</p> --}}
+                                <!-- Status message -->
+                                <form action="{{ url('schedule/addEvent.php') }}" method="POST">
+                                    @csrf
+                                    {{-- <div class="row g-4"> --}}
+                                        {{-- <div class="col-md-6"> --}}
+                                            {{-- <label for="inputNamaObat" class="form-label fw-semibold">Nama Obat</label> --}}
+                                            <input type="hidden" id="inputNamaObat" class="form-control border-2 border-secondary" value="{{ $jadwal->obat->nama_obat }}" name="inputNamaObat" readonly>
+                                        {{-- </div> --}}
+                                        {{-- <div class="col-md-6"> --}}
+                                            {{-- <label for="caraPenggunaanObat" class="form-label fw-semibold">Cara Penggunaan Obat</label> --}}
+                                            <input type="hidden" id="caraPenggunaanObat" class="form-control border-2 border-secondary" name="caraPenggunaanObat" value="{{ $jadwal->caraPenggunaanObat }}" required>
+                                        {{-- </div> --}}
+                                    {{-- </div> --}}
+                                    {{-- <div class="row g-4 mt-3"> --}}
+                                        {{-- <div class="col-md-6"> --}}
+                                            {{-- <label for="inputTime" class="form-label fw-semibold">Waktu Pengingat</label> --}}
+                                            <input type="hidden" id="inputTime" class="form-control border-2 border-secondary" name="waktu_pengingat" value="{{ $jadwal->waktu_pengingat }}" required>
+                                        {{-- </div> --}}
+                                        {{-- <div class="col-md-6"> --}}
+                                            {{-- <label for="inputDate" class="form-label fw-semibold">Tanggal Mulai Konsumsi</label> --}}
+                                            <input type="hidden" id="inputDate" class="form-control border-2 border-secondary" name="tanggal_konsumsi" value="{{ $jadwal->tanggal_konsumsi }}" readonly>
+                                        {{-- </div> --}}
+                                    {{-- </div> --}}
+                                    {{-- <div class="row g-4 mt-3">
+                                        <div class="col-md-6">
+                                            <label for="inputFrekuensi" class="form-label fw-semibold">Frekuensi</label>
+                                            <select id="inputFrekuensi" name="frekuensi" class="form-select border-2 border-secondary">
+                                                <option value="1" {{ $jadwal->frekuensi == 1 ? 'selected' : '' }}>1 Kali Sehari</option>
+                                                <option value="2" {{ $jadwal->frekuensi == 2 ? 'selected' : '' }}>2 Kali Sehari</option>
+                                                <option value="3" {{ $jadwal->frekuensi == 3 ? 'selected' : '' }}>3 Kali Sehari</option>
+                                            </select>
+                                        </div> --}}
+                                            <input type="hidden" id="inputDateEnd" class="form-control border-2 border-secondary" name="tanggal_selesai" value="{{ $jadwal->tanggal_konsumsi }}" required>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" name="submit" class="btn btn-secondary px-4 rounded-pill bg-info">
+                                            <i class="bi bi-calendar2-week-fill me-3"></i> Tambahkan Jadwal Ke Google Calender
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     @endforeach
@@ -132,6 +200,29 @@
                     const reminderModal = new bootstrap.Modal(document.getElementById("reminderModal"));
                     reminderModal.show();
                 }, waktuTunggu);
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const rows = document.querySelectorAll("tbody tr");
+        rows.forEach((row, index) => {
+            // Pastikan kita hanya memproses baris yang mengandung data (bukan baris detail dropdown)
+            if (row.classList.contains('clickable-row')) {
+                const tanggal = row.querySelector("td:nth-child(3)").innerText.trim(); // Tanggal Konsumsi
+                const waktu = row.querySelector("td:nth-child(4)").innerText.trim(); // Waktu Pengingat
+                const statusCell = row.querySelector("td:nth-child(7)"); // Kolom Status
+                // Mengonversi tanggal dan waktu menjadi objek Date
+                const [year, month, day] = tanggal.split('-');
+                const [hours, minutes] = waktu.split(':');
+                const waktuPengingat = new Date(year, month - 1, day, hours, minutes); // Buat objek Date
+                const sekarang = new Date(); // Waktu saat ini
+                // Cek apakah waktu pengingat sudah lewat
+                if (waktuPengingat < sekarang) {
+                    statusCell.innerHTML = '<span class="badge bg-danger text-wrap fs-6"><i class="bi bi-x-circle"></i>Non Aktif</span>';
+                } else {
+                    statusCell.innerHTML = '<span class="badge bg-success text-wrap fs-6"><i class="bi bi-check-circle"></i> Aktif</span>';
+                }
             }
         });
     });
