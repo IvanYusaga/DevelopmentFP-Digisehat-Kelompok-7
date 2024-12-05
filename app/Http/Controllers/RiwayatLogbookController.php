@@ -2,64 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RiwayatLogbook;
+use App\Models\JadwalPengingat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RiwayatLogbookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
-    }
+        // Ambil semua data jadwal pengingat dengan relasi obat
+        $logbookEntries = JadwalPengingat::with('obat')
+            ->where('id_user', Auth::id())
+            ->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        // Inisialisasi data progress
+        $progressData = [];
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        foreach ($logbookEntries as $entry) {
+            $idObat = $entry->id_obat;
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(RiwayatLogbook $riwayatLogbook)
-    {
-        //
-    }
+            // Hitung total dan selesai
+            $totalObat = JadwalPengingat::where('id_user', Auth::id())
+                ->where('id_obat', $idObat)
+                ->sum('jumlah_obat');
+            $selesaiObat = JadwalPengingat::where('id_user', Auth::id())
+                ->where('id_obat', $idObat)
+                ->where('status', 'selesai')
+                ->count();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(RiwayatLogbook $riwayatLogbook)
-    {
-        //
-    }
+            $progress = $totalObat > 0 ? round(($selesaiObat / $totalObat) * 100, 2) : 0;
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, RiwayatLogbook $riwayatLogbook)
-    {
-        //
-    }
+            $progressData[$idObat] = [
+                'nama_obat' => $entry->obat->nama_obat,
+                'frekuensi' => $entry->frekuensi,
+                'progress' => $progress,
+                'selesai' => $selesaiObat,
+                'total' => $totalObat,
+            ];
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(RiwayatLogbook $riwayatLogbook)
-    {
-        //
+        // Pastikan variabel progressData dikirim ke view
+        return view('user.userRiwayatLogbook', compact('progressData'));
     }
 }
