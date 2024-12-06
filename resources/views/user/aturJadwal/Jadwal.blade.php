@@ -204,28 +204,6 @@
         });
     });
 
-    document.addEventListener("DOMContentLoaded", function() {
-        const rows = document.querySelectorAll("tbody tr");
-        rows.forEach((row, index) => {
-            // Pastikan kita hanya memproses baris yang mengandung data (bukan baris detail dropdown)
-            if (row.classList.contains('clickable-row')) {
-                const tanggal = row.querySelector("td:nth-child(3)").innerText.trim(); // Tanggal Konsumsi
-                const waktu = row.querySelector("td:nth-child(4)").innerText.trim(); // Waktu Pengingat
-                const statusCell = row.querySelector("td:nth-child(7)"); // Kolom Status
-                // Mengonversi tanggal dan waktu menjadi objek Date
-                const [year, month, day] = tanggal.split('-');
-                const [hours, minutes] = waktu.split(':');
-                const waktuPengingat = new Date(year, month - 1, day, hours, minutes); // Buat objek Date
-                const sekarang = new Date(); // Waktu saat ini
-                // Cek apakah waktu pengingat sudah lewat
-                if (waktuPengingat < sekarang) {
-                    statusCell.innerHTML = '<span class="badge bg-danger text-wrap fs-6"><i class="bi bi-x-circle"></i>Non Aktif</span>';
-                } else {
-                    statusCell.innerHTML = '<span class="badge bg-success text-wrap fs-6"><i class="bi bi-check-circle"></i> Aktif</span>';
-                }
-            }
-        });
-    });
 </script>
 </main>
 @endsection
