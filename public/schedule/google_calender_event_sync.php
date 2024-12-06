@@ -98,7 +98,7 @@ if (isset($_GET['code']) || isset($_POST['update_event']) || isset($_POST['delet
                 unset($_SESSION['google_access_token']);
             }
             $status = 'success';
-            $statusMsg = '<p>Event berhasil ditambahkan ke Google Calendar! Dengan ini, jadwal pengingat obat Anda akan selalu terintegrasi dan dapat diakses kapan saja melalui perangkat Anda. Tetap sehat dan terorganisir dengan pengingat otomatis yang memastikan Anda mengikuti jadwal pengobatan dengan konsisten. Kami memahami betapa pentingnya kesehatan Anda, sehingga aplikasi ini dirancang untuk mendukung gaya hidup Anda yang sibuk, tanpa mengorbankan rutinitas pengobatan Anda.</p>';
+            $statusMsg = '<p>Event berhasil ditambahkan ke Google Calendar!</p>';
             $statusMsg .= '<p><a href="https://calendar.google.com/calendar/" target="_blank"><i class="bi bi-calendar2-week-fill"></i>&nbsp;Buka Kalender</a></p>';
         } else {
             $statusMsg = 'Data event tidak ditemukan!';

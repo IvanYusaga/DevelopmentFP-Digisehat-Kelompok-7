@@ -258,7 +258,7 @@
             container.innerHTML += `
                 <div class="col-4 mx-auto">
                     <label for="inputWaktuPengingat${i}" class="form-label">Jam Pengingat ${i}</label>
-                    <input type="time" class="form-control" name="waktu_pengingat[]" id="inputWaktuPengingat${i}" value="${currentTime}" required>
+                    <input type="time" class="form-control" name="waktu_pengingat[]" id="inputWaktuPengingat${i}" required>
                 </div>
             `;
         }
