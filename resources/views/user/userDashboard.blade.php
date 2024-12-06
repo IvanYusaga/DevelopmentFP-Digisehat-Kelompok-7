@@ -18,6 +18,7 @@
 @section('content')
 <section class="section dashboard">
     <div class="row">
+
         <!-- Jumlah Obat -->
         <div class="col-xxl-4 col-md-6">
             <div class="card info-card sales-card">
@@ -114,4 +115,81 @@
         });
     });
 </script>
+
 @endsection
+
+<style>
+    .card {
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-icon {
+        background-color: #f1f1f1;
+        border-radius: 50%;
+        padding: 10px;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .swiper-container {
+        margin-top: 20px;
+    }
+
+    .swiper-slide {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .swiper-slide a {
+        width: 100%;
+        text-decoration: none;
+    }
+
+    .swiper-slide .card {
+        width: 100%;
+        margin: 0 auto;
+        background-color: #fff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .swiper-slide .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .swiper-slide .card-body {
+        padding: 20px;
+    }
+
+    .swiper-slide .ps-3 {
+        margin-left: 15px;
+    }
+
+    .swiper-slide .ps-3 h6 {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .swiper-slide .ps-3 p {
+        margin-top: 5px;
+        font-size: 0.875rem;
+        color: #555;
+    }
+</style>
