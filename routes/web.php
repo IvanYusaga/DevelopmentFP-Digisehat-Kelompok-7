@@ -116,7 +116,11 @@ Route::middleware(UserLogin::class)->group(function () {
     Route::get('/user/userChangePassword', [AuthController::class, 'changePasswordView'])->name('changePassword.form');
     Route::post('/user/postUserChangePassword', [AuthController::class, 'postChangePassword'])->name('changePassword.post');
 
-    //route jadwal
+    //route atur jadwal
+    Route::get('/user/userManagementJadwal', function () {
+        return view('user.userManagementJadwal');
+    })->name('userManagementJadwal');
+
     Route::get('/user/checkStatusJadwal', [JadwalPengingatController::class, 'checkStatusJadwal'])->name('checkStatusJadwal');
 
     Route::get('/jadwal/create', [JadwalPengingatController::class, 'create'])->name('jadwal.create');
@@ -125,16 +129,25 @@ Route::middleware(UserLogin::class)->group(function () {
     Route::get('/user/jadwalView', [JadwalPengingatController::class, 'index'])->name('jadwal.view');
 
     // Route Riwayat Obat
+    Route::get('/user/userManagementRiwayatObat', function () {
+        return view('user.userManagementRiwayatObat');
+    })->name('userManagementRiwayatObat');
+
+    Route::get('/user/checkStatusRiwayatObat', [RiwayatObatController::class, 'checkStatusRiwayatObat'])->name('checkStatusRiwayatObat');
+
     Route::get('/user/riwayatObat', [RiwayatObatController::class, 'index'])->name('userRiwayatObat');
     Route::get('/user/cekRiwayatObat/{id_obat}', [RiwayatObatController::class, 'cekJadwal'])->name('riwayatObat.cek');
 
     Route::post('/user/riwayatObatSelesai/{id}', [RiwayatObatController::class, 'selesaiJadwal'])->name('riwayatObat.selesai');
-});
 
-Route::get('/user/userDashboard', [ObatController::class, 'dashboard'])->name('userDashboard');
+    // Route Riwayat Logbook
+    Route::get('/user/userManagementRiwayatLogbook', function () {
+        return view('user.userManagementRiwayatLogbook');
+    })->name('userManagementRiwayatLogbook');
 
+    Route::get('/user/checkStatusRiwayatLogbook', [RiwayatLogbookController::class, 'checkStatusRiwayatLogbook'])->name('checkStatusRiwayatLogbook');
 
-Route::middleware(UserLogin::class)->group(function () {
     Route::get('/user/userLogbook', [RiwayatLogbookController::class, 'index'])->name('userLogbook');
 });
 
+Route::get('/user/userDashboard', [ObatController::class, 'dashboard'])->name('userDashboard');
