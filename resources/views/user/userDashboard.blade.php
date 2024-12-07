@@ -74,8 +74,12 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6 class="mb-1" style="font-size: 1rem; font-weight: bold;">{{ $jadwal->obat->nama_obat }}</h6>
-                                        <p class="mb-0 text-dark small" style="margin-top: 5px;">{{ $jadwal->frekuensi }} kali sehari</p>
-                                        <p class="mb-0 text-dark small" style="margin-top: 3px;">{{ $jadwal->waktu_pengingat }}</p>
+                                        <p class="mb-0 text-dark small" style="margin-top: 5px;">
+                                            {{ $jadwal->tanggal_konsumsi ? date('d M Y', strtotime($jadwal->tanggal_konsumsi)) : 'Tanggal tidak tersedia' }}
+                                        </p>
+                                        <p class="mb-0 text-dark small" style="margin-top: 3px;">
+                                            {{ $jadwal->waktu_pengingat ? date('H:i', strtotime($jadwal->waktu_pengingat)) : 'Waktu tidak tersedia' }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -96,12 +100,12 @@
         new Swiper('.swiper-container', {
             slidesPerView: 1,
             spaceBetween: 10,
-            loop: true, // Looping slider
+            loop: true,
             autoplay: {
-                delay: 1500, // Mempercepat jeda antar slide (1.5 detik)
-                disableOnInteraction: false, // Tetap autoplay meskipun user berinteraksi
+                delay: 1500,
+                disableOnInteraction: false,
             },
-            speed: 800, // Kecepatan transisi antar slide (800ms)
+            speed: 800,
             breakpoints: {
                 640: {
                     slidesPerView: 2,
