@@ -22,7 +22,7 @@ class UserDashboardController extends Controller
             ->where('status', 'aktif') // Filter hanya jadwal yang aktif
             ->orderBy('tanggal_konsumsi', 'asc') // Urutkan berdasarkan tanggal konsumsi
             ->orderBy('waktu_pengingat', 'asc') // Urutkan berdasarkan waktu pengingat
-            ->take(15) // Batasi hanya 15 jadwal
+            ->take(15) // Batasi hanya 15 jadwa
             ->get();
 
         return view('user.userDashboard', compact('jumlahObat', 'jumlahJadwal', 'jadwalPengingat'));
