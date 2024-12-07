@@ -9,163 +9,187 @@
         <h1>Selamat Datang di MediPulse</h1><br>
 
         @if (!auth()->user()->profil)
-            <p>Yuk Lengkapi Profilemu! <a href="{{ route('profile.form') }}"><strong>Klik Disini</strong></a></p>
+            <p>Yuk Lengkapi Profilmu! <a href="{{ route('profile.form') }}"><strong>Klik Disini</strong></a></p>
         @endif
         <br>
     </div>
-
 @endsection
 
 @section('content')
-<div class="loading-page" style="display: none;">
-  <div class="img-container">
-      <img src="{{ asset('/style/assets/img/logo-nobg.png') }}" alt="Pengingat Obat" />
-  </div><br>
-  <div class="name-container">
-      <div class="logo-name">Website Pengingat Obat</div>
-  </div>
-</div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-      const loadingPage = document.querySelector('.loading-page');
-
-      // Cek apakah "loadingShown" sudah ada di localStorage
-      if (localStorage.getItem('loadingShown')) {
-          // Jika sudah ada, sembunyikan loading screen
-          if (loadingPage) {
-              loadingPage.style.display = 'none';
-          }
-      } else {
-          // Jika belum ada, tampilkan loading screen
-          if (loadingPage) {
-              loadingPage.style.display = 'flex';
-
-              // Sembunyikan loading screen setelah beberapa saat
-              setTimeout(() => {
-                  loadingPage.style.display = 'none';
-
-                  // Tandai bahwa loading screen sudah pernah ditampilkan
-                  localStorage.setItem('loadingShown', 'true');
-              }, 3000); // Durasi loading screen dalam milidetik
-          }
-      }
-  });
-</script>
-
 <section class="section dashboard">
     <div class="row">
 
-            <div class="col-xxl-4 col-md-6">
-                <div class="card info-card sales-card">
-
-                  <div class="card-body">
-                    <h5 class="card-title">Jumlah obat</h5>
-
+        <!-- Jumlah Obat -->
+        <div class="col-xxl-4 col-md-6">
+            <div class="card info-card sales-card">
+                <div class="card-body">
+                    <h5 class="card-title">Jumlah Obat</h5>
                     <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <img src="{{asset('style/assets/img/obat_dashboard.jpeg')}}" alt="" style="width: 40px; height: 40px;">
-                      </div>
-                      <div class="ps-3">
-                        <h6>25</h6>
-                        <span class="text-primary fw-bold small pt-2 ps-1">Obat yang telah di input</span>
-
-                      </div>
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <img src="{{ asset('style/assets/img/obat_dashboard.jpeg') }}" alt="" style="width: 40px; height: 40px;">
+                        </div>
+                        <div class="ps-3">
+                            <h6>{{ $jumlahObat }}</h6>
+                            <span class="text-primary fw-bold small pt-2 ps-1">Obat yang telah diinput</span>
+                        </div>
                     </div>
-                  </div>
-
                 </div>
-              </div>
-
-              <div class="col-xxl-4 col-md-6">
-                <div class="card info-card sales-card">
-
-                  <div class="card-body">
-                    <h5 class="card-title">Jadwal obat</h5>
-
-                    <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <img src="{{asset('style/assets/img/jumlah_jadwal.png')}}" alt="" style="width: 40px; height: 40px;">
-                      </div>
-                      <div class="ps-3">
-                        <h6>25</h6>
-                        <span class="text-primary fw-bold small pt-2 ps-1">Jumlah Jadwal</span>
-
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            <div class="col-12">
-                <h5 class="fw-bold text-primary mt-3">Jadwal Minum Obat</h5> <br>
             </div>
+        </div>
 
-            <div class="col-xxl-4 col-md-6">
-                <div class="card info-card sales-card">
-
-                  <div class="card-body">
-                    <h5 class="card-title"></h5>
-
+        <!-- Jumlah Jadwal -->
+        <div class="col-xxl-4 col-md-6">
+            <div class="card info-card sales-card">
+                <div class="card-body">
+                    <h5 class="card-title">Jumlah Jadwal</h5>
                     <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <img src="{{asset('style/assets/img/jadwal_minum_obat_dashboard.png')}}" alt="" style="width: 40px; height: 40px;">
-                      </div>
-                      <div class="ps-3">
-                        <h6>Vit A</h6>
-                        <span class="text-dark small pt-2 ps-1">1 Butir</span> <br>
-                        <span class="text-dark small pt-2 ps-1">08.00</span>
-                      </div>
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <img src="{{ asset('style/assets/img/jumlah_jadwal.png') }}" alt="" style="width: 40px; height: 40px;">
+                        </div>
+                        <div class="ps-3">
+                            <h6>{{ $jumlahJadwal }}</h6>
+                            <span class="text-primary fw-bold small pt-2 ps-1">Jadwal yang telah diatur</span>
+                        </div>
                     </div>
-                  </div>
-
                 </div>
-              </div>
+            </div>
+        </div>
 
-              <div class="col-xxl-4 col-md-6">
-                <div class="card info-card sales-card">
+        <!-- Jadwal Minum Obat -->
+        <div class="col-12">
+            <h5 class="fw-bold text-primary mt-3">Jadwal Minum Obat</h5><br>
+        </div>
 
-                  <div class="card-body">
-                    <h5 class="card-title"></h5>
-
-                    <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <img src="{{asset('style/assets/img/jadwal_minum_obat_dashboard.png')}}" alt="" style="width: 40px; height: 40px;">
-                      </div>
-                      <div class="ps-3">
-                        <h6>Vit B</h6>
-                        <span class="text-dark small pt-2 ps-1">1 Butir</span> <br>
-                        <span class="text-dark small pt-2 ps-1">09.00</span>
-                      </div>
-                    </div>
-                  </div>
-
+        <!-- Slider -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                @foreach ($jadwalPengingat as $jadwal)
+                <div class="swiper-slide">
+                    <a href="{{ route('jadwal.view', ['id' => $jadwal->id_jadwal]) }}">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <img src="{{ asset('style/assets/img/jadwal_minum_obat_dashboard.png') }}" alt="" style="width: 40px; height: 40px;">
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 class="mb-1" style="font-size: 1rem; font-weight: bold;">{{ $jadwal->obat->nama_obat }}</h6>
+                                        <p class="mb-0 text-dark small" style="margin-top: 5px;">{{ $jadwal->tanggal_konsumsi }}</p>
+                                        <p class="mb-0 text-dark small" style="margin-top: 3px;">{{ $jadwal->waktu_pengingat }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-              </div>
-
-              <div class="col-xxl-4 col-md-6">
-                <div class="card info-card sales-card">
-
-                  <div class="card-body">
-                    <h5 class="card-title"></h5>
-
-                    <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <img src="{{asset('style/assets/img/jadwal_minum_obat_dashboard.png')}}" alt="" style="width: 40px; height: 40px;">
-                      </div>
-                      <div class="ps-3">
-                        <h6>Vit B</h6>
-                        <span class="text-dark small pt-2 ps-1">1 Butir</span> <br>
-                        <span class="text-dark small pt-2 ps-1">09.00</span>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
+                @endforeach
+            </div>
+        </div>
     </div>
 </section>
 </main>
+
+<!-- Inisialisasi Swiper -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            loop: true, // Looping slider
+            autoplay: {
+                delay: 1500, // Mempercepat jeda antar slide (1.5 detik)
+                disableOnInteraction: false, // Tetap autoplay meskipun user berinteraksi
+            },
+            speed: 800, // Kecepatan transisi antar slide (800ms)
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+            },
+        });
+    });
+</script>
+
 @endsection
+
+<style>
+    .card {
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-icon {
+        background-color: #f1f1f1;
+        border-radius: 50%;
+        padding: 10px;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .swiper-container {
+        margin-top: 20px;
+    }
+
+    .swiper-slide {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .swiper-slide a {
+        width: 100%;
+        text-decoration: none;
+    }
+
+    .swiper-slide .card {
+        width: 100%;
+        margin: 0 auto;
+        background-color: #fff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .swiper-slide .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .swiper-slide .card-body {
+        padding: 20px;
+    }
+
+    .swiper-slide .ps-3 {
+        margin-left: 15px;
+    }
+
+    .swiper-slide .ps-3 h6 {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .swiper-slide .ps-3 p {
+        margin-top: 5px;
+        font-size: 0.875rem;
+        color: #555;
+    }
+</style>

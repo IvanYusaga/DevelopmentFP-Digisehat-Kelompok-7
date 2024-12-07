@@ -11,6 +11,7 @@ use App\Http\Controllers\JadwalPengingatController;
 use App\Http\Controllers\RiwayatObatController;
 use App\Http\Controllers\RiwayatLogbookController;
 use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\UserDashboardController;
 use App\Models\JadwalPengingat;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -150,4 +151,10 @@ Route::middleware(UserLogin::class)->group(function () {
     Route::get('/user/userLogbook', [RiwayatLogbookController::class, 'index'])->name('userLogbook');
 });
 
+Route::middleware(UserLogin::class)->group(function () {
+    Route::get('/user/userDashboard', [UserDashboardController::class, 'index'])->name('userDashboard');
+});
+
+
 Route::get('/user/userDashboard', [ObatController::class, 'dashboard'])->name('userDashboard');
+
