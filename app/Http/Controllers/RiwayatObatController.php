@@ -31,7 +31,7 @@ class RiwayatObatController extends Controller
         foreach ($jadwalPengingat as $jadwal) {
             $total = JadwalPengingat::where('id_user', Auth::id())
                 ->where('id_obat', $jadwal->id_obat)
-                ->sum('jumlah_obat');
+                ->count();
 
             $completed = JadwalPengingat::where('id_user', Auth::id())
                 ->where('id_obat', $jadwal->id_obat)
@@ -63,7 +63,6 @@ class RiwayatObatController extends Controller
     public function selesaiJadwal($id)
     {
         $jadwal = JadwalPengingat::findOrFail($id);
-
         $jadwal->status = 'Selesai';
         $jadwal->save();
 
