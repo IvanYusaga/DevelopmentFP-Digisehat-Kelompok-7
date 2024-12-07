@@ -93,12 +93,6 @@
               <div class="invalid-feedback">Masukkan kata sandi Anda!</div>
             </div>
 
-            <!-- Remember Me Checkbox -->
-            <div class="form-check mb-3">
-              <input type="checkbox" class="form-check-input" id="rememberMe" name="remember">
-              <label for="rememberMe" class="form-check-label">Ingat Saya</label>
-            </div>
-
             <!-- Submit Button -->
             <button class="btn btn-primary w-100 btn-lg mb-3" type="submit">Masuk</button>
           </form>
