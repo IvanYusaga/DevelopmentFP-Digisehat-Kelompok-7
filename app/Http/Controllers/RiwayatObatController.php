@@ -53,6 +53,8 @@ class RiwayatObatController extends Controller
         $jadwalPengingat = JadwalPengingat::with('obat')
             ->where('id_obat', $id_obat)
             ->where('id_user', Auth::id())
+            ->orderBy('tanggal_konsumsi', 'asc')
+            ->orderBy('waktu_pengingat', 'asc')
             ->get();
 
         $namaObat = $jadwalPengingat->first()->obat->nama_obat ?? 'Obat Tidak Ditemukan';
