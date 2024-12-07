@@ -154,7 +154,3 @@ Route::middleware(UserLogin::class)->group(function () {
 Route::middleware(UserLogin::class)->group(function () {
     Route::get('/user/userDashboard', [UserDashboardController::class, 'index'])->name('userDashboard');
 });
-
-
-Route::get('/user/userDashboard', [ObatController::class, 'dashboard'])->name('userDashboard');
-
