@@ -19,7 +19,7 @@ class JadwalPengingatController extends Controller
         if ($hasJadwal) {
             return redirect()->route('jadwal.view');
         } else {
-            return redirect()->route('jadwal.create');
+            return redirect()->route('userManagementJadwal');
         }
     }
 
@@ -121,21 +121,20 @@ class JadwalPengingatController extends Controller
     }
 
     public function viewJadwal()
-{
-    $jadwalPengingat = JadwalPengingat::with('obat')
-        ->where('id_user', Auth::id())
-        ->orderBy('tanggal_konsumsi')
-        ->get();
+    {
+        $jadwalPengingat = JadwalPengingat::with('obat')
+            ->where('id_user', Auth::id())
+            ->orderBy('tanggal_konsumsi')
+            ->get();
 
-    // Update status berdasarkan waktu
-    foreach ($jadwalPengingat as $jadwal) {
-        $currentDateTime = now();
-        $jadwalTime = Carbon::parse("{$jadwal->tanggal_konsumsi} {$jadwal->waktu_pengingat}");
-        $jadwal->status = $jadwalTime->isPast() ? 'nonaktif' : 'aktif';
-        $jadwal->save();
+        // Update status berdasarkan waktu
+        foreach ($jadwalPengingat as $jadwal) {
+            $currentDateTime = now();
+            $jadwalTime = Carbon::parse("{$jadwal->tanggal_konsumsi} {$jadwal->waktu_pengingat}");
+            $jadwal->status = $jadwalTime->isPast() ? 'nonaktif' : 'aktif';
+            $jadwal->save();
+        }
+
+        return view('user.jadwalPengingat', compact('jadwalPengingat'));
     }
-
-    return view('user.jadwalPengingat', compact('jadwalPengingat'));
-}
-
 }

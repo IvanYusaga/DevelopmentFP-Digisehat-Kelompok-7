@@ -2,13 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RiwayatObat;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\JadwalPengingat;
 
 class RiwayatObatController extends Controller
 {
+    public function checkStatusRiwayatObat()
+    {
+        $user = auth::id();
+        $hasJadwal = JadwalPengingat::where('id_user', $user)->exists();
+
+        if ($hasJadwal) {
+            return redirect()->route('userRiwayatObat');
+        } else {
+            return redirect()->route('userManagementRiwayatObat');
+        }
+    }
+
     public function index()
     {
         $jadwalPengingat = JadwalPengingat::with('obat')

@@ -8,6 +8,18 @@ use Illuminate\Support\Facades\Auth;
 
 class RiwayatLogbookController extends Controller
 {
+    public function checkStatusRiwayatLogbook()
+    {
+        $user = auth::id();
+        $hasJadwal = JadwalPengingat::where('id_user', $user)->exists();
+
+        if ($hasJadwal) {
+            return redirect()->route('userLogbook');
+        } else {
+            return redirect()->route('userManagementRiwayatLogbook');
+        }
+    }
+
     public function index()
     {
         // Ambil semua data jadwal pengingat dengan relasi obat

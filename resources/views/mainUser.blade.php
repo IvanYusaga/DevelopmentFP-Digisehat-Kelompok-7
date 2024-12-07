@@ -156,7 +156,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="{{ route('userRiwayatObat') }}">
+          <a class="nav-link collapsed" href="{{ route('checkStatusRiwayatObat') }}">
             <i class="bi bi-clock-history"></i>
             <span>Riwayat Obat</span>
           </a>
@@ -166,7 +166,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="{{ route('userLogbook') }}">
+          <a class="nav-link collapsed" href="{{ route('checkStatusRiwayatLogbook') }}">
             <i class="bi bi-journal-text"></i>
             <span>Riwayat Logbook</span>
           </a>
