@@ -1,0 +1,16 @@
+{
+    "name": "Medipulse",
+    "short_name": "Medipulse",
+    "background_color": "#6777ef",
+    "display": "fullscreen",
+    "description": "Aplikasi Pengingat Obat Terbaik Untuk Anda",
+    "theme_color": "#6777ef",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

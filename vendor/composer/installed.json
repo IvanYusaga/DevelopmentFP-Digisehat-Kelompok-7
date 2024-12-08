@@ -526,6 +526,75 @@
             "install-path": "../egulias/email-validator"
         },
         {
+            "name": "erag/laravel-pwa",
+            "version": "v1.0.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eramitgupta/laravel-pwa.git",
+                "reference": "d7dffdad935aa82dad5f6a731fa5d0adaa78b1a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eramitgupta/laravel-pwa/zipball/d7dffdad935aa82dad5f6a731fa5d0adaa78b1a0",
+                "reference": "d7dffdad935aa82dad5f6a731fa5d0adaa78b1a0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^8.12|^9.0|^10.0|^11.0",
+                "illuminate/support": "^8.12|^9.0|^10.0|^11.0",
+                "php": ">=8.0.0"
+            },
+            "time": "2024-09-19T16:10:59+00:00",
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "EragLaravelPwa\\EragLaravelPwaServiceProvider"
+                    ],
+                    "aliases": {
+                        "Pwa": "EragLaravelPwa\\Facades\\Pwa"
+                    }
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "src/Pwahelpers.php"
+                ],
+                "psr-4": {
+                    "EragLaravelPwa\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Er Amiit Gupta",
+                    "email": "info.eramitgupta@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple and easy-to-use PWA (Progressive Web App) package for Laravel applications.",
+            "keywords": [
+                "Progressive Web App",
+                "laravel",
+                "laravel package",
+                "laravel pwa",
+                "manifest",
+                "offline",
+                "pwa",
+                "service worker"
+            ],
+            "support": {
+                "issues": "https://github.com/eramitgupta/laravel-pwa/issues",
+                "source": "https://github.com/eramitgupta/laravel-pwa/tree/v1.0.0"
+            },
+            "install-path": "../erag/laravel-pwa"
+        },
+        {
             "name": "fakerphp/faker",
             "version": "v1.23.1",
             "version_normalized": "1.23.1.0",

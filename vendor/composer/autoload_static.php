@@ -28,6 +28,7 @@ class ComposerStaticInita586b84655a3c5e8cc04c306909d7f5a
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
+        'f641c05521a842027754f9adafba3d7e' => __DIR__ . '/..' . '/erag/laravel-pwa/src/Pwahelpers.php',
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
         'f57d353b41eb2e234b26064d63d8c5dd' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Filesystem/functions.php',
@@ -156,6 +157,7 @@ class ComposerStaticInita586b84655a3c5e8cc04c306909d7f5a
         ),
         'E' => 
         array (
+            'EragLaravelPwa\\' => 15,
             'Egulias\\EmailValidator\\' => 23,
         ),
         'D' => 
@@ -480,6 +482,10 @@ class ComposerStaticInita586b84655a3c5e8cc04c306909d7f5a
         array (
             0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
         ),
+        'EragLaravelPwa\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/erag/laravel-pwa/src',
+        ),
         'Egulias\\EmailValidator\\' => 
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/src',
@@ -547,6 +553,7 @@ class ComposerStaticInita586b84655a3c5e8cc04c306909d7f5a
         'App\\Http\\Controllers\\RiwayatLogbookController' => __DIR__ . '/../..' . '/app/Http/Controllers/RiwayatLogbookController.php',
         'App\\Http\\Controllers\\RiwayatObatController' => __DIR__ . '/../..' . '/app/Http/Controllers/RiwayatObatController.php',
         'App\\Http\\Controllers\\SocialiteController' => __DIR__ . '/../..' . '/app/Http/Controllers/SocialiteController.php',
+        'App\\Http\\Controllers\\UserDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserDashboardController.php',
         'App\\Http\\Middleware\\UserLogin' => __DIR__ . '/../..' . '/app/Http/Middleware/UserLogin.php',
         'App\\Models\\JadwalPengingat' => __DIR__ . '/../..' . '/app/Models/JadwalPengingat.php',
         'App\\Models\\Logbook' => __DIR__ . '/../..' . '/app/Models/Logbook.php',
@@ -889,6 +896,10 @@ class ComposerStaticInita586b84655a3c5e8cc04c306909d7f5a
         'Egulias\\EmailValidator\\Warning\\QuotedString' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/QuotedString.php',
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/Warning.php',
+        'EragLaravelPwa\\Commands\\PWACommand' => __DIR__ . '/..' . '/erag/laravel-pwa/src/Commands/PWACommand.php',
+        'EragLaravelPwa\\Commands\\PwaPublishCommand' => __DIR__ . '/..' . '/erag/laravel-pwa/src/Commands/PwaPublishCommand.php',
+        'EragLaravelPwa\\EragLaravelPwaServiceProvider' => __DIR__ . '/..' . '/erag/laravel-pwa/src/EragLaravelPwaServiceProvider.php',
+        'EragLaravelPwa\\Services\\PWAService' => __DIR__ . '/..' . '/erag/laravel-pwa/src/Services/PWAService.php',
         'Faker\\Calculator\\Ean' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Calculator/Ean.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Calculator/Iban.php',
         'Faker\\Calculator\\Inn' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Calculator/Inn.php',
