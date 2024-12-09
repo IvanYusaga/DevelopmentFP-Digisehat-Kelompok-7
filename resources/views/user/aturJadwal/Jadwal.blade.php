@@ -163,7 +163,7 @@
                 </table>
             </div>
             @empty
-            <p class="text-center">Tidak ada jadwal untuk obat ini.</p>
+            <p class="text-center">Tidak ada jadwal</p>
             @endforelse
         </div>
     </div>

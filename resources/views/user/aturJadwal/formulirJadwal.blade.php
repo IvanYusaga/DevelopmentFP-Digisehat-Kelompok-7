@@ -70,7 +70,7 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-info text-white w-100">Jadwalkan Reminder</button>
+                        <button type="submit" id="submit" class="btn btn-info text-white w-100">Jadwalkan Reminder</button>
                     </form>
                 </div>
             </div>
@@ -266,11 +266,11 @@
 
     document.getElementById('scheduleForm').addEventListener('submit', function (event) {
         // Cari tombol submit
-        const submitButton = document.getElementById('submitButton');
+        const submitButton = document.getElementById('submit');
         
         // Disable tombol untuk mencegah klik ganda
         submitButton.disabled = true;
-        submitButton.innerText = "loading..."; // Opsional, untuk memberi tahu pengguna bahwa form sedang diproses
+        submitButton.innerText = "Jadwal Anda Sedang Diproses..."; // Opsional, untuk memberi tahu pengguna bahwa form sedang diproses
     });
 
 </script>
