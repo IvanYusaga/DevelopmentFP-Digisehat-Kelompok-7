@@ -26,7 +26,7 @@
     </div>
     <div class="card-body p-4">
         <!-- Table -->
-        <div class="table-responsive">
+        <div class="table-responsive d-none d-md-block">
             <table class="table table-bordered table-striped table-hover text-center align-middle">
                 <thead class="table-secondary">
                     <tr>
@@ -47,7 +47,7 @@
                         <td>{{ $jadwal->obat->nama_obat }}</td>
                         <td>{{ $jadwal->tanggal_konsumsi }}</td>
                         <td>{{ $jadwal->waktu_pengingat }}</td>
-                        <td class="text-truncate" style="max-width: 500px;" title="{{ $jadwal->caraPenggunaanObat }}">
+                        <td class="text-start">
                         {{ $jadwal->caraPenggunaanObat }}
                         </td>
                         <td>{{ $jadwal->frekuensi }} Kali Sehari</td>
@@ -68,7 +68,7 @@
                         </td>
                     </tr>
                     <!-- Baris dropdown -->
-                    <tr class="collapse d-none" id="dropdown-{{ $index }}">
+                    <tr class="collapse" id="dropdown-{{ $index }} d-none">
                         <td colspan="8">
                             <div class="border-0 rounded-4" style="background: #f6f9ff;">
                                 <form action="{{ url('schedule/addEvent.php') }}" method="POST">
@@ -90,6 +90,81 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+
+        <!-- Tabel Mobile -->
+        <div class="table-responsive d-md-none">
+            @forelse($jadwalPengingat as $jadwal)
+            <div class="mb-3 p-2 border rounded">
+                <table class="table table-bordered table-striped" >
+                    <tbody class="clickable-row" data-bs-toggle="collapse" data-bs-target="#dropdown-{{ $index }}" aria-expanded="false" aria-controls="dropdown-{{ $index }}">
+                        <tr>
+                            <th>Nama Obat</th>
+                            <td>{{ $jadwal->obat->nama_obat }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tanggal Konsumsi</th>
+                            <td>{{ $jadwal->tanggal_konsumsi }}</td>
+                        </tr>
+                        <tr>
+                            <th>Waktu Pengingat</th>
+                            <td>{{ $jadwal->waktu_pengingat }}</td>
+                        </tr>
+                        <tr>
+                            <th>Cara Penggunaan Obat</th>
+                            <td>{{ $jadwal->caraPenggunaanObat }}</td>
+                        </tr>
+                        <tr>
+                            <th>Frekuensi</th>
+                            <td>{{ $jadwal->frekuensi }} Kali Sehari</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>
+                                <span class="badge {{ $jadwal->status == 'aktif' ? 'bg-success' : 'bg-secondary' }} text-wrap fs-6">
+                                <i class="bi {{ $jadwal->status == 'aktif' ? 'bi-check-circle' : 'bi-check-circle-fill' }}"></i>
+                                {{ ucfirst($jadwal->status) }}
+                            </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Aksi</th>
+                            <td>
+                                <form action="{{ route('jadwal.destroy', $jadwal->id_jadwal) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus jadwal ini?')">
+                                    <i class="bi bi-trash"></i> Hapus
+                                </button>
+                            </form>
+                            </td>
+                        </tr>
+                        <!-- Baris dropdown -->
+                        <tr class="collapse d-none" id="dropdown-{{ $index }}">
+                            <td colspan="8">
+                                <div class="border-0 rounded-4" style="background: #f6f9ff;">
+                                    <form action="{{ url('schedule/addEvent.php') }}" method="POST">
+                                        <form action="{{ url('schedule/addEvent.php') }}" method="POST">
+                                        <input type="hidden" id="inputNamaObat" class="form-control border-2 border-secondary" value="{{ $jadwal->obat->nama_obat }}" name="inputNamaObat" readonly>
+                                        <input type="hidden" id="caraPenggunaanObat" class="form-control border-2 border-secondary" name="caraPenggunaanObat" value="{{ $jadwal->caraPenggunaanObat }}" required>
+                                        <input type="hidden" id="inputTime" class="form-control border-2 border-secondary" name="waktu_pengingat" value="{{ $jadwal->waktu_pengingat }}" required>
+                                        <input type="hidden" id="inputDate" class="form-control border-2 border-secondary" name="tanggal_konsumsi" value="{{ $jadwal->tanggal_konsumsi }}" readonly>
+                                        <input type="hidden" id="inputDateEnd" class="form-control border-2 border-secondary" name="tanggal_selesai" value="{{ $jadwal->tanggal_konsumsi }}" required>
+                                        <div class="d-flex justify-content-center">
+                                        <button type="submit" name="submit" class="btn btn-info w-100 text-white">
+                                            <i class="bi bi-calendar2-week-fill me-3"></i> Tambahkan Jadwal Ke Google Calender
+                                        </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>   
+                    </tbody>
+                </table>
+            </div>
+            @empty
+            <p class="text-center">Tidak ada jadwal untuk obat ini.</p>
+            @endforelse
         </div>
     </div>
 </div>
