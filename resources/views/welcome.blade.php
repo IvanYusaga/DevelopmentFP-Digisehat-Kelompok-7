@@ -9,7 +9,7 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link rel="icon" href="{{ asset('/style/assets/img/logo.jpg') }}" type="image/png">
+    <link rel="icon" href="{{ asset('/style/assets/img/logo-nobg.png') }}" type="image/png">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="{{ asset('style/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
 

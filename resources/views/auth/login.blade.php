@@ -10,7 +10,7 @@
 
   <title>Medipulse - Login</title>
   <!-- Favicons -->
-  <link rel="icon" href="{{ asset('/style/assets/img/logo.jpg') }}" type="image/png">
+  <link rel="icon" href="{{ asset('/style/assets/img/logo-nobg.png') }}" type="image/png">
   <link href="{{asset('style/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -36,8 +36,8 @@
 
       <!-- Logo Section -->
       <div class="d-flex justify-content-center py-3">
-        <a href="index.html" class="d-flex align-items-center text-decoration-none">
-          <img src="{{ asset('style/assets/img/logo.jpg') }}" alt="Logo" class="img-fluid me-2" style="height: 50px;">
+        <a href="/" class="d-flex align-items-center text-decoration-none">
+          <img src="{{ asset('style/assets/img/logo-nobg.png') }}" alt="Logo" class="img-fluid me-2" style="height: 50px;">
           <h2 class="fw-bold text-primary mb-0">Medipulse</h2>
         </a>
       </div>

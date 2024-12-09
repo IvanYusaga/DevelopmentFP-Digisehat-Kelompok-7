@@ -185,7 +185,7 @@
       <!-- Modal Body -->
       <div class="modal-body p-4 d-flex flex-column align-items-center justify-content-center">
           <div class="text-center mb-4">
-              <img src="{{ asset('/style/assets/img/minumobat.png') }}" alt="Obat Icon" class="img-fluid shadow-lg" style="width: 100px;">
+              <img src="{{ asset('/style/assets/img/minumobat.png') }}" alt="Obat Icon" class="img-fluid" style="width: 100px;">
           </div>
           <h4 class="fw-bold text-primary text-gradient mb-3">Waktunya Minum Obat!</h4>
           <p id="modalMessage" class="text-muted fs-5 text-center">
