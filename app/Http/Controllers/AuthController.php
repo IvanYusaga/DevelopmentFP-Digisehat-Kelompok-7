@@ -57,21 +57,34 @@ class AuthController extends Controller
     // Login User
     public function loginPost(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required'],
-            'password' => ['required'],
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+        $user = User::where('email', $request->email)->first();
 
-            return redirect()->intended(route('userDashboard'));
+        // Jika email tidak ditemukan
+        if (!$user) {
+            return back()->withErrors([
+                'email' => 'The email is not registered.',
+            ])->onlyInput('email');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        // Jika password salah
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->withErrors([
+                'password' => 'The password is incorrect.',
+            ])->onlyInput('email');
+        }
+
+        // Jika login berhasil
+        Auth::login($user);
+        $request->session()->regenerate();
+
+        return redirect()->intended(route('userDashboard'));
     }
+
 
     // Logout
     public function logout(Request $request)

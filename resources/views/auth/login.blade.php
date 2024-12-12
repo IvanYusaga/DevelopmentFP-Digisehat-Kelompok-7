@@ -60,18 +60,17 @@
           </div>
           @endif
 
-          <!-- Login Form -->
-          <form action="{{ route('login.post') }}" method="POST" class="needs-validation" novalidate>
-            @csrf
-            @if ($errors->any())
-            <div class="alert alert-danger">
-              <ul class="mb-0">
+       <!-- Login Form -->
+       <form action="{{ route('login.post') }}" method="POST" class="needs-validation" novalidate>
+        @csrf
+        @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-octagon me-1"></i>
                 @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                {{ $error }}
                 @endforeach
-              </ul>
-            </div>
-            @endif
+        </div>
+        @endif
 
             <!-- Login with Google -->
             <a href="{{ route('redirect') }}" class="text-decoration-none">
