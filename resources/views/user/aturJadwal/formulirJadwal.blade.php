@@ -25,8 +25,8 @@
                             <select class="form-select" id="inputNamaObat" name="id_obat" onchange="populateObatDetails()">
                                 <option value="">Pilih Obat</option>
                                 @foreach($obats as $obat)
-                                    <option 
-                                        value="{{ $obat->id_obat }}" 
+                                    <option
+                                        value="{{ $obat->id_obat }}"
                                         data-penggunaanobat="{{ $obat->penggunaan_obat ?? 'Tidak tersedia' }}">
                                         {{ $obat->nama_obat }}
                                     </option>
@@ -45,10 +45,10 @@
                         </div>
 
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3 mb-md-0">
                                 <label for="inputDate" class="form-label">Tanggal Mulai Konsumsi</label>
                                 <input type="date" id="inputDate" class="form-control" name="tanggal_konsumsi" required>
-                            </div>
+                            </div>
                            <div class="mb-3 col-6">
                             <label for="inputFrekuensi" class="form-label">Frekuensi Minum Obat (Per Hari)</label>
                             <select id="inputFrekuensi" class="form-select" name="frekuensi" onchange="generateTimeInputs()">
@@ -128,7 +128,7 @@
         // Isi input form dengan data yang sesuai
         document.getElementById('caraPenggunaanObat').value = penggunaan_obat || '';
     }
-    
+
     // Menetapkan tanggal hari ini dan 30 hari ke depan
     const today = new Date();
     const maxDate = new Date();
@@ -267,7 +267,7 @@
     document.getElementById('scheduleForm').addEventListener('submit', function (event) {
         // Cari tombol submit
         const submitButton = document.getElementById('submit');
-        
+
         // Disable tombol untuk mencegah klik ganda
         submitButton.disabled = true;
         submitButton.innerText = "Jadwal Anda Sedang Diproses..."; // Opsional, untuk memberi tahu pengguna bahwa form sedang diproses

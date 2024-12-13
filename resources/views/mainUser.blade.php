@@ -33,6 +33,8 @@
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
+    <!-- Manifest for PWA -->
+    <link rel="manifest" href="/manifest.json">
 
 </head>
 
@@ -86,12 +88,12 @@
                 </a>
                 </li>
             @endif
-            
+
             @if (auth()->check() && auth()->user()->password !== null)
             <li>
               <hr class="dropdown-divider">
             </li>
-            
+
             <li>
                 <a class="dropdown-item d-flex align-items-center" href="{{ route('changePassword.form') }}">
                   <i class="bi bi-lock"></i>
