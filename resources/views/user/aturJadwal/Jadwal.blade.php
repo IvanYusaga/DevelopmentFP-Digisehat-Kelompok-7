@@ -68,7 +68,7 @@
                         </td>
                     </tr>
                     <!-- Baris dropdown -->
-                    <tr class="collapse" id="dropdown-{{ $index }} d-none">
+                    <tr class="collapse" id="dropdown-{{ $index }}">
                         <td colspan="8">
                             <div class="border-0 rounded-4" style="background: #f6f9ff;">
                                 <form action="{{ url('schedule/addEvent.php') }}" method="POST">
@@ -140,7 +140,7 @@
                             </td>
                         </tr>
                         <!-- Baris dropdown -->
-                        <tr class="collapse d-none" id="dropdown-{{ $index }}">
+                        <tr class="collapse" id="dropdown-{{ $index }}">
                             <td colspan="8">
                                 <div class="border-0 rounded-4" style="background: #f6f9ff;">
                                     <form action="{{ url('schedule/addEvent.php') }}" method="POST">
@@ -158,7 +158,7 @@
                                     </form>
                                 </div>
                             </td>
-                        </tr>   
+                        </tr>
                     </tbody>
                 </table>
             </div>
