@@ -9,8 +9,8 @@ if (isset($_SESSION['XSRF-TOKEN'])) {
     // Tambahkan token ke header Authorization
     header('Authorization: Bearer ' . $token);
 
-    // Redirect ke halaman /user/jadwal
-    header('Location: /user/jadwal');
+    // Redirect ke halaman /user/jadwal dengan parameter status=success
+    header('Location: /user/jadwal?status=success');
     exit();
 } else {
     // Token CSRF tidak ditemukan dalam sesi
@@ -22,6 +22,6 @@ if (isset($_SESSION['XSRF-TOKEN'])) {
 
     // Redirect ke halaman sebelumnya agar token baru tersedia
     header('Location: /user/jadwal');
-    exit();
+    exit();
 }
 ?>

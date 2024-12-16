@@ -206,6 +206,44 @@
   </div>
 </div>
 
+<!-- Modal Pengingat Obat Berhasil Ditambahkan -->
+<div class="modal fade" id="reminderModalcalendar" tabindex="-1" aria-labelledby="reminderModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 overflow-hidden shadow-lg">
+      <!-- Modal Header -->
+      <div class="modal-header text-white text-center justify-content-center" style="background:#b5d6f7;">
+        <h5 class="modal-title fw-bold" id="reminderModalLabel">
+          <i class="bi bi-check-circle-fill me-2"></i> BERHASIL
+        </h5>
+        <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body p-4">
+        <div class="d-flex flex-column align-items-center">
+          <i class="bi bi-calendar2-week-fill display-1 text-info mb-3"></i>
+          <h4 class="fw-normal text-primary mb-2 text-center">Pengingat Berhasil Ditambahkan Ke Google Kalendar!</h4>
+          <p id="modalMessagecalendar" class="text-muted text-center"></p>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer d-flex justify-content-between">
+        <!-- Tautan ke Google Calendar -->
+        <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer"
+        class="btn btn-primary text-white">
+            <i class="bi bi-calendar2-week-fill me-3"></i> Buka Google Kalendar
+        </a>
+        <!-- Tombol Nanti Saja -->
+        <a href="/user/jadwal" class="btn btn-secondary text-white">
+            <i class="bi bi-clock-history me-2"></i> Nanti Saja
+        </a>
+    </div>
+    </div>
+  </div>
+</div>
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const jadwalPengingat = @json($jadwalPengingat);
@@ -232,6 +270,21 @@
             }
         });
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+            // Memeriksa URL untuk query parameter 'status'
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('status');
+
+            // Jika status adalah 'success', tampilkan modal
+            if (status === 'success') {
+                const modalMessage = document.getElementById("modalMessagecalendar");
+                modalMessage.textContent = "Pastikan Anda meminum obat sesuai waktu yang ditentukan. Anda dapat membuka Google Calendar untuk mengecek jadwal lengkapnya.";
+
+                const reminderModal = new bootstrap.Modal(document.getElementById("reminderModalcalendar"));
+                reminderModal.show();
+            }
+        });
 
 </script>
 </main>
