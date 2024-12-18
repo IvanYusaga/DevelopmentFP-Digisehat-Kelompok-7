@@ -54,9 +54,9 @@ Route::get('/admin/profile', function () {
 Route::middleware(UserLogin::class)->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::get('/user/userDashboard', function () {
-        return view('user.userDashboard');
-    })->name('userDashboard');
+    // Route::get('/user/userDashboard', function () {
+    //     return view('user.userDashboard');
+    // })->name('userDashboard');
 
     // Profile User
     Route::get('/user/userProfile', [ProfileController::class, 'profile'])->name('user.profile');

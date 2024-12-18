@@ -60,17 +60,17 @@
           </div>
           @endif
 
-       <!-- Login Form -->
-       <form action="{{ route('login.post') }}" method="POST" class="needs-validation" novalidate>
-        @csrf
-        @if ($errors->any())
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <i class="bi bi-exclamation-octagon me-1"></i>
-                @foreach ($errors->all() as $error)
-                {{ $error }}
-                @endforeach
-        </div>
-        @endif
+          <!-- Login Form -->
+          <form action="{{ route('login.post') }}" method="POST" class="needs-validation" novalidate>
+            @csrf
+            @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-octagon me-1"></i>
+                    @foreach ($errors->all() as $error)
+                    {{ $error }}
+                    @endforeach
+            </div>
+            @endif
 
             <!-- Login with Google -->
             <a href="{{ route('redirect') }}" class="text-decoration-none">
@@ -87,7 +87,7 @@
             </div>
 
             <div class="form-floating mb-3">
-              <input type="password" name="password" id="password" class="form-control rounded-3" placeholder="Password" required>
+              <input type="password" name="password" autocomplete="off" id="password" class="form-control rounded-3" placeholder="Password" required>
               <label for="password"><i class="bi bi-lock-fill"></i> Kata Sandi</label>
               <div class="invalid-feedback">Masukkan kata sandi Anda!</div>
             </div>

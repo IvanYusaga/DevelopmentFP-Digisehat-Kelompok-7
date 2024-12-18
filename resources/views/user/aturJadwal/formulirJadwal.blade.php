@@ -111,7 +111,11 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script 
+    src="https://code.jquery.com/jquery-3.6.0.min.js" 
+    integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+5hb7pHlRt7r2faWUEUpDM36DRk3zH1wRUrmevH" 
+    crossorigin="anonymous">
+</script>
 <script>
     function populateObatDetails() {
         // Ambil elemen dropdown

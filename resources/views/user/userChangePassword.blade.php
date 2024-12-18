@@ -24,7 +24,7 @@
                         <div class="row mb-3">
                             <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                             <div class="col-md-8 col-lg-9">
-                                <input name="password" type="password" class="form-control form-control-sm" id="currentPassword" required>
+                                <input name="password" type="password" autocomplete="off" class="form-control form-control-sm" id="currentPassword" required>
                                 @error('password')
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <i class="bi bi-exclamation-octagon me-1"></i>
@@ -38,7 +38,7 @@
                         <div class="row mb-3">
                             <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                             <div class="col-md-8 col-lg-9">
-                                <input name="newpassword" type="password" class="form-control form-control-sm" id="newPassword" required>
+                                <input name="newpassword" type="password" autocomplete="off" class="form-control form-control-sm" id="newPassword" required>
                                 @error('newpassword')
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <i class="bi bi-exclamation-octagon me-1"></i>
@@ -52,7 +52,7 @@
                         <div class="row mb-3">
                             <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
                             <div class="col-md-8 col-lg-9">
-                                <input name="newpassword_confirmation" type="password" class="form-control form-control-sm" id="renewPassword" required>
+                                <input name="newpassword_confirmation" type="password" autocomplete="off" class="form-control form-control-sm" id="renewPassword" required>
                                 @error('newpassword_confirmation')
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <i class="bi bi-exclamation-octagon me-1"></i>

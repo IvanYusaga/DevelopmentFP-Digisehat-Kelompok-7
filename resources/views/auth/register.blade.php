@@ -100,14 +100,14 @@
               <div class="form-group mb-3">
                 <label for="yourPassword" class="form-label">Password</label>
                 <div class="input-group">
-                  <input type="password" name="password" class="form-control" id="yourPassword" required>
+                  <input type="password" name="password" autocomplete="off" class="form-control" id="yourPassword" required>
                   <div class="invalid-feedback">Harap masukkan kata sandi Anda!</div>
                 </div>
               </div>
 
               <div class="form-group mb-3">
                 <label for="yourPasswordConfirmation" class="form-label">Konfirmasi Password</label>
-                <input type="password" name="password_confirmation" class="form-control" id="yourPasswordConfirmation" required>
+                <input type="password" name="password_confirmation" autocomplete="off" class="form-control" id="yourPasswordConfirmation" required>
                 <div class="invalid-feedback">Harap konfirmasi kata sandi Anda!</div>
               </div>
 

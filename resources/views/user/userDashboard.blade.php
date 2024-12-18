@@ -275,7 +275,10 @@
 </div>
 
 <!-- Inisialisasi Swiper -->
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js" 
+integrity="sha384-eSR7zK1V2s4cY/aOWYdtyMXBr5qXmV7r8Wq7s39HiVKWy19PcLe1WCYP6bvdrRFu" 
+crossorigin="anonymous">
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         new Swiper('.swiper-container', {
