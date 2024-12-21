@@ -93,18 +93,24 @@
 
               <div class="form-group mb-3">
                 <label for="yourEmail" class="form-label">Email</label>
-                <input type="email" name="email" class="form-control" id="yourEmail" value="{{ old('email') }}" required>
+                <input type="email" name="email" class="form-control" id="yourEmail" value="{{ old('email') }}" placeholder="example@gmail.com" required>
                 <div class="invalid-feedback">Harap masukkan alamat email yang valid!</div>
               </div>
 
               <div class="form-group mb-3">
                 <label for="yourPassword" class="form-label">Password</label>
                 <div class="input-group">
-                  <input type="password" name="password" autocomplete="off" class="form-control" id="yourPassword" required>
+                  <input type="password" name="password" autocomplete="off" class="form-control" id="yourPassword" placeholder="Min:10; Special Char(@#$_); Use Number(0-9); Use Capitalization(A-Z, a-z);" required>
                   <div class="invalid-feedback">Harap masukkan kata sandi Anda!</div>
                 </div>
-              </div>
 
+                <!-- Bar Kekuatan Password -->
+                <div class="progress mt-2" style="height: 8px;">
+                  <div id="password-strength-bar" class="progress-bar" role="progressbar"></div>
+                </div>
+                <small id="password-strength-text" class="text-muted"></small>
+              </div>
+              
               <div class="form-group mb-3">
                 <label for="yourPasswordConfirmation" class="form-label">Konfirmasi Password</label>
                 <input type="password" name="password_confirmation" autocomplete="off" class="form-control" id="yourPasswordConfirmation" required>
@@ -154,6 +160,46 @@
   function togglePassword() {
   const passwordField = document.getElementById("yourPassword");
   passwordField.type = passwordField.type === "password" ? "text" : "password";
+  }
+
+  const passwordField = document.getElementById("yourPassword");
+  const strengthBar = document.getElementById("password-strength-bar");
+  const strengthText = document.getElementById("password-strength-text");
+
+  passwordField.addEventListener("input", () => {
+    const password = passwordField.value;
+    const strengthScore = calculateStrength(password);
+    updateStrengthBar(strengthScore);
+  });
+
+  function calculateStrength(password) {
+    let score = 0;
+
+    if (password.length >= 10) score += 15; // Panjang minimal 10
+    if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) score += 25; // Karakter spesial
+    if (/\d/.test(password)) score += 20; // Angka
+    if (/[a-z]/.test(password)) score += 20; // Huruf kecil
+    if (/[A-Z]/.test(password)) score += 20; // Huruf besar
+
+    return Math.min(score, 100); // Maksimal skor 100
+  }
+
+  function updateStrengthBar(score) {
+    let level;
+
+    if (score < 25) {
+      level = { text: "Very Weak", color: "danger" };
+    } else if (score < 50) {
+      level = { text: "Weak", color: "warning" };
+    } else if (score < 90) {
+      level = { text: "Good", color: "info" };
+    } else {
+      level = { text: "Strong", color: "success" };
+    }
+
+    strengthBar.style.width = `${score}%`;
+    strengthBar.className = `progress-bar bg-${level.color}`;
+    strengthText.textContent = `Strength: ${level.text}`;
   }
 </script>
 </body>

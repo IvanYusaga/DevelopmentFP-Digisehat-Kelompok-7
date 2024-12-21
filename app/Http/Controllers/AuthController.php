@@ -22,11 +22,19 @@ class AuthController extends Controller
     // Create Akun User
     public function registerPost(Request $request)
     {
-        $request->validate([
-            'nama_pengguna' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        $request->validate(
+            [
+                'nama_pengguna' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => [
+                    'required',
+                    'string',
+                    'min:10',
+                    'confirmed',
+                    'regex:/^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*\d).+$/'
+                ],
+            ],
+        );
 
         try {
             User::create([
@@ -108,16 +116,29 @@ class AuthController extends Controller
 
     public function postAddPassword(Request $request)
     {
+        // Validasi dengan aturan yang lebih ketat
         $request->validate([
-            'newpassword' => 'required|string|min:8|confirmed',
+            'newpassword' => [
+                'required',
+                'string',
+                'min:10', // minimal 10 karakter
+                'confirmed', // harus cocok dengan konfirmasi password
+                'regex:/[A-Z]/', // harus ada huruf kapital
+                'regex:/[a-z]/', // harus ada huruf kecil
+                'regex:/\d/', // harus ada angka
+                'regex:/[!@#$%^&*(),.?":{}|<>]/', // harus ada karakter spesial
+            ],
         ]);
 
+        // Ambil user yang sedang login
         $user = Auth::user();
 
+        // Update password
         $user->password = Hash::make($request->newpassword);
         $user->save();
 
-        return redirect()->route('userDashboard');
+        // Redirect ke dashboard atau halaman lain
+        return redirect()->route('userDashboard')->with('success', 'Password berhasil diperbarui.');
     }
 
     public function changePasswordView()
@@ -127,18 +148,30 @@ class AuthController extends Controller
 
     public function postChangePassword(Request $request)
     {
+        // Validasi dengan aturan yang lebih ketat
         $request->validate([
-            'password' => 'required|string|min:8|current_password',
-            'newpassword' => 'required|string|min:8|confirmed',
-            'newpassword_confirmation' => 'required|string|min:8',
+            'password' => 'required|string|min:10|current_password', // Password lama minimal 10 karakter
+            'newpassword' => [
+                'required',
+                'string',
+                'min:10', // Minimal 10 karakter
+                'confirmed', // Harus cocok dengan konfirmasi password
+                'regex:/[A-Z]/', // Harus ada huruf kapital
+                'regex:/[a-z]/', // Harus ada huruf kecil
+                'regex:/\d/', // Harus ada angka
+                'regex:/[!@#$%^&*(),.?":{}|<>]/', // Harus ada karakter spesial
+            ],
+            'newpassword_confirmation' => 'required|string|min:10', // Konfirmasi password harus sesuai
         ]);
 
         $user = Auth::user();
 
+        // Verifikasi password lama
         if (!Hash::check($request->password, $user->password)) {
             return back()->withErrors(['password' => 'Password lama yang Anda masukkan salah.']);
         }
 
+        // Update password
         $user->password = Hash::make($request->newpassword);
         $user->save();
 
